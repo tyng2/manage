@@ -15,8 +15,8 @@
 
 		<div class="row form-group">
 			<div class="col-md-12">
-				<label class="text-black" for="userId">ID</label><span id="dupCheck"
-					style="margin-left: 50px;"></span>
+				<label class="text-black" for="userId">ID</label>
+				<span id="dupCheck"	style="margin-left: 50px;"></span>
 					<input type="text" name="userId" class="form-control" required>
 			</div>
 		</div>
@@ -24,7 +24,7 @@
 		<div class="row form-group">
 			<div class="col-md-12">
 				<label class="text-black" for="password">PW</label>
-				<input type="password" name="pw" class="form-control" required>
+				<input type="password" name="password" class="form-control" required>
 			</div>
 		</div>
 

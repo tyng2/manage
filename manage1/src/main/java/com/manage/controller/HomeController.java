@@ -23,7 +23,7 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String main(Locale locale, Model model) {
-		System.out.println("<< home >>\n");
+		System.out.println("<< home홈 >>\n");
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -44,7 +44,7 @@ public class HomeController {
 	@PostMapping("/addUser")
 	public String addUser(UserVO userVO, Model model) {
 		System.out.println("<< addUser, POST >>\n");
-		
+		System.out.println("addUserPOST : " + userVO);
 		userService.insert(userVO);
 		
 		return "home";
