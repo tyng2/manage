@@ -23,7 +23,7 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String main(Locale locale, Model model) {
-		System.out.println("<< home홈 >>\n");
+		System.out.println("<< home >>\n");
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
