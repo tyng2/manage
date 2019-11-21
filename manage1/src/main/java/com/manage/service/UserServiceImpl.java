@@ -16,6 +16,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int insert(UserVO userVO) {
+		System.out.println("\n" + userVO + "\n");
 		return userMapper.insert(userVO);
 	}
 	

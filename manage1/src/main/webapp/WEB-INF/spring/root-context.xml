@@ -11,9 +11,6 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-		<constructor-arg ref="hikariConfig"/>
-	</bean>	
 		
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
     	<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
@@ -22,6 +19,10 @@
     	<property name="password" value="" />
     </bean>
     
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig"/>
+	</bean>	
+	
     <!-- value는 값을 지정 ref는 이미 지정한 값을 가져오는 것 -->
 	<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
