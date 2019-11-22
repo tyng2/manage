@@ -49,6 +49,8 @@
 					<option>사원</option>
 					<option>대리</option>
 					<option>과장</option>
+					<option>차장</option>
+					<option>부장</option>
 					<option>팀장</option>
 					<option>상무</option>
 					<option>이사</option>
