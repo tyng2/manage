@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +51,7 @@ public class HomeController {
 	}
 	
 	@PostMapping("/addUser")
-	public String addUser(UserVO userVO, Model model) {
+	public ResponseEntity<String> addUser(UserVO userVO, Model model) {
 		System.out.println("<< addUser, POST >>\n");
 		System.out.println("addUserPOST : " + userVO);
 		
@@ -58,7 +61,18 @@ public class HomeController {
 		
 		userService.insert(userVO);
 		
-		return "home";
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "text/html; charset=UTF-8");
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("<script>");
+		sb.append("alert('가입이 완료되었습니다.');");
+		sb.append("location.href = '/';");
+		sb.append("</script>");
+
+		ResponseEntity<String> responseEntity = new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
+
+		return responseEntity;
 	}
 	
 	
