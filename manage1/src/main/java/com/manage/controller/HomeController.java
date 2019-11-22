@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +15,14 @@ import com.manage.service.UserService;
 import com.manage.vo.UserVO;
 
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
 @Controller
+@Log4j
 public class HomeController {
+
+	@Setter(onMethod_ = @Autowired)
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Setter(onMethod_ = @Autowired)
 	private UserService userService;
@@ -45,9 +51,16 @@ public class HomeController {
 	public String addUser(UserVO userVO, Model model) {
 		System.out.println("<< addUser, POST >>\n");
 		System.out.println("addUserPOST : " + userVO);
+		
+		String encodedPassword = passwordEncoder.encode(userVO.getPassword());
+		userVO.setPassword(encodedPassword);
+		log.info(userVO);
+		
 		userService.insert(userVO);
 		
 		return "home";
 	}
+	
+	
 	
 }
