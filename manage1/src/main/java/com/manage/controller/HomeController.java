@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.manage.mapper.AuthMapper;
 import com.manage.service.UserService;
 import com.manage.vo.UserVO;
 
@@ -29,6 +30,9 @@ public class HomeController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private UserService userService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private AuthMapper authMapper;
 	
 	@GetMapping("/")
 	public String main(Locale locale, Model model) {
@@ -61,6 +65,8 @@ public class HomeController {
 		
 		userService.insert(userVO);
 		
+		authMapper.insertAuth(userVO.getUserId(), "ROLE_NOTHING");
+		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");
 		
@@ -73,6 +79,13 @@ public class HomeController {
 		ResponseEntity<String> responseEntity = new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
 
 		return responseEntity;
+	}
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		System.out.println("<< login >>\n");
+		
+		return "login";
 	}
 	
 	

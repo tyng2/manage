@@ -6,4 +6,5 @@ public interface UserMapper {
 	
 	public int insert(UserVO userVO);
 
+	public UserVO getUserById(String userId);
 }

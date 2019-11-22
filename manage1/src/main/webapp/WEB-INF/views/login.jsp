@@ -17,7 +17,7 @@
 			<div class="col-md-12">
 				<label class="text-black" for="userId">ID</label>
 				<span id="dupCheck"	style="margin-left: 50px;"></span>
-				<input type="text" name="userId" class="form-control" required>
+				<input type="text" name="username" class="form-control" required>
 			</div>
 		</div>
 
