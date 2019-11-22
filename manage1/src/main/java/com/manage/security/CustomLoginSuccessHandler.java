@@ -56,20 +56,20 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         log.warn("ROLE NAMES: " + roleNames);
         System.out.println("ROLE NAMES: " + roleNames);
         
-        if (roleNames.contains("ROLE_ADMIN")) {
-            response.sendRedirect("/");
-            return;
-        }
-        
-        if (roleNames.contains("ROLE_USER")) {
-            response.sendRedirect("/");
-            return;
-        }
-        
-        if (roleNames.contains("ROLE_NOTHING")) {
-            response.sendRedirect("/권한이없단다");
-            return;
-        }
+//        if (roleNames.contains("ROLE_ADMIN")) {
+//            response.sendRedirect("/");
+//            return;
+//        }
+//        
+//        if (roleNames.contains("ROLE_USER")) {
+//            response.sendRedirect("/");
+//            return;
+//        }
+//        
+//        if (roleNames.contains("ROLE_NOTHING")) {
+//            response.sendRedirect("/권한이없단다");
+//            return;
+//        }
         
         response.sendRedirect("/");
     }
