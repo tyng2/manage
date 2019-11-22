@@ -45,14 +45,25 @@
 		<div class="row form-group">
 			<div class="col-md-12">
 				<label class="text-black" for="position">직급</label>
-				<input type="text" name="position" class="form-control" required>
+				<select>
+					<option>사원</option>
+					<option>대리</option>
+					<option>과장</option>
+					<option>팀장</option>
+					<option>상무</option>
+					<option>이사</option>
+				</select>
 			</div>
 		</div>
 		
 		<div class="row form-group">
 			<div class="col-md-12">
 				<label class="text-black" for="department">부서</label>
-				<input type="text" name="department" class="form-control" required>
+				<select>
+					<option>영업1팀</option>
+					<option>영업2팀</option>
+					<option>마케팅</option>
+				</select>
 			</div>
 		</div>
 
