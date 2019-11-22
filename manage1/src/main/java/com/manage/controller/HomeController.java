@@ -69,7 +69,7 @@ public class HomeController {
 		StringBuffer auth = new StringBuffer();
 		auth.append("ROLE_");
 		
-		if ("대표 이사".equals(userVO.getPosition())) {
+		if ("이사".equals(userVO.getPosition())) {
 			auth.append("CEO");
 		} else if ("영업 1팀".equals(userVO.getDepartment())) {
 			
