@@ -45,7 +45,7 @@
 		<div class="row form-group">
 			<div class="col-md-12">
 				<label class="text-black" for="position">직급</label>
-				<select>
+				<select name="position">
 					<option>사원</option>
 					<option>대리</option>
 					<option>과장</option>
@@ -59,9 +59,9 @@
 		<div class="row form-group">
 			<div class="col-md-12">
 				<label class="text-black" for="department">부서</label>
-				<select>
-					<option>영업1팀</option>
-					<option>영업2팀</option>
+				<select name="department">
+					<option>영업 1팀</option>
+					<option>영업 2팀</option>
 					<option>마케팅</option>
 				</select>
 			</div>
