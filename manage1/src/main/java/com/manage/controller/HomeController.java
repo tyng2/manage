@@ -65,7 +65,36 @@ public class HomeController {
 		
 		userService.insert(userVO);
 		
-		authMapper.insertAuth(userVO.getUserId(), "ROLE_NOTHING");
+		
+		StringBuffer auth = new StringBuffer();
+		auth.append("ROLE_");
+		
+		if ("대표 이사".equals(userVO.getPosition())) {
+			auth.append("CEO");
+		} else if ("영업 1팀".equals(userVO.getDepartment())) {
+			
+			if ("상무".equals(userVO.getPosition())) {
+				auth.append("DIRECTOR1");
+			} else {
+				auth.append("SALES1");
+			}
+			
+		} else if ("영업 2팀".equals(userVO.getDepartment())) {
+			
+			if ("상무".equals(userVO.getPosition())) {
+				auth.append("DIRECTOR2");
+			} else {
+				auth.append("SALES2");
+			}
+		} else if ("마케팅".equals(userVO.getDepartment())) {
+			auth.append("MARKETING");
+			
+		} else {
+			auth.append("NOTHING");
+		}
+		
+		authMapper.insertAuth(userVO.getUserId(), auth.toString());
+		log.info(auth.toString());
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");
