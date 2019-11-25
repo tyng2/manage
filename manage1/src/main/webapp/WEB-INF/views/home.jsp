@@ -10,6 +10,7 @@
 <style>
 a {
 	text-decoration: none;
+	color: #882222;
 }
 </style>
 <body>
@@ -28,6 +29,10 @@ a {
 	<button>로그아웃</button>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
+	
+	<p>
+	<a href="/businessPlan">예산 작성</a>
+	</p>
 </sec:authorize>
 </body>
 </html>
