@@ -25,14 +25,13 @@ home.jsp
 <sec:authorize access="isAuthenticated()">
 	<c:set var="userId"><sec:authentication property="principal.user.userId"/></c:set>
 	<a href="#"><b><span class="hovMenu" >${userId}</span></b></a>&nbsp;님&nbsp;로그인 중<br><br>
+	
 	<form action='<c:url value='/logout' />' method="POST" >
-	<button>로그아웃</button>
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<button>로그아웃</button>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
 	
-	<p>
-	<a href="/businessPlan">예산 작성</a>
-	</p>
+	<p><a href="/businessPlan">예산 작성</a></p>
 </sec:authorize>
 </body>
 </html>

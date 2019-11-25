@@ -27,7 +27,6 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		String lastOppid = businessPlanMapper.getLastOppid();
 		
 		Calendar cal = Calendar.getInstance();
-		System.out.println(cal.get(Calendar.YEAR));
 		
 		StringBuffer newOppId = new StringBuffer();
 		newOppId.append("O").append(cal.get(Calendar.YEAR));
@@ -41,7 +40,7 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 			newOppId.append("000");
 		} else if (num < 100) {
 			newOppId.append("00");
-		} else if (num <1000) {
+		} else if (num < 1000) {
 			newOppId.append("0");
 		}
 		newOppId.append(num);
