@@ -26,6 +26,13 @@ $(document).ready(function() {
 		<input type="text" name="endUser" /><br>
 		<label>납품처</label>
 		<input type="text" name="customer" /><br>
+		
+		<label>고객명</label>
+		<input type="text" name="customerName" /><br>
+		<label>고객연락처</label>
+		<input type="tel" name="customerPhone" /><br>
+		<label>고객이메일</label>
+		<input type="email" name="customerEmail" /><br>
 		<label>구분1</label>
 		<select name="sort1">
 			<option value="1">상품</option>
@@ -54,7 +61,7 @@ $(document).ready(function() {
 		<input type="text" name="expectedProfit" /><br>
 		
 		<label>예상매출월</label>
-		<input type="text" name="expectedSalesMonth" /><br>
+		<input type="month" name="expectedSalesMonth" /><br>
 		
 		<label>상태</label>
 		<select name="state">
