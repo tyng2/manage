@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.BusinessPlanMapper">
+
+	<insert id="insertBusinessPlan">
+		INSERT INTO manage.BusinessPlanning 
+		(oppId, projectName, userNum, endUser, customer, sort1, sort2, expectedSales, expectedPurchase, expectedProfit, expectedSalesMonth, state, note, regDate) 
+		VALUES (#{oppId}, #{projectName}, #{userNum}, #{endUser}, #{customer}, #{sort1}, #{sort2}, #{expectedSales}, #{expectedPurchase}, #{expectedProfit}, #{expectedSalesMonth}, #{state}, #{note}, CURRENT_TIMESTAMP)
+	</insert>
+	
+	<select id="getBusinessPlanByUserNum" resultType="businessPlanVO">
+		SELECT * FROM manage.BusinessPlanning 
+		<where>
+			<if test="userNum != null and userNum != ''">
+				userNum = #{userNum}
+				</if>
+			</where>
+		WHERE userId = #{userId}
+	</select>
+	
+	<select id="getLastOppid" resultType="string">
+		SELECT IFNULL(OppId, 0) FROM manage.BusinessPlanning
+		ORDER BY regDate DESC LIMIT 1
+	</select>
+	
+
+</mapper>
