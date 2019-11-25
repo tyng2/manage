@@ -31,7 +31,6 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		
 		StringBuffer newOppId = new StringBuffer();
 		newOppId.append("O").append(cal.get(Calendar.YEAR));
-		newOppId.append("00"); // 구분1(sort1)의 두 자리, 임시로 0으로 두었음. 추후 수정
 		
 		int num = 1;
 		if (lastOppid != null) {
@@ -39,8 +38,10 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		}
 		
 		if (num < 10) {
-			newOppId.append("00");
+			newOppId.append("000");
 		} else if (num < 100) {
+			newOppId.append("00");
+		} else if (num <1000) {
 			newOppId.append("0");
 		}
 		newOppId.append(num);
