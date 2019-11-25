@@ -6,8 +6,8 @@
 
 	<insert id="insertBusinessPlan">
 		INSERT INTO manage.BusinessPlanning 
-		(oppId, projectName, userNum, endUser, customer, sort1, sort2, expectedSales, expectedPurchase, expectedProfit, expectedSalesMonth, state, note, regDate) 
-		VALUES (#{oppId}, #{projectName}, #{userNum}, #{endUser}, #{customer}, #{sort1}, #{sort2}, #{expectedSales}, #{expectedPurchase}, #{expectedProfit}, #{expectedSalesMonth}, #{state}, #{note}, CURRENT_TIMESTAMP)
+		(oppId, projectName, userNum, endUser, customer, sort1, sort2, expectedSales, expectedPurchase, expectedProfit, expectedSalesMonth, state, note, regDate, customerName, customerPhone, customerEmail) 
+		VALUES (#{oppId}, #{projectName}, #{userNum}, #{endUser}, #{customer}, #{sort1}, #{sort2}, #{expectedSales}, #{expectedPurchase}, #{expectedProfit}, #{expectedSalesMonth}, #{state}, #{note}, CURRENT_TIMESTAMP, #{customerName}, #{customerPhone}, #{customerEmail})
 	</insert>
 	
 	<select id="getBusinessPlanByUserNum" resultType="businessPlanVO">

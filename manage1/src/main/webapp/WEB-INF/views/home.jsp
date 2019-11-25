@@ -14,10 +14,10 @@ a {
 }
 </style>
 <body>
-<h1>Hello world!</h1>
-
-<P>The time on the server is ${serverTime}.</P>
-
+<p>
+테스트 중!
+home.jsp
+</p>
 <sec:authorize access="isAnonymous()">
 	<p><a href="/addUser">가입</a></p>
 	<p><a href="/login">로그인</a></p>
