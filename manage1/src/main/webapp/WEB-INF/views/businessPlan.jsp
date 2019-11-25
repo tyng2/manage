@@ -61,7 +61,7 @@ $(document).ready(function() {
 		<input type="text" name="expectedProfit" /><br>
 		
 		<label>예상매출월</label>
-		<input type="text" name="expectedSalesMonth" /><br>
+		<input type="month" name="expectedSalesMonth" /><br>
 		
 		<label>상태</label>
 		<select name="state">
