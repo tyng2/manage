@@ -69,10 +69,13 @@ public class BusinessPlanController {
 		return "businessPlanList";
 	}
 	 
-	 @GetMapping("/businessPlanList/{oppId}")
-	 public String businessPlanDtl(Model model) {
+	 @GetMapping("/businessPlanDtl")
+	 public String businessPlanDtl(String oppId, Model model) {
 		 System.out.println("<<businessPlanDtl>>");
 		 
+		 List<BusinessPlanVO> list = businessPlanService.businessPlanDtl(oppId);
+		  
+		 model.addAttribute("list", list);
 		 
 		 return "businessPlanDtl";
 	 }

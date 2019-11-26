@@ -61,6 +61,11 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		return list;
 	}
 
-
+	@Override
+	public List<BusinessPlanVO> businessPlanDtl(String oppId) {
+		List<BusinessPlanVO> list = businessPlanMapper.businessPlanDtl(oppId);
+		
+		return list;
+	}
 
 }
