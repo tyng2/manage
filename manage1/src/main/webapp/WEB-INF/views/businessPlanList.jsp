@@ -8,6 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title>예산 목록</title>
+<style>
+tr {
+	background-color: #FFCCCC; 
+}
+td {
+	text-align: center;
+	background-color: #DDDDDD;
+}
+</style>
 <script src="/resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -33,6 +42,7 @@
 					<th>OPPID</th>
 					<th>Product 구분</th>
 					<th>프로젝트명</th>
+					<th>담당자</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,6 +51,7 @@
 						<td>${data.oppId}</td>
 						<td>${data.sort2}</td>
 						<td>${data.projectName}</td>
+						<td>${data.userNum}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

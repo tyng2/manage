@@ -1,6 +1,5 @@
 package com.manage.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +19,8 @@ import com.manage.service.paging.PagingBean;
 import com.manage.vo.BusinessPlanVO;
 
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
 @Controller
-@Log4j
 public class BusinessPlanController {
 	
 	@Setter(onMethod_ = @Autowired)
@@ -59,6 +56,7 @@ public class BusinessPlanController {
 		return responseEntity;
 	}
 	
+//GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
 	 @GetMapping("/businessPlanList")
 	 public String getBusinessPlanByUserNum(Model model) { 
 		 System.out.println("<< businessPlanList >>\n");

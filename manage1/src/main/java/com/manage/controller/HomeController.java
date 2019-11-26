@@ -1,7 +1,5 @@
 package com.manage.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +12,8 @@ import com.manage.mapper.AuthMapper;
 import com.manage.service.UserService;
 
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
 @Controller
-@Log4j
 public class HomeController {
 
 	@Setter(onMethod_ = @Autowired)
