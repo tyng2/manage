@@ -52,13 +52,13 @@ $(document).ready(function() {
 		</select><br>
 		
 		<label>예상매출액</label>
-		<input type="text" name="expectedSales" /><br>
+		<input type="text" name="expectedSales" maxlength="12" placeholder="12자리까지 입력가능" /><br>
 		
 		<label>예상매입금</label>
-		<input type="text" name="expectedPurchase" /><br>
+		<input type="text" name="expectedPurchase" maxlength="12" placeholder="12자리까지 입력가능" /><br>
 		
 		<label>예상이익</label>
-		<input type="text" name="expectedProfit" /><br>
+		<input type="text" name="expectedProfit" maxlength="12" placeholder="12자리까지 입력가능" /><br>
 		
 		<label>예상매출월</label>
 		<input type="month" name="expectedSalesMonth" /><br>

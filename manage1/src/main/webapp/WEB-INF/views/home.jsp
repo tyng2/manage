@@ -32,6 +32,8 @@ home.jsp
 	</form>
 	
 	<p><a href="/businessPlan">예산 작성</a></p>
+
+	<p><a href="/businessPlanList">예산 목록</a></p>
 </sec:authorize>
 </body>
 </html>

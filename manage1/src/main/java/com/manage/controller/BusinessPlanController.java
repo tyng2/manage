@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.manage.mapper.BusinessPlanMapper;
 import com.manage.service.BusinessPlanSevice;
 import com.manage.vo.BusinessPlanVO;
 
@@ -24,6 +26,9 @@ public class BusinessPlanController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private BusinessPlanSevice businessPlanService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private BusinessPlanMapper businessPlanMapper;
 	
 //	POST 방식으로 businessPlan 주소 접근 시 예산 작성 처리
 	@PostMapping("/businessPlan")
@@ -46,7 +51,12 @@ public class BusinessPlanController {
 		return responseEntity;
 	}
 	
-	
+	@GetMapping("businessPlanList")
+	public String getBusinessPlanByUserNum(Model model) {
+		System.out.println("<< businessPlanList >>\n");
+		
+		return "businessPlanList";
+	}
 	
 
 }
