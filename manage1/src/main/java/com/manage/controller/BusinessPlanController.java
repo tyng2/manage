@@ -1,5 +1,6 @@
 package com.manage.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,14 @@ public class BusinessPlanController {
 		model.addAttribute("list", list);
 		return "businessPlanList";
 	}
+	
+	@GetMapping("/bpReport")
+	public String businessPlanReport(Principal principal, Model model) {
+		System.out.println("<< businessPlan Report >>\n");
+		
+		List<BusinessPlanVO> list = businessPlanMapper.getBusinessPlanPeriod(principal.getName(), "", "");
+		return "businessPlanReport";
+	}
+	
 
 }

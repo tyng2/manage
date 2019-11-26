@@ -10,5 +10,4 @@ public interface BusinessPlanSevice {
 
 	public List<BusinessPlanVO> getBusinessPlanByUserNum(String UserNum);
 
-//	public HashMap<String, String> getBusinessPlanByUserNum(HashMap<String, String> params) throws Throwable;
 }
