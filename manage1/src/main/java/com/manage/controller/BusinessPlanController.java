@@ -79,7 +79,7 @@ public class BusinessPlanController {
 		 return "businessPlanList"; 
 	 }
 	 
-	 @GetMapping("/businessPlanList/{userNum}")
+	 @GetMapping("/businessPlanList/{oppId}")
 	 public String businessPlanDtl(Model model) {
 		 System.out.println("<<businessPlanDtl>>");
 		

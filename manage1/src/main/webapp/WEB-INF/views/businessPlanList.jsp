@@ -47,7 +47,7 @@ td {
 			</thead>
 			<tbody>
 				<c:forEach var="data" items="${list}">
-					<tr name="${data.userNum}">
+					<tr name="${data.oppId}">
 						<td>${data.oppId}</td>
 						<td>${data.sort2}</td>
 						<td>${data.projectName}</td>
