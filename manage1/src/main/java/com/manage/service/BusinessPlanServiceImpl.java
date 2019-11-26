@@ -1,7 +1,6 @@
 package com.manage.service;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +61,4 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		return list;
 	}
 
-//	@Override
-//	public HashMap<String, String> getBusinessPlanByUserNum(HashMap<String, String> params) throws Throwable {
-//		return null;
-//	}
-	
-	
-	
 }
