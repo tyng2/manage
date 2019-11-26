@@ -59,5 +59,9 @@
 		WHERE bp.expectedSalesMonth BETWEEN #{month1} AND #{month2};
 	</select>
 	
-
+	<select id="businessPlanDtl" resultType="businessPlanVO">
+		SELECT * FROM manage.BusinessPlanning
+		WHERE oppId = #{oppId};
+	</select>
+	
 </mapper>

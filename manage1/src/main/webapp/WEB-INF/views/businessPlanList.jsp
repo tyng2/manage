@@ -19,17 +19,12 @@ td {
 </style>
 <script src="/resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#pageArea").on("click", "input", function() {
-			$("#page").val($(this).attr("name"));
-			$("#dataForm").submit();
-		});
-		
-		$("tbody").on("click", "tr", function() {
-			console.log("/businessPlanList/" + $(this).attr("name"));
-			location.href = "/businessPlanList/" + $(this).attr("name");
-		});
+$(document).ready(function() {
+	$("#pageArea").on("click", "input", function() {
+		$("#page").val($(this).attr("name"));
+		$("#dataForm").submit();
 	});
+});
 </script>
 </head>
 <body>
@@ -47,7 +42,7 @@ td {
 			</thead>
 			<tbody>
 				<c:forEach var="data" items="${list}">
-					<tr name="${data.userNum}">
+					<tr onclick="location.href='/businessPlanDtl?oppId=${data.oppId}'">
 						<td>${data.oppId}</td>
 						<td>${data.sort2}</td>
 						<td>${data.projectName}</td>

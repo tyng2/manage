@@ -80,10 +80,13 @@ public class BusinessPlanController {
 		return "businessPlanList";
 	}
 	 
-	 @GetMapping("/businessPlanList/{userNum}")
-	 public String businessPlanDtl(Model model) {
+	 @GetMapping("/businessPlanDtl")
+	 public String businessPlanDtl(String oppId, Model model) {
 		 System.out.println("<<businessPlanDtl>>");
 		 
+		 List<BusinessPlanVO> list = businessPlanService.businessPlanDtl(oppId);
+		  
+		 model.addAttribute("list", list);
 		 
 		 return "businessPlanDtl";
 	 }
@@ -149,7 +152,6 @@ public class BusinessPlanController {
 		
 		return "businessPlanReport";
 	}
-	
 	
 	public int calcExpectedSales(List<BusinessPlanVO> list) {
 		int expectedSales = 0; //예상매출액

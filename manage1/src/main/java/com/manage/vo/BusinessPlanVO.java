@@ -16,6 +16,6 @@ public class BusinessPlanVO {
 	private Date expectedSalesMonth;
 	
 	private Timestamp regDate;
-	
+
 
 }
