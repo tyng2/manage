@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>예산 목록</title>
+<script src="/resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
 </script>
@@ -24,7 +25,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="data" items="${list}">
+				<c:forEach var="data" items="${list }">
 					<tr name="${data.userNum}">
 						<td>${data.oppId}</td>
 						<td>${data.sort2}</td>
@@ -36,6 +37,5 @@
 		<a href="#" onclick="history.back();" style="float: right;">돌아가기</a>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
-<script src="/resources/jquery-1.12.4.js"></script>
 </body>
 </html>

@@ -1,5 +1,10 @@
 package com.manage.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,6 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.manage.mapper.BusinessPlanMapper;
 import com.manage.service.BusinessPlanSevice;
@@ -51,12 +59,21 @@ public class BusinessPlanController {
 		return responseEntity;
 	}
 	
-	@GetMapping("businessPlanList")
-	public String getBusinessPlanByUserNum(Model model) {
-		System.out.println("<< businessPlanList >>\n");
-		
-		return "businessPlanList";
-	}
+	 @GetMapping("/businessPlanList")
+	 public String getBusinessPlanByUserNum(Model model) { 
+		 System.out.println("<< businessPlanList >>\n");
+	 
+//		HashMap<String, String> data = ;
+		 List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(null);
+	  
+		 model.addAttribute("list", list);
+	 return "businessPlanList"; 
+	 }
 	
-
+//		@RequestMapping("/businessPlanList")
+//		public ModelAndView businessPlanList(@RequestParam HashMap<String, String> params, HttpSession session, ModelAndView mav) throws Throwable {
+//			HashMap<String, String> data = businessPlanService.getBusinessPlanByUserNum(params);
+//		}
+//	
+//		return mav;
 }
