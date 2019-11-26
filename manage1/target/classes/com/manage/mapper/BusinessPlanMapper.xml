@@ -48,12 +48,9 @@
 	
 	<select id="getBusinessPlanPeriod" resultType="businessPlanVO">
 		SELECT * FROM 
-<!-- 		<if test="userNum != null and userNum != ''"> -->
-<!-- 			(SELECT * FROM BusinessPlanning WHERE userNum = #{userNum}) bp  -->
-<!-- 		</if> -->
 		<choose>
-		<when test="userNum != null and userNum != ''">
-			(SELECT * FROM manage.BusinessPlanning WHERE userNum = #{userNum}) bp
+		<when test="sort1 != null and sort1 != ''">
+			(SELECT * FROM manage.BusinessPlanning WHERE sort1 = #{sort1}) bp
 		</when>
 		<otherwise>
 			manage.BusinessPlanning bp

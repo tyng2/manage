@@ -91,5 +91,7 @@ td {
 		<a href="#" onclick="history.back();" style="float: right;">돌아가기</a> <input
 			type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
+	
+	<a href="/bpReport">보고서</a>
 </body>
 </html>
