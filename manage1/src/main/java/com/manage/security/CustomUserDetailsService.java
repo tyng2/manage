@@ -36,6 +36,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         
         UserVO userVO = userMapper.getUserById(username);
         
+        if (userVO == null) {
+        	System.out.println("로그인 오류");
+        	return null;
+        }
+        
         List<AuthVO> authList = authMapper.getAuthListByUserId(username);
         userVO.setAuthList(authList);
         

@@ -33,12 +33,6 @@ public class HomeController {
 	public String main(Locale locale, Model model) {
 		System.out.println("<< home >>\n");
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
 		return "home";
 	}
 	
@@ -53,8 +47,12 @@ public class HomeController {
 	
 //	GET 방식으로 login 주소 접근 시 login.jsp 페이지로 이동
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login(String error, Model model) {
 		System.out.println("<< login >>\n");
+		
+		if (error != null) {
+			model.addAttribute("error", "아이디나 비밀번호가 맞지 않습니다.");
+		}
 		
 		return "login";
 	}
