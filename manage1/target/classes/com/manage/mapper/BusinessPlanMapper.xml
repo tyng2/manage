@@ -25,6 +25,27 @@
 		ORDER BY regDate DESC LIMIT 1
 	</select>
 	
+	<select id="getBusinessPlanListCnt" resultType="businessPlanVO">
+		SELECT COUNT(*) AS CNT
+		FROM manage.BusinessPlanning
+		WHERE userNum = #{userNum}
+<!-- 		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="searchGbn == 0">
+					AND  LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchGbn == 1">
+					AND  LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchGbn == 2">
+					AND ( LIKE '%' || #{searchTxt} || '%'
+			     		OR  LIKE '%' || #{searchTxt} || '%')
+				</when>
+			</choose>
+		</if> -->
+	</select>
+	
+	
 	<select id="getBusinessPlanPeriod" resultType="businessPlanVO">
 		SELECT * FROM 
 <!-- 		<if test="userNum != null and userNum != ''"> -->

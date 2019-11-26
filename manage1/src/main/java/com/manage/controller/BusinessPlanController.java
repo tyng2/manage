@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.manage.mapper.BusinessPlanMapper;
 import com.manage.service.BusinessPlanSevice;
+import com.manage.service.paging.IPagingService;
+import com.manage.service.paging.PagingBean;
 import com.manage.vo.BusinessPlanVO;
 
 import lombok.Setter;
@@ -30,6 +32,9 @@ public class BusinessPlanController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private BusinessPlanMapper businessPlanMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private IPagingService iPagingService;
 	
 //	POST 방식으로 businessPlan 주소 접근 시 예산 작성 처리
 	@PostMapping("/businessPlan")
@@ -51,17 +56,27 @@ public class BusinessPlanController {
 
 		return responseEntity;
 	}
+	
+//GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
+	 @GetMapping("/businessPlanList")
+	 public String getBusinessPlanByUserNum(Model model) { 
+		 System.out.println("<< businessPlanList >>\n");
 
-//	GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
-	@GetMapping("/businessPlanList")
-	public String getBusinessPlanByUserNum(Model model) {
-		System.out.println("<< businessPlanList >>\n");
+		 List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(null);
+	  
+		 model.addAttribute("list", list);
 
-		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(null);
-
-		model.addAttribute("list", list);
 		return "businessPlanList";
 	}
+	 
+	 @GetMapping("/businessPlanList/{userNum}")
+	 public String businessPlanDtl(Model model) {
+		 System.out.println("<<businessPlanDtl>>");
+		 
+		 
+		 return "businessPlanDtl";
+	 }
+	 
 	
 	@GetMapping("/bpReport")
 	public String businessPlanReport(Principal principal, Model model) {
@@ -71,5 +86,7 @@ public class BusinessPlanController {
 		return "businessPlanReport";
 	}
 	
+	 
+	 
 
 }
