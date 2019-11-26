@@ -1,5 +1,6 @@
 package com.manage.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,27 +66,26 @@ public class BusinessPlanController {
 	  
 		 model.addAttribute("list", list);
 
-		/*
-		 * //페이징 int cnt = businessPlanService.getBusinessPlanListCnt(model);
-		 * 
-		 * PagingBean pb =
-		 * iPagingService.getPageingBean(Integer.parseInt(params.get("listPage")), cnt,
-		 * 10, 10);
-		 * 
-		 * model.put("startCnt", Integer.toString(pb.getStartCount()));
-		 * model.put("endCnt", Integer.toString(pb.getEndCount()));
-		 */
-	 
-		 return "businessPlanList"; 
-	 }
+		return "businessPlanList";
+	}
 	 
 	 @GetMapping("/businessPlanList/{oppId}")
 	 public String businessPlanDtl(Model model) {
 		 System.out.println("<<businessPlanDtl>>");
-		
+		 
 		 
 		 return "businessPlanDtl";
 	 }
+	 
+	
+	@GetMapping("/bpReport")
+	public String businessPlanReport(Principal principal, Model model) {
+		System.out.println("<< businessPlan Report >>\n");
+		
+		List<BusinessPlanVO> list = businessPlanMapper.getBusinessPlanPeriod(principal.getName(), "", "");
+		return "businessPlanReport";
+	}
+	
 	 
 	 
 

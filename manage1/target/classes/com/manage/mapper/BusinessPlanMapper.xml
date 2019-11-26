@@ -18,7 +18,6 @@
 				userNum = #{userNum}
 			</if>
 		</where>
-<!-- 		WHERE userNum = #{userNum} -->
 	</select>
 	
 	<select id="getLastOppid" resultType="string">
@@ -44,6 +43,23 @@
 				</when>
 			</choose>
 		</if> -->
+	</select>
+	
+	
+	<select id="getBusinessPlanPeriod" resultType="businessPlanVO">
+		SELECT * FROM 
+<!-- 		<if test="userNum != null and userNum != ''"> -->
+<!-- 			(SELECT * FROM BusinessPlanning WHERE userNum = #{userNum}) bp  -->
+<!-- 		</if> -->
+		<choose>
+		<when test="userNum != null and userNum != ''">
+			(SELECT * FROM manage.BusinessPlanning WHERE userNum = #{userNum}) bp
+		</when>
+		<otherwise>
+			manage.BusinessPlanning bp
+		</otherwise>
+		</choose>
+		WHERE bp.expectedSalesMonth BETWEEN #{month1} AND #{month2};
 	</select>
 	
 
