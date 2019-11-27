@@ -139,8 +139,4 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		return list;
 	}
 
-	
-	
->>>>>>> branch 'master' of https://github.com/QWERvTY/manage.git
-
 }
