@@ -18,5 +18,7 @@ public interface BusinessPlanMapper {
 
 	public List<BusinessPlanVO> businessPlanDtl(String oppId);
 	
+	public List<Integer> getYearBusinessPlan();
+	
 	
 }

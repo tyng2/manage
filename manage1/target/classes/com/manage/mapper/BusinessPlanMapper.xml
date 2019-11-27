@@ -64,4 +64,9 @@
 		WHERE oppId = #{oppId};
 	</select>
 	
+	<select id="getYearBusinessPlan" resultType="string">
+		SELECT DISTINCT DATE_FORMAT(expectedSalesMonth, '%Y') FROM BusinessPlanning 
+		ORDER BY expectedSalesMonth DESC;
+	</select>
+	
 </mapper>

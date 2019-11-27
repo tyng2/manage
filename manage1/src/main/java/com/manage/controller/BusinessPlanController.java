@@ -74,8 +74,11 @@ public class BusinessPlanController {
 		 System.out.println("<< businessPlanList >>\n");
 
 		 List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(null);
-	  
+		 List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
+		 System.out.println("listYear : " + listYear);
+		 
 		 model.addAttribute("list", list);
+		 model.addAttribute("listYear", listYear);
 
 		return "businessPlanList";
 	}
@@ -92,8 +95,8 @@ public class BusinessPlanController {
 	 }
 	 
 	
-	@GetMapping("/bpReport")
-	public String businessPlanReport(Principal principal, Model model) {
+	@PostMapping("/bpReport")
+	public String businessPlanReport(String year, Principal principal, Model model) {
 		System.out.println("<< businessPlan Report >>\n");
 		
 		if (principal == null) {
@@ -149,6 +152,9 @@ public class BusinessPlanController {
 		map.put("bp43", calcExpectedSales(list43));
 		
 		model.addAttribute("bp", map);
+		
+		year = year.substring(0, 4);
+		model.addAttribute("year", year);
 		
 		return "businessPlanReport";
 	}

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>분기별 매출 계획</title>
+<title>${year }년 분기별 매출 계획</title>
 <style>
 tr {
 	background-color: #FFCCCC; 
@@ -22,7 +22,7 @@ td {
 <body>
 	<form action="/businessPlanList" id="dataForm" method="POST">
 
-	<h3>2020년 분기별 매출 계획</h3>
+	<h3>${year }년 분기별 매출 계획</h3>
 	<p>2019년 10월 현재</p>
 	<div>
 	<p>부서 : </p>
