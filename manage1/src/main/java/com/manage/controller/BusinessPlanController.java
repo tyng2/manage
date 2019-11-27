@@ -69,16 +69,34 @@ public class BusinessPlanController {
 	}
 	
 //GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
-	 @GetMapping("/businessPlanList")
-	 public String getBusinessPlanByUserNum(Model model) { 
-		 System.out.println("<< businessPlanList >>\n");
+	@GetMapping("/businessPlanList")
+	public String getBusinessPlanByUserNum(Model model) { 
+		System.out.println("<< businessPlanList >>\n");
+		
+		
+//		로그인 한 아이디의 권한 가져오기
+		List<String> roleNames = new ArrayList<>();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Collection<GrantedAuthority> collection 
+            = (Collection<GrantedAuthority>) auth.getAuthorities();
+        
+        for (GrantedAuthority authority : collection) {
+            roleNames.add(authority.getAuthority());
+        }
+        System.out.println("권한 : " + roleNames);
+        String roleName = roleName(roleNames);
+        
+        if ("All".equals(roleName)) {
+        	model.addAttribute("select", roleName);
+        }
+        
 
-		 List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(null);
-		 List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
-		 System.out.println("listYear : " + listYear);
-		 
-		 model.addAttribute("list", list);
-		 model.addAttribute("listYear", listYear);
+		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(null);
+		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
+		System.out.println("listYear : " + listYear);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("listYear", listYear);
 
 		return "businessPlanList";
 	}
@@ -94,28 +112,25 @@ public class BusinessPlanController {
 		 return "businessPlanDtl";
 	 }
 	 
-	
 	@PostMapping("/bpReport")
-	public String businessPlanReport(String year, Principal principal, Model model) {
+	public String businessPlanReport(String year, String team, Principal principal, Model model) {
 		System.out.println("<< businessPlan Report >>\n");
-		
+
 		if (principal == null) {
 			return "/";
 		}
-		
+
 //		로그인 한 아이디의 권한 가져오기
 		List<String> roleNames = new ArrayList<>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Collection<GrantedAuthority> collection 
-            = (Collection<GrantedAuthority>) auth.getAuthorities();
-        
-        for (GrantedAuthority authority : collection) {
-            roleNames.add(authority.getAuthority());
-        }
-        System.out.println("권한 : " + roleNames);
-//        roleNames.get(0);
+		Collection<GrantedAuthority> collection = (Collection<GrantedAuthority>) auth.getAuthorities();
 
-        
+		for (GrantedAuthority authority : collection) {
+			roleNames.add(authority.getAuthority());
+		}
+		System.out.println("권한 : " + roleNames);
+
+
 		// 1분기의 영업 계획 내용 (1. 물품, 2. 유지보수, 3. 개발)
 		List<BusinessPlanVO> list11 = businessPlanMapper.getBusinessPlanPeriod("1", "2020-01-01", "2020-03-31");
 		List<BusinessPlanVO> list12 = businessPlanMapper.getBusinessPlanPeriod("2", "2020-01-01", "2020-03-31");
@@ -136,7 +151,7 @@ public class BusinessPlanController {
 //		System.out.println("2분기 갯수 : " + list2.size());
 //		System.out.println("3분기 갯수 : " + list3.size());
 //		System.out.println("4분기 갯수 : " + list4.size());
-		
+
 		Map<String, Integer> map = new HashMap<>();
 		map.put("bp11", calcExpectedSales(list11));
 		map.put("bp12", calcExpectedSales(list12));
@@ -150,30 +165,50 @@ public class BusinessPlanController {
 		map.put("bp41", calcExpectedSales(list41));
 		map.put("bp42", calcExpectedSales(list42));
 		map.put("bp43", calcExpectedSales(list43));
-		
-		
+
 		year = year.substring(0, 4);
 		model.addAttribute("year", year);
-		
+
 		Map<String, String> yearAndMonth = businessPlanService.getLastExpectedYearANDMonth(Integer.parseInt(year));
 //		List<String> list = businessPlanService.getLastExpectedYearANDMonth(Integer.parseInt(year)); 
 		System.out.println("year, month : " + yearAndMonth);
+
+		String roleName = roleName(roleNames);
 		
+		if (roleName.equals("All")) {
+			model.addAttribute("depName", team);
+		} else {
+			model.addAttribute("depName", roleName);
+		}
+
 		model.addAttribute("bp", map);
 		model.addAttribute("yearAndMonth", yearAndMonth);
-		
+
 		return "businessPlanReport";
 	}
-	
+
 	public int calcExpectedSales(List<BusinessPlanVO> list) {
-		int expectedSales = 0; //예상매출액
-		
+		int expectedSales = 0; // 예상매출액
+
 		for (BusinessPlanVO bp : list) {
 			expectedSales += bp.getExpectedSales();
 		}
-		
+
 		return expectedSales;
 	}
-	 
+
+	public String roleName(List<String> list) {
+		String roleName = null;
+		if (list.get(0).equals("ROLE_SALES1") || list.get(0).equals("ROLE_DIRECTOR1")) {
+			roleName = "영업 1팀";
+		} else if (list.get(0).equals("ROLE_SALES2") || list.get(0).equals("ROLE_DIRECTOR2")) {
+			roleName = "영업 2팀";
+		} else if (list.get(0).equals("ROLE_MARKETING") || list.get(0).equals("ROLE_CEO")) {
+			roleName = "All";
+		}
+
+		System.out.println(roleName);
+		return roleName;
+	}
 
 }

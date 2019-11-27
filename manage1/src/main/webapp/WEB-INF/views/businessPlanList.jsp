@@ -93,8 +93,18 @@ $(document).ready(function() {
 				<option>${year }년</option>
 			</c:forEach>
 		</select>
+		<c:if test="${select != null }">
+			<select name="team">
+				<option>영업 1팀</option>
+				<option>영업 2팀</option>
+			</select>
+		</c:if>
 		<button>보고서</button>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
+	
+	
+	
+	
 </body>
 </html>
