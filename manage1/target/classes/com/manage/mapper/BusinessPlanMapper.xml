@@ -93,6 +93,5 @@
 		SELECT DATE_FORMAT(regDate, '%m') FROM BusinessPlanning 
 		WHERE DATE_FORMAT(expectedSalesMonth, '%Y') = #{year} ORDER BY regDate DESC LIMIT 1;
 	</select>
->>>>>>> branch 'master' of https://github.com/QWERvTY/manage.git
 	
 </mapper>
