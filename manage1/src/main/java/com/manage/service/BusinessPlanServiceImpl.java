@@ -62,10 +62,25 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 	}
 
 	@Override
-	public List<BusinessPlanVO> businessPlanDtl(String oppId) {
-		List<BusinessPlanVO> list = businessPlanMapper.businessPlanDtl(oppId);
+	public BusinessPlanVO businessPlanDtl(String oppId) {
+		BusinessPlanVO list = businessPlanMapper.businessPlanDtl(oppId);
 		
 		return list;
+	}
+
+	@Override
+	public boolean businessPlanUpdate(BusinessPlanVO list) {
+		 boolean isSuccess = false;
+	        
+		 List<BusinessPlanVO> board = businessPlanMapper.getBusinessPlanByUserNum(list.getUserNum());
+	        
+	        if (list.getOppId().equals(list.getOppId())) {
+	        	businessPlanMapper.businessPlanUpdate(list);
+	            isSuccess = true;
+	        } else {
+	            isSuccess = false;
+	        }
+	        return isSuccess;
 	}
 
 }

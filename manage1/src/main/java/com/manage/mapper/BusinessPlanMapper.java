@@ -16,7 +16,8 @@ public interface BusinessPlanMapper {
 	
 	public List<BusinessPlanVO> getBusinessPlanPeriod(@Param("sort1") String sort1, @Param("month1") String month1, @Param("month2") String month2);
 
-	public List<BusinessPlanVO> businessPlanDtl(String oppId);
-	
+	public BusinessPlanVO businessPlanDtl(String oppId);
+
+	public int businessPlanUpdate(BusinessPlanVO list);
 	
 }

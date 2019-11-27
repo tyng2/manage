@@ -10,6 +10,8 @@ public interface BusinessPlanSevice {
 
 	public List<BusinessPlanVO> getBusinessPlanByUserNum(String UserNum);
 
-	public List<BusinessPlanVO> businessPlanDtl(String oppId);
+	public BusinessPlanVO businessPlanDtl(String oppId);
+
+	public boolean businessPlanUpdate(BusinessPlanVO list);
 
 }
