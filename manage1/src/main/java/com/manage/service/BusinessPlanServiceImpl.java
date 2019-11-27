@@ -1,7 +1,9 @@
 package com.manage.service;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 
 		
 		/* 새 영업계획에 사용될 OppId 구하는 과정 */
-		String lastOppid = businessPlanMapper.getLastOppid();
+		String lastOppid = businessPlanMapper.getLastData().getOppId();
 		
 		Calendar cal = Calendar.getInstance();
 		
@@ -67,5 +69,20 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		
 		return list;
 	}
+
+	@Override
+	public Map<String, String> getLastExpectedYearANDMonth(int year) {
+		
+		String yr = businessPlanMapper.getLastExpectedYear(year);
+		String month = businessPlanMapper.getLastExpectedMonth(year);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("yr", yr);
+		map.put("month", month);
+		return map;
+	}
+
+	
+	
 
 }

@@ -151,10 +151,16 @@ public class BusinessPlanController {
 		map.put("bp42", calcExpectedSales(list42));
 		map.put("bp43", calcExpectedSales(list43));
 		
-		model.addAttribute("bp", map);
 		
 		year = year.substring(0, 4);
 		model.addAttribute("year", year);
+		
+		Map<String, String> yearAndMonth = businessPlanService.getLastExpectedYearANDMonth(Integer.parseInt(year));
+//		List<String> list = businessPlanService.getLastExpectedYearANDMonth(Integer.parseInt(year)); 
+		System.out.println("year, month : " + yearAndMonth);
+		
+		model.addAttribute("bp", map);
+		model.addAttribute("yearAndMonth", yearAndMonth);
 		
 		return "businessPlanReport";
 	}

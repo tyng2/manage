@@ -20,8 +20,8 @@
 		</where>
 	</select>
 	
-	<select id="getLastOppid" resultType="string">
-		SELECT IFNULL(OppId, 0) FROM manage.BusinessPlanning
+	<select id="getLastData" resultType="businessPlanVO">
+		SELECT * FROM manage.BusinessPlanning
 		ORDER BY regDate DESC LIMIT 1
 	</select>
 	
@@ -67,6 +67,16 @@
 	<select id="getYearBusinessPlan" resultType="string">
 		SELECT DISTINCT DATE_FORMAT(expectedSalesMonth, '%Y') FROM BusinessPlanning 
 		ORDER BY expectedSalesMonth DESC;
+	</select>
+	
+	<select id="getLastExpectedYear" resultType="string">
+		SELECT DATE_FORMAT(regDate, '%Y') FROM BusinessPlanning 
+		WHERE DATE_FORMAT(expectedSalesMonth, '%Y') = #{year} ORDER BY regDate DESC LIMIT 1;
+	</select>
+	
+	<select id="getLastExpectedMonth" resultType="string">
+		SELECT DATE_FORMAT(regDate, '%m') FROM BusinessPlanning 
+		WHERE DATE_FORMAT(expectedSalesMonth, '%Y') = #{year} ORDER BY regDate DESC LIMIT 1;
 	</select>
 	
 </mapper>

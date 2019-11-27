@@ -12,7 +12,7 @@ public interface BusinessPlanMapper {
 	
 	public List<BusinessPlanVO> getBusinessPlanByUserNum(String userNum);
 	
-	public String getLastOppid();
+	public BusinessPlanVO getLastData();
 	
 	public List<BusinessPlanVO> getBusinessPlanPeriod(@Param("sort1") String sort1, @Param("month1") String month1, @Param("month2") String month2);
 
@@ -20,5 +20,8 @@ public interface BusinessPlanMapper {
 	
 	public List<Integer> getYearBusinessPlan();
 	
+	public String getLastExpectedYear(int year);
+
+	public String getLastExpectedMonth(int year);
 	
 }
