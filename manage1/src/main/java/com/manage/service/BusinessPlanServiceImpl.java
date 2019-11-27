@@ -82,6 +82,48 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		return map;
 	}
 
+	@Override
+	public List<BusinessPlanVO> getBusinessPlanPeriodService(String roleName, int sort1, String year, int quarter) {
+		year = year.substring(0, 4);
+		StringBuilder month1 = new StringBuilder();
+		StringBuilder month2 = new StringBuilder();
+		month1.append(year).append("-");
+		month2.append(month1.toString());
+		switch (quarter) {
+		case 1:
+			month1.append("01-01");
+			month2.append("03-31");
+			break;
+		case 2:
+			month1.append("04-01");
+			month2.append("06-30");
+			break;
+		case 3:
+			month1.append("07-01");
+			month2.append("09-30");
+			break;
+		case 4:
+			month1.append("10-01");
+			month2.append("12-31");
+			break;
+		default:
+			break;
+		}
+		
+		System.out.println(roleName);
+		System.out.println(sort1);
+		System.out.println(month1.toString());
+		System.out.println(month2.toString());
+		List<BusinessPlanVO> list = businessPlanMapper.getBusinessPlanPeriod(roleName, sort1 + "", month1.toString(), month2.toString());
+		System.out.println("Impl list : " + list.size() + "개");
+		
+		for (BusinessPlanVO bp : list) {
+			System.out.println(bp);
+		}
+		
+		return list;
+	}
+
 	
 	
 

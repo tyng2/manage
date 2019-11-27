@@ -86,7 +86,7 @@ public class BusinessPlanController {
         System.out.println("권한 : " + roleNames);
         String roleName = roleName(roleNames);
         
-        if ("All".equals(roleName)) {
+        if ("마케팅".equals(roleName) || "이사".equals(roleName)) {
         	model.addAttribute("select", roleName);
         }
         
@@ -114,10 +114,10 @@ public class BusinessPlanController {
 	 
 	@PostMapping("/bpReport")
 	public String businessPlanReport(String year, String team, Principal principal, Model model) {
-		System.out.println("<< businessPlan Report >>\n");
+		System.out.println("<< businessPlan Report, " + year + ", " + team + " >>\n");
 
 		if (principal == null) {
-			return "/";
+			return "";
 		}
 
 //		로그인 한 아이디의 권한 가져오기
@@ -129,28 +129,32 @@ public class BusinessPlanController {
 			roleNames.add(authority.getAuthority());
 		}
 		System.out.println("권한 : " + roleNames);
+		System.out.println("year : " + year);
 
-
-		// 1분기의 영업 계획 내용 (1. 물품, 2. 유지보수, 3. 개발)
-		List<BusinessPlanVO> list11 = businessPlanMapper.getBusinessPlanPeriod("1", "2020-01-01", "2020-03-31");
-		List<BusinessPlanVO> list12 = businessPlanMapper.getBusinessPlanPeriod("2", "2020-01-01", "2020-03-31");
-		List<BusinessPlanVO> list13 = businessPlanMapper.getBusinessPlanPeriod("3", "2020-01-01", "2020-03-31");
+		String depName = roleName(roleNames);
+		System.out.println("String " + depName);
+		if ("마케팅".equals(depName) || "이사".equals(depName)) {
+			depName = team;
+        }
+    	model.addAttribute("depName", depName);
+    	
+		System.out.println("getBPPeriodService : " + depName + " " + year);
+		// 1분기의 영업 계획 내용 (부서, 구분, 연도, 분기) < 구분 : (1. 물품, 2. 유지보수, 3. 개발) >
+		List<BusinessPlanVO> list11 = businessPlanService.getBusinessPlanPeriodService(depName, 1, year, 1);
+		List<BusinessPlanVO> list12 = businessPlanService.getBusinessPlanPeriodService(depName, 2, year, 1);
+		List<BusinessPlanVO> list13 = businessPlanService.getBusinessPlanPeriodService(depName, 3, year, 1);
 		// 2분기의 영업 계획 내용 (1. 물품, 2. 유지보수, 3. 개발)
-		List<BusinessPlanVO> list21 = businessPlanMapper.getBusinessPlanPeriod("1", "2020-04-01", "2020-06-30");
-		List<BusinessPlanVO> list22 = businessPlanMapper.getBusinessPlanPeriod("2", "2020-04-01", "2020-06-30");
-		List<BusinessPlanVO> list23 = businessPlanMapper.getBusinessPlanPeriod("3", "2020-04-01", "2020-06-30");
+		List<BusinessPlanVO> list21 = businessPlanService.getBusinessPlanPeriodService(depName, 1, year, 2);
+		List<BusinessPlanVO> list22 = businessPlanService.getBusinessPlanPeriodService(depName, 2, year, 2);
+		List<BusinessPlanVO> list23 = businessPlanService.getBusinessPlanPeriodService(depName, 3, year, 2);
 		// 3분기의 영업 계획 내용 (1. 물품, 2. 유지보수, 3. 개발)
-		List<BusinessPlanVO> list31 = businessPlanMapper.getBusinessPlanPeriod("1", "2020-07-01", "2020-09-30");
-		List<BusinessPlanVO> list32 = businessPlanMapper.getBusinessPlanPeriod("2", "2020-07-01", "2020-09-30");
-		List<BusinessPlanVO> list33 = businessPlanMapper.getBusinessPlanPeriod("3", "2020-07-01", "2020-09-30");
+		List<BusinessPlanVO> list31 = businessPlanService.getBusinessPlanPeriodService(depName, 1, year, 3);
+		List<BusinessPlanVO> list32 = businessPlanService.getBusinessPlanPeriodService(depName, 2, year, 3);
+		List<BusinessPlanVO> list33 = businessPlanService.getBusinessPlanPeriodService(depName, 3, year, 3);
 		// 4분기의 영업 계획 내용 (1. 물품, 2. 유지보수, 3. 개발)
-		List<BusinessPlanVO> list41 = businessPlanMapper.getBusinessPlanPeriod("1", "2020-10-01", "2020-12-31");
-		List<BusinessPlanVO> list42 = businessPlanMapper.getBusinessPlanPeriod("2", "2020-10-01", "2020-12-31");
-		List<BusinessPlanVO> list43 = businessPlanMapper.getBusinessPlanPeriod("3", "2020-10-01", "2020-12-31");
-//		System.out.println("1분기 갯수 : " + list1.size());
-//		System.out.println("2분기 갯수 : " + list2.size());
-//		System.out.println("3분기 갯수 : " + list3.size());
-//		System.out.println("4분기 갯수 : " + list4.size());
+		List<BusinessPlanVO> list41 = businessPlanService.getBusinessPlanPeriodService(depName, 1, year, 4);
+		List<BusinessPlanVO> list42 = businessPlanService.getBusinessPlanPeriodService(depName, 2, year, 4);
+		List<BusinessPlanVO> list43 = businessPlanService.getBusinessPlanPeriodService(depName, 3, year, 4);
 
 		Map<String, Integer> map = new HashMap<>();
 		map.put("bp11", calcExpectedSales(list11));
@@ -173,13 +177,7 @@ public class BusinessPlanController {
 //		List<String> list = businessPlanService.getLastExpectedYearANDMonth(Integer.parseInt(year)); 
 		System.out.println("year, month : " + yearAndMonth);
 
-		String roleName = roleName(roleNames);
 		
-		if (roleName.equals("All")) {
-			model.addAttribute("depName", team);
-		} else {
-			model.addAttribute("depName", roleName);
-		}
 
 		model.addAttribute("bp", map);
 		model.addAttribute("yearAndMonth", yearAndMonth);
@@ -198,17 +196,19 @@ public class BusinessPlanController {
 	}
 
 	public String roleName(List<String> list) {
-		String roleName = null;
+		String depName = null;
 		if (list.get(0).equals("ROLE_SALES1") || list.get(0).equals("ROLE_DIRECTOR1")) {
-			roleName = "영업 1팀";
+			depName = "영업 1팀";
 		} else if (list.get(0).equals("ROLE_SALES2") || list.get(0).equals("ROLE_DIRECTOR2")) {
-			roleName = "영업 2팀";
-		} else if (list.get(0).equals("ROLE_MARKETING") || list.get(0).equals("ROLE_CEO")) {
-			roleName = "All";
+			depName = "영업 2팀";
+		} else if (list.get(0).equals("ROLE_MARKETING")) {
+			depName = "마케팅";
+		} else if (list.get(0).equals("ROLE_CEO")) {
+			depName = "이사";
 		}
 
-		System.out.println(roleName);
-		return roleName;
+		System.out.println(depName);
+		return depName;
 	}
 
 }

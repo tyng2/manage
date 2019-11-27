@@ -15,4 +15,6 @@ public interface BusinessPlanSevice {
 	
 	public Map<String, String> getLastExpectedYearANDMonth(int year);
 
+	public List<BusinessPlanVO> getBusinessPlanPeriodService(String roleName, int sort1, String year, int quarter);
+	
 }
