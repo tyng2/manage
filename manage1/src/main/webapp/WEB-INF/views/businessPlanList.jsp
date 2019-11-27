@@ -83,10 +83,28 @@ $(document).ready(function() {
 			</c:choose>
 			<input type="button" value="마지막페이지" name="${pb.maxPcount}" />
 		</div>
-		<a href="#" onclick="history.back();" style="float: right;">돌아가기</a> <input
-			type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<a href="#" onclick="history.back();" style="float: right;">돌아가기</a>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
 	
-	<a href="/bpReport">보고서</a>
+	<form action="/bpReport" method="POST">
+		<select name="year" required="required">
+			<c:forEach var="year" items="${listYear }">
+				<option>${year }년</option>
+			</c:forEach>
+		</select>
+		<c:if test="${select != null }">
+			<select name="team">
+				<option>영업 1팀</option>
+				<option>영업 2팀</option>
+			</select>
+		</c:if>
+		<button>보고서</button>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	</form>
+	
+	
+	
+	
 </body>
 </html>

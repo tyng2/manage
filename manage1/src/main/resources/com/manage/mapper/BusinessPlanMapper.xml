@@ -20,8 +20,8 @@
 		</where>
 	</select>
 	
-	<select id="getLastOppid" resultType="string">
-		SELECT IFNULL(OppId, 0) FROM manage.BusinessPlanning
+	<select id="getLastData" resultType="businessPlanVO">
+		SELECT * FROM manage.BusinessPlanning
 		ORDER BY regDate DESC LIMIT 1
 	</select>
 	
@@ -46,17 +46,26 @@
 	</select>
 	
 	
+<!-- 	department가 null이면 모든 부서 자료 열람, sort1이 null이면 모든 자료 열람 -->
 	<select id="getBusinessPlanPeriod" resultType="businessPlanVO">
 		SELECT * FROM 
 		<choose>
-		<when test="sort1 != null and sort1 != ''">
-			(SELECT * FROM manage.BusinessPlanning WHERE sort1 = #{sort1}) bp
+		<when test="sort1 != null and department != null">
+			(SELECT bp.* FROM BusinessPlanning bp INNER JOIN user ur ON bp.userNum = ur.userNum 
+			WHERE ur.department = #{department} AND bp.sort1 = #{sort1}) fbp
+		</when>
+		<when test="sort1 == null and department != null">
+			(SELECT bp.* FROM BusinessPlanning bp INNER JOIN user ur ON bp.userNum = ur.userNum 
+			WHERE ur.department = #{department}) fbp
+		</when>
+		<when test="sort1 != null and department == null">
+			(SELECT * FROM manage.BusinessPlanning WHERE sort1 = #{sort1}) fbp
 		</when>
 		<otherwise>
-			manage.BusinessPlanning bp
+			manage.BusinessPlanning fbp
 		</otherwise>
 		</choose>
-		WHERE bp.expectedSalesMonth BETWEEN #{month1} AND #{month2};
+		WHERE fbp.expectedSalesMonth BETWEEN #{month1} AND #{month2};
 	</select>
 	
 	<select id="businessPlanDtl" resultType="businessPlanVO">
@@ -69,5 +78,21 @@
 			state=#{state}, note=#{note}, customerName=#{customerName}, customerPhone=#{customerPhone}, customerEmail=#{customerEmail}
 		WHERE oppId = #{oppId};
 	</update>
+
+	<select id="getYearBusinessPlan" resultType="string">
+		SELECT DISTINCT DATE_FORMAT(expectedSalesMonth, '%Y') FROM BusinessPlanning 
+		ORDER BY expectedSalesMonth DESC;
+	</select>
+	
+	<select id="getLastExpectedYear" resultType="string">
+		SELECT DATE_FORMAT(regDate, '%Y') FROM BusinessPlanning 
+		WHERE DATE_FORMAT(expectedSalesMonth, '%Y') = #{year} ORDER BY regDate DESC LIMIT 1;
+	</select>
+	
+	<select id="getLastExpectedMonth" resultType="string">
+		SELECT DATE_FORMAT(regDate, '%m') FROM BusinessPlanning 
+		WHERE DATE_FORMAT(expectedSalesMonth, '%Y') = #{year} ORDER BY regDate DESC LIMIT 1;
+	</select>
+>>>>>>> branch 'master' of https://github.com/QWERvTY/manage.git
 	
 </mapper>
