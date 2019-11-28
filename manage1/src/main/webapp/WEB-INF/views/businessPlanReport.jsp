@@ -23,13 +23,20 @@ td {
 	<form action="/businessPlanList" id="dataForm" method="POST">
 
 	<h3>${year }년 분기별 매출 계획</h3>
-	<p>${yr }년 ${month }월 현재</p>
+	<c:if test="${month != null }">
+		<p>${yr }년 ${month }월 현재</p>
+	</c:if>
 	<div>
 	<p>부서 : ${depName }</p>
 	<p>(단위:백만원)</p>
 	</div>
-		<table>
-			<thead>
+	<table>
+		<c:choose>
+		<c:when test="${month == null }">
+		<td>해당 매출 계획이 없습니다.</td>
+		</c:when>
+		<c:otherwise>
+		<thead>
 				<tr>
 					<th>구분</th>
 					<th>1분기</th>
@@ -73,9 +80,12 @@ td {
 					<td id="sum"></td>
 				</tr>
 			</tbody>
-		</table>
-		<a href="#" onclick="history.back();" style="float: right;">돌아가기</a>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		</c:otherwise>
+		</c:choose>
+			
+	</table>
+	<a href="#" onclick="history.back();" style="float: right;">돌아가기</a>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
 <script>
 $(document).ready(function() {

@@ -24,7 +24,6 @@ import com.manage.mapper.AuthMapper;
 import com.manage.mapper.BusinessPlanMapper;
 import com.manage.service.BusinessPlanSevice;
 import com.manage.service.paging.IPagingService;
-import com.manage.service.paging.PagingBean;
 import com.manage.vo.BusinessPlanVO;
 
 import lombok.Setter;
@@ -177,11 +176,12 @@ public class BusinessPlanController {
 		String month = businessPlanMapper.getLastExpectedYearANDMonth(depName, "m", Integer.parseInt(year));
 		System.out.println("year, month : " + year + ", " +month);
 
-		
+		if (month != null) {
+			model.addAttribute("yr", yr);
+			model.addAttribute("month", month);
+		}
 
 		model.addAttribute("bp", map);
-		model.addAttribute("yr", yr);
-		model.addAttribute("month", month);
 
 		return "businessPlanReport";
 	}
