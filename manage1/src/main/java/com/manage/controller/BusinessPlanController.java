@@ -173,14 +173,15 @@ public class BusinessPlanController {
 		year = year.substring(0, 4);
 		model.addAttribute("year", year);
 
-		Map<String, String> yearAndMonth = businessPlanService.getLastExpectedYearANDMonth(Integer.parseInt(year));
-//		List<String> list = businessPlanService.getLastExpectedYearANDMonth(Integer.parseInt(year)); 
-		System.out.println("year, month : " + yearAndMonth);
+		String yr = businessPlanMapper.getLastExpectedYearANDMonth(depName, "y", Integer.parseInt(year));
+		String month = businessPlanMapper.getLastExpectedYearANDMonth(depName, "m", Integer.parseInt(year));
+		System.out.println("year, month : " + year + ", " +month);
 
 		
 
 		model.addAttribute("bp", map);
-		model.addAttribute("yearAndMonth", yearAndMonth);
+		model.addAttribute("yr", yr);
+		model.addAttribute("month", month);
 
 		return "businessPlanReport";
 	}

@@ -23,7 +23,7 @@ td {
 	<form action="/businessPlanList" id="dataForm" method="POST">
 
 	<h3>${year }년 분기별 매출 계획</h3>
-	<p>${yearAndMonth.yr }년 ${yearAndMonth.month }월 현재</p>
+	<p>${yr }년 ${month }월 현재</p>
 	<div>
 	<p>부서 : ${depName }</p>
 	<p>(단위:백만원)</p>

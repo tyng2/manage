@@ -71,18 +71,6 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 	}
 
 	@Override
-	public Map<String, String> getLastExpectedYearANDMonth(int year) {
-		
-		String yr = businessPlanMapper.getLastExpectedYear(year);
-		String month = businessPlanMapper.getLastExpectedMonth(year);
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("yr", yr);
-		map.put("month", month);
-		return map;
-	}
-
-	@Override
 	public List<BusinessPlanVO> getBusinessPlanPeriodService(String roleName, int sort1, String year, int quarter) {
 		year = year.substring(0, 4);
 		StringBuilder month1 = new StringBuilder();

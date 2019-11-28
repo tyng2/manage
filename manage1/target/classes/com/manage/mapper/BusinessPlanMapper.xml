@@ -68,6 +68,34 @@
 		WHERE fbp.expectedSalesMonth BETWEEN #{month1} AND #{month2};
 	</select>
 	
+	<select id="getLastExpectedYearANDMonth" resultType="string">
+		SELECT 
+		
+		<choose>
+		<when test='yearOrMonth == "y"'>
+			DATE_FORMAT(fbp.regDate, '%Y') FROM 
+		</when>
+		<when test='yearOrMonth == "m"'>
+			DATE_FORMAT(fbp.regDate, '%m') FROM 
+		</when>
+		<otherwise>
+			fbp.*
+		</otherwise>
+		</choose>
+		
+		<choose>
+		<when test="department != null">
+			(SELECT bp.* FROM BusinessPlanning bp INNER JOIN user ur ON bp.userNum = ur.userNum 
+			WHERE ur.department = #{department}) fbp
+		</when>
+		<otherwise>
+			BusinessPlanning fbp
+		</otherwise>
+		</choose>
+		
+		WHERE DATE_FORMAT(fbp.expectedSalesMonth, '%Y') = #{year} ORDER BY fbp.regDate DESC LIMIT 1;
+	</select>
+	
 	<select id="businessPlanDtl" resultType="businessPlanVO">
 		SELECT * FROM manage.BusinessPlanning
 		WHERE oppId = #{oppId};
@@ -78,14 +106,6 @@
 		ORDER BY expectedSalesMonth DESC;
 	</select>
 	
-	<select id="getLastExpectedYear" resultType="string">
-		SELECT DATE_FORMAT(regDate, '%Y') FROM BusinessPlanning 
-		WHERE DATE_FORMAT(expectedSalesMonth, '%Y') = #{year} ORDER BY regDate DESC LIMIT 1;
-	</select>
 	
-	<select id="getLastExpectedMonth" resultType="string">
-		SELECT DATE_FORMAT(regDate, '%m') FROM BusinessPlanning 
-		WHERE DATE_FORMAT(expectedSalesMonth, '%Y') = #{year} ORDER BY regDate DESC LIMIT 1;
-	</select>
 	
 </mapper>
