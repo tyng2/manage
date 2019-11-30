@@ -20,7 +20,7 @@ public interface BusinessPlanMapper {
 	
 	public List<Integer> getYearBusinessPlan();
 	
-//	yearOrMonth 값이 y 이면 년, m 이면 월을 출력
+//	yearOrMonth 값이 "y" 이면 년, "m" 이면 월을 출력
 	public String getLastExpectedYearANDMonth(@Param("department") String department, @Param("yearOrMonth") String yearOrMonth, @Param("year") int year);
 
 	

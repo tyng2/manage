@@ -211,5 +211,11 @@ public class BusinessPlanController {
 		System.out.println(depName);
 		return depName;
 	}
+	
+	@PostMapping("/bpReport/Detail")
+	public String businessPlanReportDetail() {
+		
+		return "businessPlanReportDetail";
+	}
 
 }
