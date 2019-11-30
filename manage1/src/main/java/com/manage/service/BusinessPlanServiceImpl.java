@@ -71,7 +71,6 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 	}
 
 	@Override
-
 	public boolean businessPlanUpdate(BusinessPlanVO b) {
 		 boolean isSuccess = false;
 	        
@@ -101,17 +100,6 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
         
         return isSuccess;
 	}
-	
-	public Map<String, String> getLastExpectedYearANDMonth(int year) {
-		
-		String yr = businessPlanMapper.getLastExpectedYear(year);
-		String month = businessPlanMapper.getLastExpectedMonth(year);
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("yr", yr);
-		map.put("month", month);
-		return map;
-	}
 
 	@Override
 	public List<BusinessPlanVO> getBusinessPlanPeriodService(String roleName, int sort1, String year, int quarter) {
@@ -120,6 +108,7 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		StringBuilder month2 = new StringBuilder();
 		month1.append(year).append("-");
 		month2.append(month1.toString());
+//		quarter : 1. 1분기, 2. 2분기, 3. 3분기, 4. 4분기, 0. 해당 연도 모두
 		switch (quarter) {
 		case 1:
 			month1.append("01-01");
@@ -135,6 +124,10 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 			break;
 		case 4:
 			month1.append("10-01");
+			month2.append("12-31");
+			break;
+		case 0:
+			month1.append("01-01");
 			month2.append("12-31");
 			break;
 		default:

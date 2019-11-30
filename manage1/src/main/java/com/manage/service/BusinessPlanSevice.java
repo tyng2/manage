@@ -1,7 +1,6 @@
 package com.manage.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.manage.vo.BusinessPlanVO;
 
@@ -14,8 +13,6 @@ public interface BusinessPlanSevice {
 	public BusinessPlanVO businessPlanDtl(String oppId);
 
 	public boolean businessPlanUpdate(BusinessPlanVO b);
-	
-	public Map<String, String> getLastExpectedYearANDMonth(int year);
 
 	public List<BusinessPlanVO> getBusinessPlanPeriodService(String roleName, int sort1, String year, int quarter);
 

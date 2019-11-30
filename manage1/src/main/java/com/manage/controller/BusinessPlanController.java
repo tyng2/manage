@@ -30,7 +30,6 @@ import com.manage.mapper.BusinessPlanMapper;
 import com.manage.mapper.UserMapper;
 import com.manage.service.BusinessPlanSevice;
 import com.manage.service.paging.IPagingService;
-import com.manage.service.paging.PagingBean;
 import com.manage.vo.BusinessPlanVO;
 
 import lombok.Setter;
@@ -182,14 +181,16 @@ public class BusinessPlanController {
 		year = year.substring(0, 4);
 		model.addAttribute("year", year);
 
-		Map<String, String> yearAndMonth = businessPlanService.getLastExpectedYearANDMonth(Integer.parseInt(year));
-//		List<String> list = businessPlanService.getLastExpectedYearANDMonth(Integer.parseInt(year)); 
-		System.out.println("year, month : " + yearAndMonth);
+		String yr = businessPlanMapper.getLastExpectedYearANDMonth(depName, "y", Integer.parseInt(year));
+		String month = businessPlanMapper.getLastExpectedYearANDMonth(depName, "m", Integer.parseInt(year));
+		System.out.println("year, month : " + year + ", " +month);
 
-		
+		if (month != null) {
+			model.addAttribute("yr", yr);
+			model.addAttribute("month", month);
+		}
 
 		model.addAttribute("bp", map);
-		model.addAttribute("yearAndMonth", yearAndMonth);
 
 		return "businessPlanReport";
 	}
@@ -281,4 +282,9 @@ public class BusinessPlanController {
 		return depName;
 	}
 
+	@PostMapping("/bpReport/Detail")
+	public String businessPlanReportDetail() {
+		
+		return "businessPlanReportDetail";
+	}
 }
