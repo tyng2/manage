@@ -18,7 +18,9 @@ public interface BusinessPlanMapper {
 
 	public BusinessPlanVO businessPlanDtl(String oppId);
 
-	public int businessPlanUpdate(BusinessPlanVO list);
+	public int businessPlanUpdate(BusinessPlanVO b);
+	
+	public void businessPlanDel(String oppId);
 	
 	public List<Integer> getYearBusinessPlan();
 	

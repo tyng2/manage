@@ -65,20 +65,20 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 
 	@Override
 	public BusinessPlanVO businessPlanDtl(String oppId) {
-		BusinessPlanVO list = businessPlanMapper.businessPlanDtl(oppId);
+		BusinessPlanVO bp = businessPlanMapper.businessPlanDtl(oppId);
 		
-		return list;
+		return bp;
 	}
 
 	@Override
 
-	public boolean businessPlanUpdate(BusinessPlanVO list) {
+	public boolean businessPlanUpdate(BusinessPlanVO b) {
 		 boolean isSuccess = false;
 	        
-		 List<BusinessPlanVO> board = businessPlanMapper.getBusinessPlanByUserNum(list.getUserNum());
+		 BusinessPlanVO bp = businessPlanMapper.businessPlanDtl(b.getOppId());
 	        
-	        if (list.getOppId().equals(list.getOppId())) {
-	        	businessPlanMapper.businessPlanUpdate(list);
+	        if (b.getUserNum().equals(bp.getUserNum())) {
+	        	businessPlanMapper.businessPlanUpdate(b);
 	            isSuccess = true;
 	        } else {
 	            isSuccess = false;
@@ -86,6 +86,22 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 	        return isSuccess;
 	}
 
+	@Override
+	public boolean businessPlanDel(String oppId, String userNum) {
+		boolean isSuccess = false;
+        
+		BusinessPlanVO bp = businessPlanMapper.businessPlanDtl(oppId);
+        
+        if(userNum.equals(bp.getUserNum())) {
+        	businessPlanMapper.businessPlanDel(oppId);
+            isSuccess = true;
+        } else {
+            isSuccess = false;
+        }
+        
+        return isSuccess;
+	}
+	
 	public Map<String, String> getLastExpectedYearANDMonth(int year) {
 		
 		String yr = businessPlanMapper.getLastExpectedYear(year);

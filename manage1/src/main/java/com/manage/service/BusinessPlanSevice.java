@@ -13,10 +13,12 @@ public interface BusinessPlanSevice {
 
 	public BusinessPlanVO businessPlanDtl(String oppId);
 
-	public boolean businessPlanUpdate(BusinessPlanVO list);
+	public boolean businessPlanUpdate(BusinessPlanVO b);
 	
 	public Map<String, String> getLastExpectedYearANDMonth(int year);
 
 	public List<BusinessPlanVO> getBusinessPlanPeriodService(String roleName, int sort1, String year, int quarter);
+
+	public boolean businessPlanDel(String oppId, String userNum);
 	
 }

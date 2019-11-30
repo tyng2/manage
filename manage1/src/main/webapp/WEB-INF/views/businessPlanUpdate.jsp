@@ -9,7 +9,9 @@
 <meta charset="UTF-8">
 <script src="/resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-
+$(document).ready(function() {	
+	
+});
 </script>
 <title>수정 페이지</title>
 <style>
@@ -47,21 +49,21 @@ td {
 			</thead>
 			<tbody>
 					<tr>
-						<td>${data.oppId}</td>
-						<td><input type="text" value="${data.projectName}"></td>
-						<td><input type="text" value="${data.userNum}"></td>
-						<td><input type="text" value="${data.endUser}"></td>
-						<td><input type="text" value="${data.customer}"></td>
-						<td><input type="text" value="${data.expectedSales}"></td>
-						<td><input type="text" value="${data.expectedPurchase}"></td>
-						<td><input type="text" value="${data.expectedProfit}"></td>
-						<td><input type="text" value="${data.expectedSalesMonth}"></td>
-						<td><input type="text" value="${data.state}"></td>
-						<td><input type="text" value="${data.note}"></td>
-						<td><input type="text" value="${data.regDate}"></td>
-						<td><input type="text" value="${data.customerName}"></td>
-						<td><input type="text" value="${data.customerPhone}"></td>
-						<td><input type="text" value="${data.customerEmail}"></td>
+						<td><input type="text" name="oppId" value="${data.oppId}" readonly="readonly"></td>
+						<td><input type="text" name="projectName" value="${data.projectName}"></td>
+						<td><input type="text" name="userNum" value="${data.userNum}"></td>
+						<td><input type="text" name="endUser" value="${data.endUser}"></td>
+						<td><input type="text" name="customer" value="${data.customer}"></td>
+						<td><input type="text" name="note" value="${data.expectedSales}"></td>
+						<td><input type="text" name="expectedPurchase" value="${data.expectedPurchase}"></td>
+						<td><input type="text" name="expectedProfit" value="${data.expectedProfit}"></td>
+						<td><input type="month" name="expectedSalesMonth" value="${data.expectedSalesMonth}"></td>
+						<td><input type="text" name="state" value="${data.state}"></td>
+						<td><input type="text" name="note" value="${data.note}"></td>
+						<td><input type="text" name="regDate" value="${data.regDate}"></td>
+						<td><input type="text" name="customerName" value="${data.customerName}"></td>
+						<td><input type="text" name="customerPhone" value="${data.customerPhone}"></td>
+						<td><input type="text" name="customerEmail" value="${data.customerEmail}"></td>
 					</tr>
 			</tbody>
 		</table>

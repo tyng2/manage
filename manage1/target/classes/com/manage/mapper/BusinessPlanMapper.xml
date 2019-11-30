@@ -79,6 +79,10 @@
 		WHERE oppId = #{oppId};
 	</update>
 
+	<delete id="businessPlanDel">
+		DELETE FROM manage.BusinessPlanning WHERE oppId = #{oppId};
+	</delete>
+
 	<select id="getYearBusinessPlan" resultType="string">
 		SELECT DISTINCT DATE_FORMAT(expectedSalesMonth, '%Y') FROM BusinessPlanning 
 		ORDER BY expectedSalesMonth DESC;
