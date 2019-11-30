@@ -10,8 +10,12 @@ public interface BusinessPlanSevice {
 
 	public List<BusinessPlanVO> getBusinessPlanByUserNum(String UserNum);
 
-	public List<BusinessPlanVO> businessPlanDtl(String oppId);
-	
+	public BusinessPlanVO businessPlanDtl(String oppId);
+
+	public boolean businessPlanUpdate(BusinessPlanVO b);
+
 	public List<BusinessPlanVO> getBusinessPlanPeriodService(String roleName, int sort1, String year, int quarter);
+
+	public boolean businessPlanDel(String oppId, String userNum);
 	
 }

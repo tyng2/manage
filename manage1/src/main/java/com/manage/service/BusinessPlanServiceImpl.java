@@ -1,9 +1,7 @@
 package com.manage.service;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,10 +62,41 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 	}
 
 	@Override
-	public List<BusinessPlanVO> businessPlanDtl(String oppId) {
-		List<BusinessPlanVO> list = businessPlanMapper.businessPlanDtl(oppId);
+	public BusinessPlanVO businessPlanDtl(String oppId) {
+		BusinessPlanVO bp = businessPlanMapper.businessPlanDtl(oppId);
 		
-		return list;
+		return bp;
+	}
+
+	@Override
+	public boolean businessPlanUpdate(BusinessPlanVO b) {
+		 boolean isSuccess = false;
+	        
+		 BusinessPlanVO bp = businessPlanMapper.businessPlanDtl(b.getOppId());
+	        
+	        if (b.getUserNum().equals(bp.getUserNum())) {
+	        	businessPlanMapper.businessPlanUpdate(b);
+	            isSuccess = true;
+	        } else {
+	            isSuccess = false;
+	        }
+	        return isSuccess;
+	}
+
+	@Override
+	public boolean businessPlanDel(String oppId, String userNum) {
+		boolean isSuccess = false;
+        
+		BusinessPlanVO bp = businessPlanMapper.businessPlanDtl(oppId);
+        
+        if(userNum.equals(bp.getUserNum())) {
+        	businessPlanMapper.businessPlanDel(oppId);
+            isSuccess = true;
+        } else {
+            isSuccess = false;
+        }
+        
+        return isSuccess;
 	}
 
 	@Override
@@ -116,8 +145,5 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		
 		return list;
 	}
-
-	
-	
 
 }

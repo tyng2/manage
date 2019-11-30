@@ -1,11 +1,16 @@
 package com.manage.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.manage.mapper.AuthMapper;
 import com.manage.mapper.BusinessPlanMapper;
+import com.manage.mapper.UserMapper;
 import com.manage.service.BusinessPlanSevice;
 import com.manage.service.paging.IPagingService;
 import com.manage.vo.BusinessPlanVO;
@@ -45,6 +51,9 @@ public class BusinessPlanController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private IPagingService iPagingService;
+	
+	@Setter(onMethod_= @Autowired)
+	private UserMapper userMapper;
 	
 //	POST 방식으로 businessPlan 주소 접근 시 예산 작성 처리
 	@PostMapping("/businessPlan")
@@ -104,9 +113,9 @@ public class BusinessPlanController {
 	 public String businessPlanDtl(String oppId, Model model) {
 		 System.out.println("<<businessPlanDtl>>");
 		 
-		 List<BusinessPlanVO> list = businessPlanService.businessPlanDtl(oppId);
+		 BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
 		  
-		 model.addAttribute("list", list);
+		 model.addAttribute("data", list);
 		 
 		 return "businessPlanDtl";
 	 }
@@ -195,7 +204,68 @@ public class BusinessPlanController {
 
 		return expectedSales;
 	}
-
+	 
+	@GetMapping("/businessPlanUpdate")
+	public String businessPlanUpdate(String oppId, Model model, HttpSession session) {
+		System.out.println("<<businessPlanUpdate>>");
+		
+		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
+		
+		model.addAttribute("data", list);
+		
+		return "businessPlanUpdate";
+	}
+	
+	  @PostMapping("/businessPlanUpdate") 
+	  public ResponseEntity<String> businessPlanUpdate(String oppId, BusinessPlanVO b, Model model, Principal principal) {
+	  System.out.println("<< businessPlan Update, POST >>\n");
+	  System.out.println(b);
+      
+      HttpHeaders headers = new HttpHeaders();
+      
+      boolean isSuccess = businessPlanService.businessPlanUpdate(b);
+      
+      if(!isSuccess) { // 수정 실패
+      	headers.add("Content-Type", "text/html; charset=UTF-8");
+          StringBuilder sb = new StringBuilder();
+          sb.append("<script>");
+          sb.append("alert('글 작성자가 다릅니다!');");
+          sb.append("history.back();");
+          sb.append("</script>");
+          
+          return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
+      }
+      
+      //글 수정 성공 이후 글목록으로 리다이렉트
+      headers.add("Location", "/businessPlanDtl?oppId=" + oppId);
+      return new ResponseEntity<String>(headers, HttpStatus.FOUND);
+	  
+	  }
+	 
+	  @GetMapping("/businessPlanDel")
+	    public void businessPlanDel(String oppId, Principal principal, HttpServletResponse response) throws IOException {
+	        System.out.println("<< businessPlanDel >>");
+	        
+	        String userNum = userMapper.getUserById(principal.getName()).getUserNum();
+	        
+	        boolean isSuccess = businessPlanService.businessPlanDel(oppId, userNum);
+	        
+	        response.setContentType("text/html; charset=UTF-8");
+	        PrintWriter out = response.getWriter();
+	        String msg = null;
+	        if (isSuccess) {
+	        	msg = "삭제되었습니다.";
+	        } else {
+	        	msg = "잘못된 접근입니다.";
+	        }
+	        out.println("<script>");
+	        out.println("alert('" + msg + "');");
+	        out.println("location.href='/businessPlanList';");
+	        out.println("</script>");
+	        out.close();
+	        return;
+	    }
+	  
 	public String roleName(List<String> list) {
 		String depName = null;
 		if (list.get(0).equals("ROLE_SALES1") || list.get(0).equals("ROLE_DIRECTOR1")) {
@@ -211,11 +281,10 @@ public class BusinessPlanController {
 		System.out.println(depName);
 		return depName;
 	}
-	
+
 	@PostMapping("/bpReport/Detail")
 	public String businessPlanReportDetail() {
 		
 		return "businessPlanReportDetail";
 	}
-
 }
