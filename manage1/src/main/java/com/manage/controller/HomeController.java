@@ -1,7 +1,5 @@
 package com.manage.controller;
 
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -26,8 +24,18 @@ public class HomeController {
 	private AuthMapper authMapper;
 	
 	@GetMapping("/")
-	public String main(Locale locale, Model model) {
-		System.out.println("<< home >>\n");
+	public String main(String error, Model model) {
+		System.out.println("<< main >>\n");
+		
+		if (error != null) {
+			model.addAttribute("error", "아이디나 비밀번호가 맞지 않습니다.");
+		}
+		
+		return "main";
+	}
+	
+	@GetMapping("/home")
+	public String home(Model model) {
 		
 		return "home";
 	}
@@ -41,17 +49,17 @@ public class HomeController {
 	}
 	
 	
-//	GET 방식으로 login 주소 접근 시 login.jsp 페이지로 이동
-	@GetMapping("/login")
-	public String login(String error, Model model) {
-		System.out.println("<< login >>\n");
-		
-		if (error != null) {
-			model.addAttribute("error", "아이디나 비밀번호가 맞지 않습니다.");
-		}
-		
-		return "login";
-	}
+////	GET 방식으로 login 주소 접근 시 login.jsp 페이지로 이동
+//	@GetMapping("/login")
+//	public String login(String error, Model model) {
+//		System.out.println("<< login >>\n");
+//		
+//		if (error != null) {
+//			model.addAttribute("error", "아이디나 비밀번호가 맞지 않습니다.");
+//		}
+//		
+//		return "login";
+//	}
 	
 //	GET 방식으로 businessPlan 주소 접근 시 businessPlan.jsp 페이지로 이동
 	@GetMapping("/businessPlan")
