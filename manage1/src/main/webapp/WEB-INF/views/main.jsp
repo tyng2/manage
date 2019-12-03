@@ -32,6 +32,9 @@
 <link rel="stylesheet" href="resources/css/icomoon.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/custom.css">
+
+<!-- Favicon -->   
+<link href="/resources/images/kcsfav.png" rel="shortcut icon" />
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">
@@ -39,8 +42,6 @@
 location.href="/home";
 </script>
 </sec:authorize>
-<c:out value="${error }" />
-
 <div class="main-section">
 
 <section class="mn-section mn-section-2 section-signup page-header img" style="background-image: url(resources/images/bg_2.jpg);">
@@ -67,10 +68,10 @@ location.href="/home";
               </div>-->
 				</div>
 				<!-- <p class="description text-center">Or Be Classical</p> -->
-				<div class="card-body pd4">
+				<div class="card-body pd4 form-group">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<span class="input-group-text"> <i class="ion-ios-contact"></i></span>
+							<span class="input-group-text"><i class="ion-ios-contact"></i></span>
 						</div>
 						<input type="text" name="username" class="form-control" placeholder="계정">
 					</div>
@@ -80,6 +81,7 @@ location.href="/home";
 						</div>
 						<input type="password" name="password" class="form-control" placeholder="비밀번호">
 					</div>
+				<p id="err" style="color: #FF0000; margin-bottom: 0;"><c:out value="${error}"/></p>
 				</div>
 				<div class="footer text-center pd4">
 					<button class="btn btn-primary btn-block">로그인</button>
