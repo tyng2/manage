@@ -1,0 +1,20 @@
+.ftco-navbar-light-nonAbsolute {
+  background: #000 !important;
+  //position: absolute;
+  //top: 10px;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  //padding: 0;
+  padding: 10px 15px; 
+}
+
+.pd4 {
+	padding: 0.5rem 4rem 1rem 4rem !important;
+}
+
+.mn-section {
+  padding: 4em 0; }
+  .mn-section.mn-section-2 {
+    padding: 8em 0; 
+	}
