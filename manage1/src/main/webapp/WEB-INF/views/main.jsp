@@ -38,9 +38,7 @@
 </head>
 <body>
 <sec:authorize access="isAuthenticated()">
-<script>
-location.href="/home";
-</script>
+<script>location.href="/home";</script>
 </sec:authorize>
 <div class="main-section">
 
@@ -69,6 +67,21 @@ location.href="/home";
 				</div>
 				<!-- <p class="description text-center">Or Be Classical</p> -->
 				<div class="card-body pd4 form-group">
+					<c:if test="${error != null }">
+						<div class="alert alert-danger">
+						<div class="container">
+							<div class="d-flex">
+								<div class="alert-icon">
+									<i class="ion-ios-information-circle-outline"></i>
+								</div>
+								<p class="mb-0 ml-2"><b>알림:&nbsp;</b>${error }</p>
+							</div>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true"><i class="ion-ios-close"></i></span>
+							</button>
+						</div>
+						</div>
+					</c:if>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="ion-ios-contact"></i></span>
@@ -81,7 +94,6 @@ location.href="/home";
 						</div>
 						<input type="password" name="password" class="form-control" placeholder="비밀번호">
 					</div>
-				<p id="err" style="color: #FF0000; margin-bottom: 0;"><c:out value="${error}"/></p>
 				</div>
 				<div class="footer text-center pd4">
 					<button class="btn btn-primary btn-block">로그인</button>
@@ -96,33 +108,12 @@ location.href="/home";
 
 
 
-<footer class="ftco-section ftco-section-2">
-<div class="col-md-12 text-center">
-	<!--<p class="mb-0 text-left"><img src="images/kcslogo.png" height="20px;"></p>-->
-	<p class="mb-0">
-		<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-		Copyright &copy;
-		<script>
-           document.write(new Date().getFullYear());
-
-         </script>
-		All rights reserved | This template is made with <i
-			class="icon-heart" aria-hidden="true"></i> by <a
-			href="https://colorlib.com" target="_blank">Colorlib</a>
-		<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	</p>
-</div>
-</footer>
+<jsp:include page="/WEB-INF/views/inc/bottom.jsp"></jsp:include>
 
 </div>
 
 <!-- loader -->
-<div id="ftco-loader" class="show fullscreen">
-<svg class="circular" width="48px" height="48px">
-	<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-	<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
-</svg>
-</div>
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 <script src="resources/js/jquery.min.js"></script>
 <script src="resources/js/jquery-migrate-3.0.1.min.js"></script>
