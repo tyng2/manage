@@ -24,7 +24,7 @@
 .ftco-navbar-custom {
   //background: transparent !important;
   //background: #000 !important;
-  position: absolute;
+  //position: absolute;
   //top: 10px;
   left: 0;
   right: 0;
@@ -34,7 +34,7 @@
   }
   @media (max-width: 991.98px) {
     .ftco-navbar-custom {
-      background: #000 !important;
+      //background: #000 !important;
       position: relative;
       top: 0;
       padding: 10px 15px; } }
@@ -171,4 +171,21 @@
       transition: .3s all ease-out; }
     .ftco-navbar-custom.scrolled .navbar-brand {
       color: #000 !important; }
+      
+      
+.ftco-navbar-custom .navbar-nav > .nav-item .dropdown-menu .dropdown-item {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.7);
+      font-weight: 300; }
+      .ftco-navbar-custom .navbar-nav > .nav-item .dropdown-menu .dropdown-item i {
+        color: rgba(0, 0, 0, 0.4); }
+      .ftco-navbar-custom .navbar-nav > .nav-item .dropdown-menu .dropdown-item:hover, .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu .dropdown-item:focus {
+        background: transparent;
+        color: #000; }
+        
+        
+        
+        
+
 	

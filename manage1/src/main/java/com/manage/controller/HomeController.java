@@ -63,7 +63,7 @@ public class HomeController {
 	
 //	GET 방식으로 businessPlan 주소 접근 시 businessPlan.jsp 페이지로 이동
 	@GetMapping("/businessPlan")
-	public String addBusnessplan(Model model) {
+	public String businessplan(Model model) {
 		System.out.println("<< businessPlan >>\n");
 		
 		return "businessPlan";

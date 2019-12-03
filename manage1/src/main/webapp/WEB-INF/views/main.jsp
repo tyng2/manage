@@ -24,7 +24,7 @@
 
 <link rel="stylesheet" href="resources/css/aos.css">
 
-<link rel="stylesheet" href="resources/css/ionicons.min.css">
+<link rel="stylesheet" href="resources/css/ionicons.min.css">	
 
 <link rel="stylesheet"
 	href="resources/css/bootstrap-datetimepicker.min.css">
@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="resources/css/flaticon.css">
 <link rel="stylesheet" href="resources/css/icomoon.css">
 <link rel="stylesheet" href="resources/css/style.css">
+<link rel="stylesheet" href="resources/css/custom.css">
 
 <!-- Favicon -->
 <link href="resources/images/kcsfav.png" rel="shortcut icon" />
@@ -53,13 +54,6 @@
 </style>
 </head>
 <body>
-<script>
-function logoutProcess(){
-	document.logoutForm.action = "/logout";
-	document.logoutForm.method = "POST";
-	document.logoutForm.submit();
-}
-</script>
 
 <div class="main-section">
 <jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>

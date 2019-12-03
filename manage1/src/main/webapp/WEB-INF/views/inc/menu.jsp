@@ -9,7 +9,7 @@
 			<span class="oi oi-menu"></span> Menu
 		</button>
 		<div class="collapse navbar-collapse" id="ftco-nav">
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav mr-auto">
 				<li class="dropdown nav-item">
 					<a href="#" class="dropdown-toggle nav-link icon d-flex align-items-center" data-toggle="dropdown">
 					영업 관리 <b class="caret"></b>

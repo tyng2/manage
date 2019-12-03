@@ -201,3 +201,15 @@
 
 })(jQuery);
 
+
+
+/* custom */
+
+function logoutProcess(){
+	document.logoutForm.action = "/logout";
+	document.logoutForm.method = "POST";
+	document.logoutForm.submit();
+}
+
+
+

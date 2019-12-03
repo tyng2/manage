@@ -57,7 +57,7 @@ public class BusinessPlanController {
 	
 //	POST 방식으로 businessPlan 주소 접근 시 예산 작성 처리
 	@PostMapping("/businessPlan")
-	public ResponseEntity<String> addUser(BusinessPlanVO businessPlanVO, Model model) {
+	public ResponseEntity<String> addBusinessPlan(BusinessPlanVO businessPlanVO, Model model) {
 		System.out.println("<< businessPlan, POST >>\n");
 		
 		businessPlanService.insertBusinessPlan(businessPlanVO);
