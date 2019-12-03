@@ -25,7 +25,7 @@
 		ORDER BY regDate DESC LIMIT 1
 	</select>
 	
-	<select id="getBusinessPlanListCnt" resultType="businessPlanVO">
+	<select id="getBusinessPlanListCnt" resultType="int">
 		SELECT COUNT(*) AS CNT
 		FROM manage.BusinessPlanning
 		WHERE userNum = #{userNum}

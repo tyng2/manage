@@ -24,12 +24,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.manage.mapper.AuthMapper;
 import com.manage.mapper.BusinessPlanMapper;
 import com.manage.mapper.UserMapper;
 import com.manage.service.BusinessPlanSevice;
 import com.manage.service.paging.IPagingService;
+import com.manage.service.paging.PagingBean;
 import com.manage.vo.BusinessPlanVO;
 
 import lombok.Setter;
@@ -81,7 +83,6 @@ public class BusinessPlanController {
 	public String getBusinessPlanByUserNum(Model model) { 
 		System.out.println("<< businessPlanList >>\n");
 		
-		
 //		로그인 한 아이디의 권한 가져오기
 		List<String> roleNames = new ArrayList<>();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -107,6 +108,29 @@ public class BusinessPlanController {
 		model.addAttribute("listYear", listYear);
 
 		return "businessPlanList";
+	}
+	
+	@PostMapping("/businessPlanList")
+	public ResponseEntity<String> getBusinessPlanByUserNum(Model model, @RequestParam HashMap<String, String> params) {
+		HttpHeaders headers = new HttpHeaders();
+		
+		if(!params.containsKey("listPage")) {
+			params.put("listPage", "1");
+		}
+		
+		int cnt = businessPlanService.getBusinessPlanListCnt(params);
+		
+		PagingBean pb 
+		= iPagingService.getPageingBean(Integer.parseInt(params.get("listPage")), 
+				cnt, 5, 5);
+		
+		params.put("startCnt", Integer.toString(pb.getStartCount()));
+		params.put("endCnt", Integer.toString(pb.getEndCount()));
+		
+		model.addAttribute("pb", pb);
+		model.addAttribute("listPage", params.get("listPage"));
+		
+		return new ResponseEntity<String>(headers, HttpStatus.OK);
 	}
 	 
 	 @GetMapping("/businessPlanDtl")

@@ -1,6 +1,7 @@
 package com.manage.service;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		
 		/* 새 영업계획에 사용될 OppId 구하는 과정 */
 		String lastOppid = businessPlanMapper.getLastData().getOppId();
+		System.out.println("lastOppId : " + lastOppid);
 		
 		Calendar cal = Calendar.getInstance();
 		
@@ -144,6 +146,12 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public int getBusinessPlanListCnt(HashMap<String, String> params) {
+		int cnt = businessPlanMapper.getBusinessPlanListCnt(params);
+		return cnt;
 	}
 
 }
