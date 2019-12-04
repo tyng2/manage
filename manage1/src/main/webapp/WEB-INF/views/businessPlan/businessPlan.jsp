@@ -12,12 +12,23 @@
 <jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
 
 </head>
+<script src="/resources/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function() {	
+	var year = new Date().getFullYear();
+	var month = new Date().getMonth() + 1;
+	console.log(month);
+	
+	var setting = year + "-" + month;
+	console.log(setting);
+	$('input[name=expectedSalesMonth]').attr("value", setting);
+})
+</script>
 <body>
 <c:set var="userNum"><sec:authentication property="principal.user.userNum"/></c:set>
 <div class="main-section">
 <jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 
-	
 
 <form action="/businessPlan" method="POST">
 <section class="ftco-section bg-light" id="inputs">
@@ -85,7 +96,7 @@
 		<div class="row">
 			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
-					<input type="month" name="expectedSalesMonth" class="form-control" value="2019-12" required>
+					<input type="month" name="expectedSalesMonth" class="form-control" value="" required>
 					<label class="form-control-placeholder" for="expectedSalesMonth">예상매출월</label>		
 				</div>
 			</div>

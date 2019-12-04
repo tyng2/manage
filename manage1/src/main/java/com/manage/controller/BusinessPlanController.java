@@ -105,7 +105,7 @@ public class BusinessPlanController {
         int amount = 5; // 한 페이지 당 보여줄 글 갯수
         int startRow = (pageNum - 1) * amount; // 시작 행 번호
         
-        List<BusinessPlanVO> list1 = businessPlanService.getBusinessPlanPageList(search, amount, startRow);;
+        List<BusinessPlanVO> list = businessPlanService.getBusinessPlanPageList(search, amount, startRow);;
 
         int allRowCount = 0; // 전체 행 갯수
         allRowCount = businessPlanMapper.getBusinessPlanPageCount(search);
@@ -135,7 +135,7 @@ public class BusinessPlanController {
 //		System.out.println("listYear : " + listYear);
 		model.addAttribute("listYear", listYear);
 		
-		model.addAttribute("list", list1);
+		model.addAttribute("list", list);
 		model.addAttribute("page", page);
 		
 		
