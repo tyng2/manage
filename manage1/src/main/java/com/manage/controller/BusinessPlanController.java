@@ -80,22 +80,9 @@ public class BusinessPlanController {
 	
 //GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
 	@GetMapping("/businessPlanList")
-	public String getBusinessPlanByUserNum(String userNum, Model model, @RequestParam HashMap<String, String> params) { 
+	public String getBusinessPlanByUserNum(String userNum, Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(required = false) String search) { 
 		System.out.println("<< businessPlanList >>\n");
-		System.out.println("params : " + params);
-		
-		if(!params.containsKey("listPage")) {
-			params.put("listPage", "1");
-		}
-		
-		int cnt = businessPlanService.getBusinessPlanListCnt();
-		
-		PagingBean pb 
-		= iPagingService.getPageingBean(Integer.parseInt(params.get("listPage")), 
-				cnt, 5, 5);
-		
-		params.put("startCnt", Integer.toString(pb.getStartCount()));
-		params.put("endCnt", Integer.toString(pb.getEndCount()));
+		System.out.println("param : " + userNum + " " + pageNum + " " + search);
 		
 //		로그인 한 아이디의 권한 가져오기
 		List<String> roleNames = new ArrayList<>();
@@ -109,25 +96,49 @@ public class BusinessPlanController {
         System.out.println("권한 : " + roleNames);
         String roleName = roleName(roleNames);
 		
-        System.out.println("/ncnt : " + cnt);
-		System.out.println("listpage : " + params.get("listPage"));
-		System.out.println("startCnt :" + Integer.toString(pb.getStartCount()));
-		System.out.println("endCnt :" + Integer.toString(pb.getEndCount()));
 		
         if ("마케팅".equals(roleName) || "이사".equals(roleName)) {
         	model.addAttribute("select", roleName);
         }
         
+        
+        int amount = 5; // 한 페이지 당 보여줄 글 갯수
+        int startRow = (pageNum - 1) * amount; // 시작 행 번호
+        
+        List<BusinessPlanVO> list1 = businessPlanService.getBusinessPlanPageList(search, amount, startRow);;
 
-		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(userNum);
-		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
-		System.out.println("listYear : " + listYear);
+        int allRowCount = 0; // 전체 행 갯수
+        allRowCount = businessPlanMapper.getBusinessPlanPageCount(search);
+        
+        int maxPage = allRowCount / amount + (allRowCount % amount == 0 ? 0 : 1);
+        
+        int pageBlockSize = 5; // 한 페이지블록 당 페이지 갯수
+        
+        int startPage = ((pageNum/pageBlockSize) - (pageNum%pageBlockSize==0 ? 1 : 0)) * pageBlockSize + 1;
+        
+        int endPage = startPage + pageBlockSize - 1;
+        if (endPage > maxPage) { // 마지막 블록에서 끝 페이지 번호 구하기
+            endPage = maxPage;
+        }
+        
+        Map<String, Integer> page = new HashMap<>();
+        page.put("startPage", startPage);
+        page.put("endPage", endPage);
+        page.put("pageBlockSize", pageBlockSize);
+        page.put("maxPage", maxPage);
+        page.put("allRowCount", allRowCount);
+        page.put("pageNum", pageNum);
+        
+        
+//		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(userNum);
+//		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
+//		System.out.println("listYear : " + listYear);
+//		model.addAttribute("listYear", listYear);
 		
-		model.addAttribute("list", list);
-		model.addAttribute("listYear", listYear);
+		model.addAttribute("list", list1);
+		model.addAttribute("page", page);
 		
-		model.addAttribute("pb", pb);
-		model.addAttribute("listPage", params.get("listPage"));
+		
 
 		return "businessPlan/businessPlanList";
 	}
