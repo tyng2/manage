@@ -6,7 +6,7 @@
 
 	<select id="getCBAnalysis" resultType="CostBenefitAnalysisVO">
 		SELECT * FROM manage.BusinessPlanning 
-
+		WHERE state = 4
 	</select>
 	
 </mapper>

@@ -9,6 +9,29 @@
 <title>(주)케이씨에스 손익 분석 시스템 - 손익 분석 작성</title>
 </head>
 <body>
-
+	<form action="/costBenefitAnalysis" id="dataForm" method="POST">
+	
+		<table>
+			<thead>
+				<tr>
+					<th>OPPID</th>
+					<th>프로젝트명</th>
+					<th>담당자</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="data" items="${list}">
+					<tr>
+						<td>${data.oppId}</td>
+						<td>${data.projectName}</td>
+						<td>${data.userNum}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	
+		<a href="#" onclick="history.back();" style="float: right;">돌아가기</a>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	</form>
 </body>
 </html>

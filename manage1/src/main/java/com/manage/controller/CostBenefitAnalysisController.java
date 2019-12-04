@@ -18,7 +18,7 @@ public class CostBenefitAnalysisController {
 	@Setter(onMethod_ = @Autowired)
 	private CostBenefitAnalysisService costBenefitAnalysisService;
 	
-	@GetMapping("/costBenefitAnalysisList")
+	@GetMapping("/costBenefitAnalysis")
 	public String getCBAnalysis(String oppId, Model model) {
 		System.out.println("<< 손익분석 목록 >>");
 		
@@ -26,6 +26,6 @@ public class CostBenefitAnalysisController {
 		
 		model.addAttribute("list", list);
 		
-		return "costBenefitAnalysis/costBenefitAnalysisList";
+		return "costBenefitAnalysis/costBenefitAnalysis";
 	}
 }
