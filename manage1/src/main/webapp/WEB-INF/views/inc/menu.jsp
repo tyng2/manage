@@ -13,13 +13,19 @@
 				<li class="dropdown nav-item">
 					<a href="#" class="dropdown-toggle nav-link icon d-flex align-items-center" data-toggle="dropdown">
 					영업 관리 <b class="caret"></b>
-				</a>
+					</a>
 					<div class="dropdown-menu dropdown-menu-left">
 						<a href="/businessPlan" class="dropdown-item">예산 작성</a>
 						<a href="/businessPlanList" class="dropdown-item">예산 목록</a>
 					</div></li>
-				<li class="nav-item">
-					<a href="#" class="nav-link icon d-flex align-items-center">손익 분석</a></li>
+				<li class="dropdown nav-item">
+					<a href="#" class="dropdown-toggle nav-link icon d-flex align-items-center" data-toggle="dropdown">
+					손익 분석 <b class="caret"></b>
+					</a>
+					<div class="dropdown-menu dropdown-menu-left">
+						<a href="/cbAnalysis" class="dropdown-item">손익 분석 작성</a>
+						<a href="/cbAnalysisList" class="dropdown-item">손익 분석 목록</a>
+					</div></li>
 				<li class="nav-item">
 					<a href="#" class="nav-link icon d-flex align-items-center">
 					메뉴3</a>

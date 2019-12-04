@@ -1,24 +1,30 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>예산 목록</title>
+<title>(주)케이씨에스 영업 관리 시스템 - 예산 목록</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
 <style>
-/* tr {
-	background-color: #FFCCCC; 
+.user {
+	color: #FFF;
+	text-decoration: blink;
 }
-td {
-	text-align: center;
-	background-color: #DDDDDD;
-} */
+.userId {
+
+}
+
+#logout {
+	text-decoration: none;
+	color: #FFF;
+}
 </style>
-<script src="/resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
+<script>
 $(document).ready(function() {
 	$("#pageArea").on("click", "input", function() {
 		$("#page").val($(this).attr("name"));
@@ -28,83 +34,78 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-	<form action="/businessPlanList" id="dataForm" method="POST">
-		<input type="hidden" id="page" name="listPage" value="${listPage}" />
-		
-		<table class="table table-info table-borderless">
-			<thead>
-				<tr>
-					<th>OPPID</th>
-					<th>Product 구분</th>
-					<th>프로젝트명</th>
-					<th>담당자</th>
-				</tr>
-			</thead>
-			<tbody>
+
+<div class="main-section">
+<jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
+
+	
+<section class="ftco-section pb-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 heading-title">
+			<h1>Basic Elements</h1>
+			<form action="/businessPlanList" id="dataForm" method="POST">
+				<input type="hidden" id="page" name="listPage" value="${listPage}" />
+				<table class="table table-light table-hover table-borderless">
+				<thead class="thead-dark">
+					<tr>
+						<th>OPPID</th>
+						<th>Product 구분</th>
+						<th>프로젝트명</th>
+						<th>담당자</th>
+					</tr>
+				</thead>
+				<tbody>
 				<c:forEach var="data" items="${list}">
-					<tr onclick="location.href='/businessPlanDtl?oppId=${data.oppId}'">
+					<tr onclick="location.href='/businessPlanDtl?oppId=${data.oppId}'" >
 						<td>${data.oppId}</td>
 						<td>${data.sort2}</td>
 						<td>${data.projectName}</td>
 						<td>${data.userNum}</td>
 					</tr>
 				</c:forEach>
-			</tbody>
-		</table>
+				</tbody>
+				</table>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			</form>
 
-		<div id="pageArea">
-			<input type="button" value="처음페이지" name="1" />
-			<c:choose>
-				<c:when test="${listPage eq 1}">
-					<input type="button" value="이전페이지" name="1" />
-				</c:when>
-				<c:otherwise>
-					<input type="button" value="이전페이지" name="${listPage - 1}" />
-				</c:otherwise>
-			</c:choose>
-			<c:forEach var="i" begin="${pb.startPcount}" end="${pb.endPcount}"
-				step="1">
-				<c:choose>
-					<c:when test="${i eq listPage}">
-						<input type="button" value="${i}" name="${i}" disabled="disabled" />
-					</c:when>
-					<c:otherwise>
-						<input type="button" value="${i}" name="${i}" />
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<c:choose>
-				<c:when test="${listPage eq pb.maxPcount}">
-					<input type="button" value="다음페이지" name="${pb.maxPcount}" />
-				</c:when>
-				<c:otherwise>
-					<input type="button" value="다음페이지" name="${listPage + 1}" />
-				</c:otherwise>
-			</c:choose>
-			<input type="button" value="마지막페이지" name="${pb.maxPcount}" />
+			<form action="/bpReport" method="POST">
+				<select name="year" required="required">
+					<c:forEach var="year" items="${listYear }">
+						<option>${year }년</option>
+					</c:forEach>
+				</select>
+				<c:if test="${select != null }">
+					<select name="team">
+						<option>영업 1팀</option>
+						<option>영업 2팀</option>
+					</select>
+				</c:if>
+				<button>보고서</button>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			</form>
+			</div>
 		</div>
-		<a href="#" onclick="history.back();" style="float: right;">돌아가기</a>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-	</form>
-	
-	<form action="/bpReport" method="POST">
-		<select name="year" required="required">
-			<c:forEach var="year" items="${listYear }">
-				<option>${year }년</option>
-			</c:forEach>
-		</select>
-		<c:if test="${select != null }">
-			<select name="team">
-				<option>영업 1팀</option>
-				<option>영업 2팀</option>
-			</select>
-		</c:if>
-		<button>보고서</button>
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-	</form>
-	
-	
-	
-	
+	</div>
+</section>
+
+
+
+<jsp:include page="/WEB-INF/views/inc/bottom.jsp"></jsp:include>
+
+</div>
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen">
+	<svg class="circular" width="48px" height="48px">
+		<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+			stroke-width="4" stroke="#eeeeee" />
+		<circle class="path" cx="24" cy="24" r="22" fill="none"
+			stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+</div>
+
+
+<jsp:include page="/WEB-INF/views/inc/js.jsp"></jsp:include>
+
 </body>
 </html>
