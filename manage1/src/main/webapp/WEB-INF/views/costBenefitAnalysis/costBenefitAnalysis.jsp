@@ -6,7 +6,16 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>(주)케이씨에스 손익 분석 시스템 - 손익 분석 작성</title>
+<style>
+tr {
+	background-color: #FFCCCC; 
+}
+td {
+	text-align: center;
+	background-color: #DDDDDD;
+}
+</style>
+<title>(주)케이씨에스 손익 분석 시스템 - 손익 분석</title>
 </head>
 <body>
 	<form action="/costBenefitAnalysis" id="dataForm" method="POST">
@@ -21,7 +30,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="data" items="${list}">
-					<tr>
+					<tr onclick="location.href='/costBenefitAnalysisRegi?oppId=${data.oppId}'">
 						<td>${data.oppId}</td>
 						<td>${data.projectName}</td>
 						<td>${data.userNum}</td>

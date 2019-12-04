@@ -10,7 +10,7 @@ import lombok.Data;
 public class CostBenefitAnalysisVO {
 
 	private String oppId, projectName, userNum, endUser, customer, autoExtension;
-	private int version, profitSort, expectedSales, expectedPurchase, expectedProfit, exchangeRate;
+	private int version, profitSort, expectedSales, expectedPurchase, expectProfit, exchangeRate;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date contractDate, expiredDate;
