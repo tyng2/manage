@@ -25,24 +25,21 @@
 		ORDER BY regDate DESC LIMIT 1
 	</select>
 	
-	<select id="getBusinessPlanListCnt" resultType="businessPlanVO">
+	<select id="getBusinessPlanListCnt" resultType="Integer">
 		SELECT COUNT(*) AS CNT
 		FROM manage.BusinessPlanning
-		WHERE userNum = #{userNum}
-<!-- 		<if test="searchTxt != null and searchTxt != ''">
-			<choose>
-				<when test="searchGbn == 0">
-					AND  LIKE '%' || #{searchTxt} || '%'
-				</when>
-				<when test="searchGbn == 1">
-					AND  LIKE '%' || #{searchTxt} || '%'
-				</when>
-				<when test="searchGbn == 2">
-					AND ( LIKE '%' || #{searchTxt} || '%'
-			     		OR  LIKE '%' || #{searchTxt} || '%')
-				</when>
-			</choose>
-		</if> -->
+	</select>
+	
+	<select id="getBusinessPlanList" resultType="hashmap">
+		SELECT L.oppId, L.sort1, L.projectName, L.userNum, L.RNUM
+		FROM (SELECT oppId, sort1, projectName, userNum, ROW_NUMBER() OVER(ORDER BY oppId DESC) AS RNUM
+			  FROM manage.BusinessPlanning
+		        WHERE 1 = 1
+<!-- 		        <if test="searchListTxt != null and searchListTxt != ''">
+					AND M.MEM_NM LIKE '%' || #{searchListTxt} || '%'
+				</if> -->
+		     ) L
+		WHERE L.RNUM BETWEEN #{startCnt} AND #{endCnt}
 	</select>
 	
 	

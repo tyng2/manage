@@ -8,7 +8,7 @@ public interface BusinessPlanSevice {
 	
 	public int insertBusinessPlan(BusinessPlanVO businessPlanVO);
 
-	public List<BusinessPlanVO> getBusinessPlanByUserNum(String UserNum);
+	public List<BusinessPlanVO> getBusinessPlanByUserNum(String userNum);
 
 	public BusinessPlanVO businessPlanDtl(String oppId);
 
@@ -17,5 +17,9 @@ public interface BusinessPlanSevice {
 	public List<BusinessPlanVO> getBusinessPlanPeriodService(String roleName, int sort1, String year, int quarter);
 
 	public boolean businessPlanDel(String oppId, String userNum);
+
+	public int getBusinessPlanListCnt();
+
+	public List<BusinessPlanVO> getBusinessPlanList(String startCnt, String endCnt);
 	
 }

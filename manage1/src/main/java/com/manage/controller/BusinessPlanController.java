@@ -24,12 +24,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.manage.mapper.AuthMapper;
 import com.manage.mapper.BusinessPlanMapper;
 import com.manage.mapper.UserMapper;
 import com.manage.service.BusinessPlanSevice;
 import com.manage.service.paging.IPagingService;
+import com.manage.service.paging.PagingBean;
 import com.manage.vo.BusinessPlanVO;
 
 import lombok.Setter;
@@ -78,9 +80,22 @@ public class BusinessPlanController {
 	
 //GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
 	@GetMapping("/businessPlanList")
-	public String getBusinessPlanByUserNum(Model model) { 
+	public String getBusinessPlanByUserNum(String userNum, Model model, @RequestParam HashMap<String, String> params) { 
 		System.out.println("<< businessPlanList >>\n");
+		System.out.println("params : " + params);
 		
+		if(!params.containsKey("listPage")) {
+			params.put("listPage", "1");
+		}
+		
+		int cnt = businessPlanService.getBusinessPlanListCnt();
+		
+		PagingBean pb 
+		= iPagingService.getPageingBean(Integer.parseInt(params.get("listPage")), 
+				cnt, 5, 5);
+		
+		params.put("startCnt", Integer.toString(pb.getStartCount()));
+		params.put("endCnt", Integer.toString(pb.getEndCount()));
 		
 //		로그인 한 아이디의 권한 가져오기
 		List<String> roleNames = new ArrayList<>();
@@ -93,20 +108,39 @@ public class BusinessPlanController {
         }
         System.out.println("권한 : " + roleNames);
         String roleName = roleName(roleNames);
-        
+		
+        System.out.println("/ncnt : " + cnt);
+		System.out.println("listpage : " + params.get("listPage"));
+		System.out.println("startCnt :" + Integer.toString(pb.getStartCount()));
+		System.out.println("endCnt :" + Integer.toString(pb.getEndCount()));
+		
         if ("마케팅".equals(roleName) || "이사".equals(roleName)) {
         	model.addAttribute("select", roleName);
         }
         
 
-		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(null);
+		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(userNum);
 		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
 		System.out.println("listYear : " + listYear);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("listYear", listYear);
+		
+		model.addAttribute("pb", pb);
+		model.addAttribute("listPage", params.get("listPage"));
 
 		return "businessPlan/businessPlanList";
+	}
+	
+	@PostMapping("/businessPlanList")
+	public ResponseEntity<List> getBusinessPlanByUserNum(@RequestParam HashMap<String, String> params, Model model) {
+		System.out.println("listPage : " + params);
+		HttpHeaders headers = new HttpHeaders();
+		
+//		List<BusinessPlanVO> list2 = businessPlanService.getBusinessPlanList(params);
+		List<BusinessPlanVO> list2 = null;
+		
+		return new ResponseEntity<List>(list2, headers, HttpStatus.OK);
 	}
 	 
 	 @GetMapping("/businessPlanDtl")
@@ -284,7 +318,8 @@ public class BusinessPlanController {
 
 	@PostMapping("/bpReport/Detail")
 	public String businessPlanReportDetail() {
-		
+
 		return "businessPlan/businessPlanReportDetail";
 	}
+
 }
