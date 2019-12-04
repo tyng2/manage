@@ -7,15 +7,13 @@
 <head>
 <title>(주)케이씨에스 영업 관리 시스템 - 예산 작성</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
-
 <link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-	href="resources/css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/animate.css">
 
 <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
@@ -38,20 +36,7 @@
 
 <!-- Favicon -->
 <link href="resources/images/kcsfav.png" rel="shortcut icon" />
-<style>
-.user {
-	color: #FFF;
-	text-decoration: blink;
-}
-.userId {
 
-}
-
-#logout {
-	text-decoration: none;
-	color: #FFF;
-}
-</style>
 </head>
 <body>
 <c:set var="userNum"><sec:authentication property="principal.user.userNum"/></c:set>

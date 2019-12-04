@@ -66,7 +66,7 @@ public class HomeController {
 	public String businessplan(Model model) {
 		System.out.println("<< businessPlan >>\n");
 		
-		return "businessPlan";
+		return "businessPlan/businessPlan";
 	}
 	
 	
