@@ -10,6 +10,28 @@
 		VALUES (#{oppId}, #{projectName}, #{userNum}, #{endUser}, #{customer}, #{sort1}, #{sort2}, #{expectedSales}, #{expectedPurchase}, #{expectedProfit}, #{expectedSalesMonth}, #{state}, #{note}, CURRENT_TIMESTAMP, #{customerName}, #{customerPhone}, #{customerEmail})
 	</insert>
 	
+	
+	<select id="getBusinessPlanPageList" resultType="businessPlanVO">
+		SELECT * FROM manage.BusinessPlanning
+		<where>
+		<if test="search != null and search != ''">
+			projectName LIKE CONCAT('%', #{search}, '%') 
+		</if>
+		</where>
+		ORDER BY regDate DESC 
+		LIMIT #{amount} OFFSET #{startRow} 
+	</select>
+	
+	<select id="getBusinessPlanPageCount" resultType="int" parameterType="string">
+	SELECT COUNT(*) FROM manage.BusinessPlanning
+	<where>
+		<if test="value != null and value != ''">
+			projectName LIKE CONCAT('%', #{value }, '%') 
+		</if>
+	</where>
+</select>
+	
+	
 <!-- 	userNum이 null인 경우 목록을 모두 가져옴 -->
 	<select id="getBusinessPlanByUserNum" resultType="businessPlanVO">
 		SELECT * FROM manage.BusinessPlanning 

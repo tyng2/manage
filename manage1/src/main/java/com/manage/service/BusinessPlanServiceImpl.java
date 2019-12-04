@@ -160,5 +160,12 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		return list2;
 	}
 
+	@Override
+	public List<BusinessPlanVO> getBusinessPlanPageList(String search, int amount, int startRow) {
+		return businessPlanMapper.getBusinessPlanPageList(search, amount, startRow);
+	}
+
+	
+	
 
 }
