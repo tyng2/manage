@@ -80,8 +80,21 @@ public class BusinessPlanController {
 	
 //GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
 	@GetMapping("/businessPlanList")
-	public String getBusinessPlanByUserNum(Model model) { 
+	public String getBusinessPlanByUserNum(String oppId, Model model, @RequestParam HashMap<String, String> params) { 
 		System.out.println("<< businessPlanList >>\n");
+		
+		if(!params.containsKey("listPage")) {
+			params.put("listPage", "1");
+		}
+		
+		int cnt = businessPlanService.getBusinessPlanListCnt(params);
+		
+		PagingBean pb 
+		= iPagingService.getPageingBean(Integer.parseInt(params.get("listPage")), 
+				cnt, 5, 5);
+		
+		params.put("startCnt", Integer.toString(pb.getStartCount()));
+		params.put("endCnt", Integer.toString(pb.getEndCount()));
 		
 //		로그인 한 아이디의 권한 가져오기
 		List<String> roleNames = new ArrayList<>();
@@ -100,37 +113,28 @@ public class BusinessPlanController {
         }
         
 
-		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(null);
+		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(oppId);
 		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
 		System.out.println("listYear : " + listYear);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("listYear", listYear);
+		
+		model.addAttribute("pb", pb);
+		model.addAttribute("listPage", params.get("listPage"));
 
 		return "businessPlanList";
 	}
 	
 	@PostMapping("/businessPlanList")
-	public ResponseEntity<String> getBusinessPlanByUserNum(Model model, @RequestParam HashMap<String, String> params) {
+	public ResponseEntity<List> getBusinessPlanByUserNum(@RequestParam HashMap<String, String> params, Model model) {
+		System.out.println("listPage : " + params);
 		HttpHeaders headers = new HttpHeaders();
 		
-		if(!params.containsKey("listPage")) {
-			params.put("listPage", "1");
-		}
+		List<HashMap<String, String>> list2
+		= businessPlanService.getBusinessPlanList(params);
 		
-		int cnt = businessPlanService.getBusinessPlanListCnt(params);
-		
-		PagingBean pb 
-		= iPagingService.getPageingBean(Integer.parseInt(params.get("listPage")), 
-				cnt, 5, 5);
-		
-		params.put("startCnt", Integer.toString(pb.getStartCount()));
-		params.put("endCnt", Integer.toString(pb.getEndCount()));
-		
-		model.addAttribute("pb", pb);
-		model.addAttribute("listPage", params.get("listPage"));
-		
-		return new ResponseEntity<String>(headers, HttpStatus.OK);
+		return new ResponseEntity<List>(list2, headers, HttpStatus.OK);
 	}
 	 
 	 @GetMapping("/businessPlanDtl")

@@ -56,9 +56,9 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 	}
 
 	@Override
-	public List<BusinessPlanVO> getBusinessPlanByUserNum(String userNum) {
-		System.out.println("\n" + userNum + "\n");
-		List<BusinessPlanVO> list = businessPlanMapper.getBusinessPlanByUserNum(userNum);
+	public List<BusinessPlanVO> getBusinessPlanByUserNum(String oppId) {
+		System.out.println("\nuserNum : " + oppId + "\n");
+		List<BusinessPlanVO> list = businessPlanMapper.getBusinessPlanByUserNum(oppId);
 		
 		return list;
 	}
@@ -153,5 +153,12 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		int cnt = businessPlanMapper.getBusinessPlanListCnt(params);
 		return cnt;
 	}
+
+	@Override
+	public List<HashMap<String, String>> getBusinessPlanList(HashMap<String, String> params) {
+		List<HashMap<String, String>> list2 = businessPlanMapper.getBusinessPlanList(params);
+		return list2;
+	}
+
 
 }
