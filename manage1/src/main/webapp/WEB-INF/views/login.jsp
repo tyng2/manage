@@ -9,32 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="resources/css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/animate.css">
-
-<link rel="stylesheet" href="resources/css/owl.carousel.min.css">
-<link rel="stylesheet" href="resources/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="resources/css/magnific-popup.css">
-
-<link rel="stylesheet" href="resources/css/aos.css">
-
-<link rel="stylesheet" href="resources/css/ionicons.min.css">
-
-<link rel="stylesheet" href="resources/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="resources/css/nouislider.css">
-
-
-<link rel="stylesheet" href="resources/css/flaticon.css">
-<link rel="stylesheet" href="resources/css/icomoon.css">
-<link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="resources/css/custom.css">
-
-<!-- Favicon -->   
-<link href="resources/images/kcsfav.png" rel="shortcut icon" />
+<jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
 </head>
 <style>
 
@@ -79,7 +54,7 @@
               </div>-->
 				</div>
 				<!-- <p class="description text-center">Or Be Classical</p> -->
-				<div class="card-body pd4 form-group">
+				<div class="card-body pd4 form-group" style="margin: 0;">
 					<c:if test="${error != null }">
 						<div class="alert alert-danger">
 						<div class="container">
@@ -110,6 +85,9 @@
 				<div class="footer text-center">
 					<button class="btn btn-primary btn-block">로그인</button>
 				</div>
+					<div class="" style="margin-top: 1.5rem;">
+							<a href="/addUser" class="">가입</a>
+					</div>
 				</div>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			</form>
@@ -128,21 +106,7 @@
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-<script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="resources/js/popper.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/jquery.easing.1.3.js"></script>
-<script src="resources/js/jquery.waypoints.min.js"></script>
-<script src="resources/js/jquery.stellar.min.js"></script>
-<script src="resources/js/owl.carousel.min.js"></script>
-<script src="resources/js/jquery.magnific-popup.min.js"></script>
-<script src="resources/js/aos.js"></script>
-
-<script src="resources/js/nouislider.min.js"></script>
-<script src="resources/js/moment-with-locales.min.js"></script>
-<script src="resources/js/bootstrap-datetimepicker.min.js"></script>
-<script src="resources/js/main.js"></script>
+<jsp:include page="/WEB-INF/views/inc/js.jsp"></jsp:include>
 
 </body>
 </html>

@@ -45,7 +45,7 @@ public class HomeController {
 	public String addUser(Model model) {
 		System.out.println("<< addUser >>\n");
 		
-		return "addUser";
+		return "user/addUser";
 	}
 	
 	

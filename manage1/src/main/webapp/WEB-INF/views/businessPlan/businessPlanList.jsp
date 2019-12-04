@@ -9,13 +9,13 @@
 <meta charset="UTF-8">
 <title>예산 목록</title>
 <style>
-tr {
+/* tr {
 	background-color: #FFCCCC; 
 }
 td {
 	text-align: center;
 	background-color: #DDDDDD;
-}
+} */
 </style>
 <script src="/resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
@@ -31,7 +31,7 @@ $(document).ready(function() {
 	<form action="/businessPlanList" id="dataForm" method="POST">
 		<input type="hidden" id="page" name="listPage" value="${listPage}" />
 		
-		<table>
+		<table class="table table-info table-borderless">
 			<thead>
 				<tr>
 					<th>OPPID</th>
