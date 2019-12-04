@@ -39,7 +39,7 @@
 	};
 	loader();
 
-
+/*
 	$('nav .dropdown').hover(function(){
 		var $this = $(this);
 		// 	 timer;
@@ -58,6 +58,8 @@
 			$this.find('.dropdown-menu').removeClass('show');
 		// }, 100);
 	});
+//	hover일 경우에는 드롭다운 메뉴 보이지 않게하려고 주석처리
+*/
 
 
 	$('#dropdown04').on('show.bs.dropdown', function () {
@@ -198,4 +200,16 @@
 
 
 })(jQuery);
+
+
+
+/* custom */
+
+function logoutProcess(){
+	document.logoutForm.action = "/logout";
+	document.logoutForm.method = "POST";
+	document.logoutForm.submit();
+}
+
+
 

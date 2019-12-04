@@ -25,19 +25,19 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String main(String error, Model model) {
-		System.out.println("<< main >>\n");
+		System.out.println("<< login >>\n");
 		
 		if (error != null) {
 			model.addAttribute("error", "아이디나 비밀번호가 맞지 않습니다.");
 		}
 		
-		return "main";
+		return "login";
 	}
 	
-	@GetMapping("/home")
-	public String home(Model model) {
+	@GetMapping("/main")
+	public String main(Model model) {
 		
-		return "home";
+		return "main";
 	}
 	
 //	GET 방식으로 addUser 주소 접근 시 addUser.jsp 페이지로 이동
@@ -63,7 +63,7 @@ public class HomeController {
 	
 //	GET 방식으로 businessPlan 주소 접근 시 businessPlan.jsp 페이지로 이동
 	@GetMapping("/businessPlan")
-	public String addBusnessplan(Model model) {
+	public String businessplan(Model model) {
 		System.out.println("<< businessPlan >>\n");
 		
 		return "businessPlan";
