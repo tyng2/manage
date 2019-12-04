@@ -10,8 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
-
 <link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="resources/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/animate.css">
@@ -36,6 +36,19 @@
 <!-- Favicon -->   
 <link href="resources/images/kcsfav.png" rel="shortcut icon" />
 </head>
+<style>
+
+
+/* @font-face {
+	font-family: 'Nanum Gothic';
+	unicode-range: U+AC00-U+D7A3;
+	font-style: normal;
+} */
+
+#index {
+	color: #003;
+}
+</style>
 <body>
 <sec:authorize access="isAuthenticated()">
 <script>location.href="/main";</script>
@@ -50,8 +63,8 @@
 			<form class="form-login" action="/login" method="POST">
 				<div class="card-header card-header-primary text-center">
 				<h4 class="card-title">
-					<img src="resources/images/kcs.png"><br>
-					<br>영업 관리 시스템
+					<img src="resources/images/kcs.png"><br><br>
+					<span id="index">영업 관리 시스템</span>
 				</h4>
 					<!--<div class="social-line">
                 <a href="#" class="btn-icon d-flex align-items-center justify-content-center">
@@ -94,9 +107,9 @@
 						</div>
 						<input type="password" name="password" class="form-control" placeholder="비밀번호">
 					</div>
-				</div>
-				<div class="footer text-center pd4">
+				<div class="footer text-center">
 					<button class="btn btn-primary btn-block">로그인</button>
+				</div>
 				</div>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			</form>

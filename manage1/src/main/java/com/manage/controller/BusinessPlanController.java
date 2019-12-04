@@ -106,7 +106,7 @@ public class BusinessPlanController {
 		model.addAttribute("list", list);
 		model.addAttribute("listYear", listYear);
 
-		return "businessPlanList";
+		return "businessPlan/businessPlanList";
 	}
 	 
 	 @GetMapping("/businessPlanDtl")
@@ -117,7 +117,7 @@ public class BusinessPlanController {
 		  
 		 model.addAttribute("data", list);
 		 
-		 return "businessPlanDtl";
+		 return "businessPlan/businessPlanDtl";
 	 }
 	 
 	@PostMapping("/bpReport")
@@ -192,7 +192,7 @@ public class BusinessPlanController {
 
 		model.addAttribute("bp", map);
 
-		return "businessPlanReport";
+		return "businessPlan/businessPlanReport";
 	}
 
 	public int calcExpectedSales(List<BusinessPlanVO> list) {
@@ -213,7 +213,7 @@ public class BusinessPlanController {
 		
 		model.addAttribute("data", list);
 		
-		return "businessPlanUpdate";
+		return "businessPlan/businessPlanUpdate";
 	}
 	
 	  @PostMapping("/businessPlanUpdate") 
@@ -285,6 +285,6 @@ public class BusinessPlanController {
 	@PostMapping("/bpReport/Detail")
 	public String businessPlanReportDetail() {
 		
-		return "businessPlanReportDetail";
+		return "businessPlan/businessPlanReportDetail";
 	}
 }

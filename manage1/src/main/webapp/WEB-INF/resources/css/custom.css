@@ -1,3 +1,8 @@
+body {
+	font-family: "Open Sans", 'Nanum Gothic', sans-serif;
+}
+
+
 .ftco-navbar-light-nonAbsolute {
   background: #000 !important;
   //position: absolute;
@@ -185,6 +190,18 @@
         color: #000; }
         
         
+.user {
+	color: #FFF;
+	text-decoration: blink;
+}
+.userId {
+
+}
+
+#logout {
+	text-decoration: none;
+	color: #FFF;
+}
         
         
 
