@@ -131,9 +131,9 @@ public class BusinessPlanController {
         
         
 //		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(userNum);
-//		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
+		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
 //		System.out.println("listYear : " + listYear);
-//		model.addAttribute("listYear", listYear);
+		model.addAttribute("listYear", listYear);
 		
 		model.addAttribute("list", list1);
 		model.addAttribute("page", page);

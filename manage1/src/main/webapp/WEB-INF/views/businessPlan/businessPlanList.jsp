@@ -10,27 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
-<style>
-.user {
-	color: #FFF;
-	text-decoration: blink;
-}
-.userId {
-
-}
-
-#logout {
-	text-decoration: none;
-	color: #FFF;
-}
-</style>
 <script>
-// $(document).ready(function() {
-// 	$("#pageArea").on("click", "input", function() {
-// 		$("#page").val($(this).attr("name"));
-// 		$("#dataForm").submit();
-// 	});
-// });
 </script>
 </head>
 <body>
@@ -64,7 +44,7 @@
 					<c:forEach var="data" items="${list}">
 					<tr onclick="location.href='/businessPlanDtl?oppId=${data.oppId}'" >
 						<td>${data.oppId}</td>
-						<td>${data.sort2}</td>
+						<td>${data.sort1}</td>
 						<td>${data.projectName}</td>
 						<td>${data.userNum}</td>
 					</tr>
