@@ -7,37 +7,9 @@
 <head>
 <title>(주)케이씨에스 영업 관리 시스템</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
-
-<link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-	href="resources/css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/animate.css">
-
-<link rel="stylesheet" href="resources/css/owl.carousel.min.css">
-<link rel="stylesheet" href="resources/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="resources/css/magnific-popup.css">
-
-<link rel="stylesheet" href="resources/css/aos.css">
-
-<link rel="stylesheet" href="resources/css/ionicons.min.css">	
-
-<link rel="stylesheet"
-	href="resources/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="resources/css/nouislider.css">
-
-
-<link rel="stylesheet" href="resources/css/flaticon.css">
-<link rel="stylesheet" href="resources/css/icomoon.css">
-<link rel="stylesheet" href="resources/css/style.css">
-<link rel="stylesheet" href="resources/css/custom.css">
-
-<!-- Favicon -->
-<link href="resources/images/kcsfav.png" rel="shortcut icon" />
+<jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
 <style>
 .user {
 	color: #FFF;
@@ -893,21 +865,7 @@
 </div>
 
 
-<script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="resources/js/popper.min.js"></script>
-<script src="resources/js/bootstrap.min.js"></script>
-<script src="resources/js/jquery.easing.1.3.js"></script>
-<script src="resources/js/jquery.waypoints.min.js"></script>
-<script src="resources/js/jquery.stellar.min.js"></script>
-<script src="resources/js/owl.carousel.min.js"></script>
-<script src="resources/js/jquery.magnific-popup.min.js"></script>
-<script src="resources/js/aos.js"></script>
-
-<script src="resources/js/nouislider.min.js"></script>
-<script src="resources/js/moment-with-locales.min.js"></script>
-<script src="resources/js/bootstrap-datetimepicker.min.js"></script>
-<script src="resources/js/main.js"></script>
+<jsp:include page="/WEB-INF/views/inc/js.jsp"></jsp:include>
 
 </body>
 </html>
