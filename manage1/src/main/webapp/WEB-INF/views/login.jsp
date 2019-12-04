@@ -79,7 +79,7 @@
               </div>-->
 				</div>
 				<!-- <p class="description text-center">Or Be Classical</p> -->
-				<div class="card-body pd4 form-group">
+				<div class="card-body pd4 form-group" style="margin: 0;">
 					<c:if test="${error != null }">
 						<div class="alert alert-danger">
 						<div class="container">
@@ -110,6 +110,9 @@
 				<div class="footer text-center">
 					<button class="btn btn-primary btn-block">로그인</button>
 				</div>
+					<div class="" style="margin-top: 1.5rem;">
+							<a href="/addUser" class="">가입</a>
+					</div>
 				</div>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			</form>
