@@ -9,7 +9,7 @@ public interface BusinessPlanSevice {
 	
 	public int insertBusinessPlan(BusinessPlanVO businessPlanVO);
 
-	public List<BusinessPlanVO> getBusinessPlanByUserNum(String oppId);
+	public List<BusinessPlanVO> getBusinessPlanByUserNum(String userNum);
 
 	public BusinessPlanVO businessPlanDtl(String oppId);
 
@@ -19,8 +19,8 @@ public interface BusinessPlanSevice {
 
 	public boolean businessPlanDel(String oppId, String userNum);
 
-	public int getBusinessPlanListCnt(HashMap<String, String> params);
+	public int getBusinessPlanListCnt();
 
-	public List<HashMap<String, String>> getBusinessPlanList(HashMap<String, String> params);
+	public List<BusinessPlanVO> getBusinessPlanList(String startCnt, String endCnt);
 	
 }

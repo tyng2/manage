@@ -80,14 +80,15 @@ public class BusinessPlanController {
 	
 //GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
 	@GetMapping("/businessPlanList")
-	public String getBusinessPlanByUserNum(String oppId, Model model, @RequestParam HashMap<String, String> params) { 
+	public String getBusinessPlanByUserNum(String userNum, Model model, @RequestParam HashMap<String, String> params) { 
 		System.out.println("<< businessPlanList >>\n");
+		System.out.println("params : " + params);
 		
 		if(!params.containsKey("listPage")) {
 			params.put("listPage", "1");
 		}
 		
-		int cnt = businessPlanService.getBusinessPlanListCnt(params);
+		int cnt = businessPlanService.getBusinessPlanListCnt();
 		
 		PagingBean pb 
 		= iPagingService.getPageingBean(Integer.parseInt(params.get("listPage")), 
@@ -107,13 +108,18 @@ public class BusinessPlanController {
         }
         System.out.println("권한 : " + roleNames);
         String roleName = roleName(roleNames);
-        
+		
+        System.out.println("/ncnt : " + cnt);
+		System.out.println("listpage : " + params.get("listPage"));
+		System.out.println("startCnt :" + Integer.toString(pb.getStartCount()));
+		System.out.println("endCnt :" + Integer.toString(pb.getEndCount()));
+		
         if ("마케팅".equals(roleName) || "이사".equals(roleName)) {
         	model.addAttribute("select", roleName);
         }
         
 
-		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(oppId);
+		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(userNum);
 		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
 		System.out.println("listYear : " + listYear);
 		
@@ -131,8 +137,8 @@ public class BusinessPlanController {
 		System.out.println("listPage : " + params);
 		HttpHeaders headers = new HttpHeaders();
 		
-		List<HashMap<String, String>> list2
-		= businessPlanService.getBusinessPlanList(params);
+//		List<BusinessPlanVO> list2 = businessPlanService.getBusinessPlanList(params);
+		List<BusinessPlanVO> list2 = null;
 		
 		return new ResponseEntity<List>(list2, headers, HttpStatus.OK);
 	}
@@ -315,4 +321,7 @@ public class BusinessPlanController {
 		
 		return "businessPlanReportDetail";
 	}
+	
+	
+	
 }

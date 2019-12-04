@@ -11,7 +11,7 @@ public interface BusinessPlanMapper {
 	
 	public int insertBusinessPlan(BusinessPlanVO businessPlanVO);
 	
-	public List<BusinessPlanVO> getBusinessPlanByUserNum(String oppId);
+	public List<BusinessPlanVO> getBusinessPlanByUserNum(String userNum);
 	
 	public BusinessPlanVO getLastData();
 	
@@ -28,8 +28,8 @@ public interface BusinessPlanMapper {
 //	yearOrMonth 값이 "y" 이면 년, "m" 이면 월을 출력
 	public String getLastExpectedYearANDMonth(@Param("department") String department, @Param("yearOrMonth") String yearOrMonth, @Param("year") int year);
 
-	public int getBusinessPlanListCnt(HashMap<String, String> params);
+	public int getBusinessPlanListCnt();
 
-	public List<HashMap<String, String>> getBusinessPlanList(HashMap<String, String> params);	
+	public List<BusinessPlanVO> getBusinessPlanList(@Param("startCnt") String startCnt, @Param("endCnt") String endCnt);	
 	
 }
