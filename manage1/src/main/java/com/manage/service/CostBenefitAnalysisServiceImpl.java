@@ -28,11 +28,16 @@ public class CostBenefitAnalysisServiceImpl implements CostBenefitAnalysisServic
 	public CostBenefitAnalysisVO CBAnalysisDtl(String oppId) {
 		CostBenefitAnalysisVO cb = costBenefitAnalysisMapper.CBAnalysisDtl(oppId);
 		
+		System.out.println("oppId : " + oppId);
+		
 		return cb;
 	}
 
 	@Override
 	public int CBAnalysisRegi(CostBenefitAnalysisVO c) {
+		
+		
+		
 		return costBenefitAnalysisMapper.CBAnalysisRegi(c);
 	}
 }

@@ -10,18 +10,25 @@
 	</select>
 	
 	<select id="CBAnalysisDtl" resultType="CostBenefitAnalysisVO">
-		SELECT * FROM manage.CostBenefitAnalysis
+		SELECT * FROM manage.BusinessPlanning
 		WHERE oppId = #{oppId};	
 	</select>
 	
-	<update id="CBAnalysisRegi">
+<!-- 	<update id="CBAnalysisRegi">
 		UPDATE manage.CostBenefitAnalysis SET version=#{version}, projectName=#{projectName}, 
 				endUser=#{endUser}, customer=#{customer}, contractDate=#{contractDate},
 				expiredDate=#{expiredDate}, autoExtension=#{autoExtension},	profitSort=#{profitSort},
 				expectedSales=#{expectedSales}, expectedPurchase=#{expectedPurchase},
-				expectProfit=#{expectProfit}, exchangeRate=#{exchangeRate}
+				expectedProfit=#{expectedProfit}, exchangeRate=#{exchangeRate}
 		WHERE oppId = #{oppId};
-	</update>
+	</update> -->
 	
+	<insert id="CBAnalysisRegi">
+		INSERT INTO manage.CostBenefitAnalysis
+		(oppId, version, projectName, endUser, customer, contractDate, expiredDate, autoExtension, profitSort,
+		 expectedSales, expectedPurchase, expectedProfit, exchangeRate)
+		VALUES (#{oppId}, #{version}, #{projectName}, #{endUser}, #{customer}, #{contractDate}, #{expiredDate}, #{autoExtension},
+				#{profitSort}, #{expectedSales}, #{expectedPurchase}, #{expectedProfit}, #{exchangeRate})	
+	</insert>
 </mapper>
 

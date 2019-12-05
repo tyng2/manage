@@ -25,8 +25,9 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 
 		
 		/* 새 영업계획에 사용될 OppId 구하는 과정 */
-		String lastOppid = businessPlanMapper.getLastData().getOppId();
-		System.out.println("lastOppId : " + lastOppid);
+		BusinessPlanVO bpVO = businessPlanMapper.getLastData();
+		String lastOppId = (null == bpVO) ? null : bpVO.getOppId();
+		System.out.println("lastOppId : " + lastOppId);
 		
 		Calendar cal = Calendar.getInstance();
 		
@@ -34,8 +35,8 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		newOppId.append("O").append(cal.get(Calendar.YEAR));
 		
 		int num = 1;
-		if (lastOppid != null) {
-			num = Integer.parseInt(lastOppid.substring(7)) + 1;
+		if (lastOppId != null) {
+			num = Integer.parseInt(lastOppId.substring(7)) + 1;
 		}
 		
 		if (num < 10) {

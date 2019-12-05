@@ -55,11 +55,16 @@ $(document).ready(function() {
 						<td><input type="date" name="contractDate" value="${data.contractDate}"></td>
 						<td><input type="date" name="expiredDate" value="${data.expiredDate}"></td>
 						<td><input type="text" name="autoExtension" value="${data.autoExtension}"></td>
-						<td><input type="text" name="profitSort" value="${data.profitSort}"></td>
+						<%-- <td><input type="text" name="profitSort" value="${data.profitSort}"></td> --%>
+						<td><select name="profitSort">
+							<option value="1">당월</option><option value="2">익월</option>
+						</select></td>
 						<td><input type="text" name="expectedSales" value="${data.expectedSales}"></td>
 						<td><input type="text" name="expectedPurchase" value="${data.expectedPurchase}"></td>
-						<td><input type="text" name="expectProfit" value="${data.expectProfit}"></td>
-						<td><input type="text" name="exchangeRate" value="${data.exchangeRate}"></td>
+						<td><input type="text" name="expectedProfit" value="${data.expectedProfit}"></td>
+						<td><select name="exchangeRate">
+							<option value="1">내자</option><option value="2">외자</option>
+						</select></td>
 					</tr>
 			</tbody>
 		</table>

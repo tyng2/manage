@@ -26,6 +26,8 @@ td {
 					<th>OPPID</th>
 					<th>프로젝트명</th>
 					<th>담당자</th>
+					<th>예상매출액</th>
+					<th>예상매입금</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,6 +36,8 @@ td {
 						<td>${data.oppId}</td>
 						<td>${data.projectName}</td>
 						<td>${data.userNum}</td>
+						<td>${data.expectedSales}</td>
+						<td>${data.expectedPurchase}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
