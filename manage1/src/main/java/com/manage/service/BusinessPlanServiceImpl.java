@@ -26,7 +26,7 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		
 		/* 새 영업계획에 사용될 OppId 구하는 과정 */
 		BusinessPlanVO bpVO = businessPlanMapper.getLastData();
-		String lastOppId = (null == bpVO) ? null : bpVO.getOppId();
+		String lastOppId = (bpVO == null) ? null : bpVO.getOppId();
 		System.out.println("lastOppId : " + lastOppId);
 		
 		Calendar cal = Calendar.getInstance();

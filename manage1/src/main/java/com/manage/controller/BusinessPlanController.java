@@ -105,10 +105,13 @@ public class BusinessPlanController {
         int amount = 5; // 한 페이지 당 보여줄 글 갯수
         int startRow = (pageNum - 1) * amount; // 시작 행 번호
         
-        List<BusinessPlanVO> list1 = businessPlanService.getBusinessPlanPageList(search, amount, startRow);;
+        List<BusinessPlanVO> list = businessPlanService.getBusinessPlanPageList(search, amount, startRow);;
 
         int allRowCount = 0; // 전체 행 갯수
         allRowCount = businessPlanMapper.getBusinessPlanPageCount(search);
+        
+        System.out.println("getBPPageList.size() : " + list.size());
+        System.out.println("getBPPageCount : " + allRowCount); // 비교해보기
         
         int maxPage = allRowCount / amount + (allRowCount % amount == 0 ? 0 : 1);
         
@@ -133,9 +136,9 @@ public class BusinessPlanController {
 //		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(userNum);
 		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
 //		System.out.println("listYear : " + listYear);
-		model.addAttribute("listYear", listYear);
+		model.addAttribute("listYear", listYear);	
 		
-		model.addAttribute("list", list1);
+		model.addAttribute("list", list);
 		model.addAttribute("page", page);
 		
 		
@@ -154,16 +157,16 @@ public class BusinessPlanController {
 		return new ResponseEntity<List>(list2, headers, HttpStatus.OK);
 	}
 	 
-	 @GetMapping("/businessPlanDtl")
-	 public String businessPlanDtl(String oppId, Model model) {
-		 System.out.println("<<businessPlanDtl>>");
-		 
-		 BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
-		  
-		 model.addAttribute("data", list);
-		 
-		 return "businessPlan/businessPlanDtl";
-	 }
+	@GetMapping("/businessPlanDtl")
+	public String businessPlanDtl(String oppId, Model model) {
+		System.out.println("<<businessPlanDtl>>");
+		
+		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
+		System.out.println("businessPlanDtl : " + list);
+		model.addAttribute("data", list);
+	 
+		return "businessPlan/businessPlanDtl";
+	}
 	 
 	@PostMapping("/bpReport")
 	public String businessPlanReport(String year, String team, Principal principal, Model model) {
