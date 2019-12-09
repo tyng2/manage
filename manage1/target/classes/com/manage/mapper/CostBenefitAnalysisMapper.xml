@@ -4,9 +4,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.manage.mapper.CostBenefitAnalysisMapper">
 
-	<select id="getCBAnalysis" resultType="CostBenefitAnalysisVO">
+	<select id="getCBAnalysis" resultType="BusinessPlanVO">
 		SELECT * FROM manage.BusinessPlanning 
-
+		WHERE state = 4
+	</select>
+	
+<!-- 	<select id="getCBAnalysisPageList" resultType="CostBenefitAnalysisVO">
+		SELECT * FROM manage.BusinessPlanning
+		<where>
+		<if test="search != null and search != ''">
+			projectName LIKE CONCAT('%', #{search}, '%') 
+		</if>
+		</where>
+		ORDER BY regDate DESC 
+		LIMIT #{amount} OFFSET #{startRow} 
+	</select>
+	
+	<select id="getCBAnalysisPageCount" resultType="int" parameterType="string">
+		SELECT COUNT(*) FROM manage.BusinessPlanning
+		<where>
+		<if test="value != null and value != ''">
+			projectName LIKE CONCAT('%', #{value }, '%') 
+		</if>
+		</where>
+	</select> -->
+	
+	<select id="CBAnalysisDtl" resultType="CostBenefitAnalysisVO">
+		SELECT * FROM manage.BusinessPlanning
+		WHERE oppId = #{oppId};	
+	</select>
+	
+<!-- 	<update id="CBAnalysisRegi">
+		UPDATE manage.CostBenefitAnalysis SET version=#{version}, projectName=#{projectName}, 
+				endUser=#{endUser}, customer=#{customer}, contractDate=#{contractDate},
+				expiredDate=#{expiredDate}, autoExtension=#{autoExtension},	profitSort=#{profitSort},
+				expectedSales=#{expectedSales}, expectedPurchase=#{expectedPurchase},
+				expectedProfit=#{expectedProfit}, exchangeRate=#{exchangeRate}
+		WHERE oppId = #{oppId};
+	</update> -->
+	
+	<insert id="CBAnalysisRegi">
+		INSERT INTO manage.CostBenefitAnalysis
+		(oppId, version, userNum, projectName, endUser, customer, contractDate, expiredDate, autoExtension, profitSort,
+		 expectedSales, expectedPurchase, expectedProfit, exchangeRate)
+		VALUES (#{oppId}, 1, #{userNum}, #{projectName}, #{endUser}, #{customer}, #{contractDate}, #{expiredDate}, #{autoExtension},
+				#{profitSort}, #{expectedSales}, #{expectedPurchase}, #{expectedProfit}, #{exchangeRate})
+	</insert>
+	
+	<select id="getCBAnalysisList" resultType="CostBenefitAnalysisVO">
+		SELECT * FROM manage.CostBenefitAnalysis; 
 	</select>
 	
 </mapper>
