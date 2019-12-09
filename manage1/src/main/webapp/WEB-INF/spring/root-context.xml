@@ -10,9 +10,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
-<<<<<<< HEAD
-	
+
 <!-- 	인터넷 접속 안될 때 -->
 <!-- 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 	    	<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
