@@ -13,4 +13,8 @@ public interface CostBenefitAnalysisService {
 
 	public int CBAnalysisRegi(CostBenefitAnalysisVO c);
 
+	public List<CostBenefitAnalysisVO> getCBAnalysisPageList(String search, int amount, int startRow);
+
+	public List<CostBenefitAnalysisVO> getCBAnalysisList();
+
 }

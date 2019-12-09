@@ -40,4 +40,18 @@ public class CostBenefitAnalysisServiceImpl implements CostBenefitAnalysisServic
 		
 		return costBenefitAnalysisMapper.CBAnalysisRegi(c);
 	}
+
+	@Override
+	public List<CostBenefitAnalysisVO> getCBAnalysisPageList(String search, int amount, int startRow) {
+		return costBenefitAnalysisMapper.getCBAnalysisPageList(search, amount, startRow);
+	}
+
+	@Override
+	public List<CostBenefitAnalysisVO> getCBAnalysisList() {
+		List<CostBenefitAnalysisVO> list = costBenefitAnalysisMapper.getCBAnalysisList();
+		
+		System.out.println("list :" + list);
+		
+		return list;
+	}
 }

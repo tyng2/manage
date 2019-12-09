@@ -130,7 +130,7 @@ body {
     left: 0;
     top: 0;
     margin-top: -130px;
-    background: #fff !important;
+/*     background: #fff !important; */
     -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1); }
     .ftco-navbar-custom.scrolled .nav-item.active > a {
@@ -160,7 +160,7 @@ body {
     .ftco-navbar-custom.scrolled .nav-link {
       padding-top: 0.9rem !important;
       padding-bottom: 0.9rem !important;
-      color: #000 !important; }
+      color: #FFF !important; }
       .ftco-navbar-custom.scrolled .nav-link.icon i {
         color: rgba(0, 0, 0, 0.4) !important; }
       .ftco-navbar-custom.scrolled .nav-link.active {
