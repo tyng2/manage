@@ -110,9 +110,6 @@ public class BusinessPlanController {
         int allRowCount = 0; // 전체 행 갯수
         allRowCount = businessPlanMapper.getBusinessPlanPageCount(search);
         
-        System.out.println("getBPPageList.size() : " + list.size());
-        System.out.println("getBPPageCount : " + allRowCount); // 비교해보기
-        
         int maxPage = allRowCount / amount + (allRowCount % amount == 0 ? 0 : 1);
         
         int pageBlockSize = 5; // 한 페이지블록 당 페이지 갯수
@@ -134,9 +131,9 @@ public class BusinessPlanController {
         
         
 //		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(userNum);
-		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
 //		System.out.println("listYear : " + listYear);
-		model.addAttribute("listYear", listYear);	
+//		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
+//		model.addAttribute("listYear", listYear);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("page", page);
@@ -157,16 +154,46 @@ public class BusinessPlanController {
 		return new ResponseEntity<List>(list2, headers, HttpStatus.OK);
 	}
 	 
-	@GetMapping("/businessPlanDtl")
-	public String businessPlanDtl(String oppId, Model model) {
-		System.out.println("<<businessPlanDtl>>");
-		
-		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
-		System.out.println("businessPlanDtl : " + list);
-		model.addAttribute("data", list);
+	 @GetMapping("/businessPlanDtl")
+	 public String businessPlanDtl(String oppId, Model model) {
+		 System.out.println("<<businessPlanDtl>>");
+		 
+		 BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
+		  
+		 model.addAttribute("data", list);
+		 
+		 return "businessPlan/businessPlanDtl";
+	 }
 	 
-		return "businessPlan/businessPlanDtl";
+	@GetMapping("/bpReport")
+	public String businessPlanGetReport(Principal principal, Model model) {
+		
+		if (principal == null) {
+			return "";
+		}
+		
+//		로그인 한 아이디의 권한 가져오기
+		List<String> roleNames = new ArrayList<>();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Collection<GrantedAuthority> collection = (Collection<GrantedAuthority>) auth.getAuthorities();
+        
+        for (GrantedAuthority authority : collection) {
+            roleNames.add(authority.getAuthority());
+        }
+        System.out.println("권한 : " + roleNames);
+        String roleName = roleName(roleNames);
+		
+		
+        if ("마케팅".equals(roleName) || "이사".equals(roleName)) {
+        	model.addAttribute("select", roleName);
+        }
+		
+		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
+		model.addAttribute("listYear", listYear);
+		
+		return "businessPlan/businessPlanGetReport";
 	}
+	 
 	 
 	@PostMapping("/bpReport")
 	public String businessPlanReport(String year, String team, Principal principal, Model model) {

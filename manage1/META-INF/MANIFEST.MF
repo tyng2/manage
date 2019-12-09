@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: manage1
+Bundle-SymbolicName: manage1
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.manage.controller,
+ com.manage.mapper,
+ com.manage.security,
+ com.manage.security.domain,
+ com.manage.service,
+ com.manage.service.paging,
+ com.manage.vo
