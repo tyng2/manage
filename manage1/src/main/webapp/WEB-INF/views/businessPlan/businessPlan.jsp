@@ -40,13 +40,13 @@ $(document).ready(function() {
 		</div>
 		<input type="hidden" name="userNum" value="${userNum }" />
 		<div class="row">
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="text" name="projectName" class="form-control" required>
 					<label class="form-control-placeholder" for="projectName">프로젝트명</label>			
 				</div>
 			</div>
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<select name="sort1" class="form-control">
 						<option value="1">상품</option>
@@ -56,7 +56,7 @@ $(document).ready(function() {
 					<label class="form-control-placeholder" for="sort1">구분1</label>			
 				</div>
 			</div>
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<select name="sort2" class="form-control">
 						<option value="1">Nonstop</option>
@@ -73,19 +73,19 @@ $(document).ready(function() {
 		</div><br><br>
 		
 		<div class="row">
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="text" name="expectedSales" class="form-control" required>
 					<label class="form-control-placeholder" for="expectedSales">예상매출액</label>			
 				</div>
 			</div>
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="text" name="expectedPurchase" class="form-control" required>
 					<label class="form-control-placeholder" for="expectedPurchase">예상매입금</label>			
 				</div>
 			</div>
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="text" name="expectedProfit" class="form-control" required>
 					<label class="form-control-placeholder" for="expectedProfit">예상이익</label>			
@@ -94,13 +94,13 @@ $(document).ready(function() {
 		</div><br>
 		
 		<div class="row">
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="month" name="expectedSalesMonth" class="form-control" value="" required>
 					<label class="form-control-placeholder" for="expectedSalesMonth">예상매출월</label>		
 				</div>
 			</div>
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<select name="state" class="form-control">
 						<option value="1">Lead</option>
@@ -115,13 +115,13 @@ $(document).ready(function() {
 		</div><br><br>
 		
 		<div class="row">
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="text" name="endUser" class="form-control" required>
 					<label class="form-control-placeholder" for="endUser">최종사용자</label>		
 				</div>
 			</div>
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="text" name="customer" class="form-control" required>
 					<label class="form-control-placeholder" for="customer">납품처</label>			
@@ -130,19 +130,19 @@ $(document).ready(function() {
 		</div><br>
 		
 		<div class="row">
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="text" name="customerName" class="form-control" required>
 					<label class="form-control-placeholder" for="customerName">고객명</label>			
 				</div>
 			</div>
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="text" name="customerPhone" class="form-control" required>
 					<label class="form-control-placeholder" for="customerPhone">고객연락처</label>			
 				</div>
 			</div>
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-4">
 				<div class="form-group">
 					<input type="email" name="customerEmail" class="form-control" required>
 					<label class="form-control-placeholder" for="customerEmail">고객이메일</label>			
@@ -151,7 +151,7 @@ $(document).ready(function() {
 		</div><br><br>
 		
 		<div class="row">
-			<div class="col-lg-12 col-sm-12">
+			<div class="col-lg-9 col-sm-4">
 				<div class="form-group">
 					<input type="text" name="note" id="note" class="form-control" required>
 					<label class="form-control-placeholder" for="note">비고</label>			

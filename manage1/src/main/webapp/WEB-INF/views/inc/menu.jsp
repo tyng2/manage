@@ -3,9 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-info ftco-navbar-custom" id="ftco-navbar">
-<sec:authorize access="isAnonymous()">
-<script>location.href="/";</script>
-</sec:authorize>
 <div class="container">
 	<a class="navbar-brand" href="/main"><img src="resources/images/kcs.png" height="45px"></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +17,7 @@
 				<div class="dropdown-menu dropdown-menu-left">
 					<a href="/businessPlan" class="dropdown-item">예산 작성</a>
 					<a href="/businessPlanList" class="dropdown-item">예산 목록</a>
+					<a href="/bpReport" class="dropdown-item">예산 보고서</a>
 				</div></li>
 			<li class="dropdown nav-item">
 				<a href="#" class="dropdown-toggle nav-link icon d-flex align-items-center" data-toggle="dropdown">

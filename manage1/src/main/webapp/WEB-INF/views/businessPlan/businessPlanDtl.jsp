@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -46,23 +46,23 @@ td {
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>${data.oppId}</td>
-					<td>${data.projectName}</td>
-					<td>${data.userNum}</td>
-					<td>${data.endUser}</td>
-					<td>${data.customer}</td>
-					<td>${data.expectedSales}</td>
-					<td>${data.expectedPurchase}</td>
-					<td>${data.expectedProfit}</td>
-					<td><fmt:formatDate value="${data.expectedSalesMonth}" pattern="yyyy-MM"/></td>
-					<td>${data.state}</td>
-					<td>${data.note}</td>
-					<td><fmt:formatDate value="${data.regDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-					<td>${data.customerName}</td>
-					<td>${data.customerPhone}</td>
-					<td>${data.customerEmail}</td>
-				</tr>
+					<tr>
+						<td>${data.oppId}</td>
+						<td>${data.projectName}</td>
+						<td>${data.userNum}</td>
+						<td>${data.endUser}</td>
+						<td>${data.customer}</td>
+						<td>${data.expectedSales}</td>
+						<td>${data.expectedPurchase}</td>
+						<td>${data.expectedProfit}</td>
+						<td>${data.expectedSalesMonth}</td>
+						<td>${data.state}</td>
+						<td>${data.note}</td>
+						<td>${CURRENT_TIMESTAMP}</td>
+						<td>${data.customerName}</td>
+						<td>${data.customerPhone}</td>
+						<td>${data.customerEmail}</td>
+					</tr>
 			</tbody>
 		</table>
 		
