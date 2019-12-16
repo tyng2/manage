@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 function report(result) {
 	
-	var output = "<h3>" + result[1].year + "년 분기별 매출 계획</h3>";
+	var output = "<h3>" + result[0].year + "년 분기별 매출 계획</h3>";
 	
 	$("#report").html(output);
 }

@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.manage.mapper.AuthMapper;
 import com.manage.mapper.BusinessPlanMapper;
@@ -196,9 +199,12 @@ public class BusinessPlanController {
 	 
 	 
 	@PostMapping("/bpReport")
+	@ResponseBody
 	public String businessPlanReport(String year, String team, Principal principal, Model model) {
 		System.out.println("<< businessPlan Report, " + year + ", " + team + " >>\n");
 
+		JSONArray jArr = new JSONArray(); 
+		
 		if (principal == null) {
 			return "";
 		}
@@ -220,8 +226,9 @@ public class BusinessPlanController {
 			depName = team;
         }
     	model.addAttribute("depName", depName);
-    	
 		System.out.println("getBPPeriodService : " + depName + " " + year);
+		
+
 		// 1분기의 영업 계획 내용 (부서, 구분, 연도, 분기) < 구분 : (1. 물품, 2. 유지보수, 3. 개발) >
 		List<BusinessPlanVO> list11 = businessPlanService.getBusinessPlanPeriodService(depName, 1, year, 1);
 		List<BusinessPlanVO> list12 = businessPlanService.getBusinessPlanPeriodService(depName, 2, year, 1);
@@ -239,6 +246,21 @@ public class BusinessPlanController {
 		List<BusinessPlanVO> list42 = businessPlanService.getBusinessPlanPeriodService(depName, 2, year, 4);
 		List<BusinessPlanVO> list43 = businessPlanService.getBusinessPlanPeriodService(depName, 3, year, 4);
 
+		JSONObject jObj = new JSONObject();
+		jObj.put("bp11", calcExpectedSales(list11));
+		jObj.put("bp12", calcExpectedSales(list12));
+		jObj.put("bp13", calcExpectedSales(list13));
+		jObj.put("bp21", calcExpectedSales(list21));
+		jObj.put("bp22", calcExpectedSales(list22));
+		jObj.put("bp23", calcExpectedSales(list23));
+		jObj.put("bp31", calcExpectedSales(list31));
+		jObj.put("bp32", calcExpectedSales(list32));
+		jObj.put("bp33", calcExpectedSales(list33));
+		jObj.put("bp41", calcExpectedSales(list41));
+		jObj.put("bp42", calcExpectedSales(list42));
+		jObj.put("bp43", calcExpectedSales(list43));
+		
+		
 		Map<String, Integer> map = new HashMap<>();
 		map.put("bp11", calcExpectedSales(list11));
 		map.put("bp12", calcExpectedSales(list12));
@@ -255,6 +277,9 @@ public class BusinessPlanController {
 
 		year = year.substring(0, 4);
 		model.addAttribute("year", year);
+		jObj.put("year", year);
+		
+		
 
 		String yr = businessPlanMapper.getLastExpectedYearANDMonth(depName, "y", Integer.parseInt(year));
 		String month = businessPlanMapper.getLastExpectedYearANDMonth(depName, "m", Integer.parseInt(year));
@@ -263,11 +288,16 @@ public class BusinessPlanController {
 		if (month != null) {
 			model.addAttribute("yr", yr);
 			model.addAttribute("month", month);
+			jObj.put("yr", yr);
+			jObj.put("month", month);
 		}
 
 		model.addAttribute("bp", map);
-
-		return "businessPlan/businessPlanReport";
+		jArr.put(jObj);
+		System.out.println("jArr : " + jArr);
+		
+//		return "businessPlan/businessPlanReport";
+		return jArr.toString();
 	}
 
 	public int calcExpectedSales(List<BusinessPlanVO> list) {
