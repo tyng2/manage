@@ -49,9 +49,20 @@ public class CostBenefitAnalysisServiceImpl implements CostBenefitAnalysisServic
 	@Override
 	public List<CostBenefitAnalysisVO> getCBAnalysisList() {
 		List<CostBenefitAnalysisVO> list = costBenefitAnalysisMapper.getCBAnalysisList();
-		
-		System.out.println("list :" + list);
-		
+
 		return list;
 	}
+
+	@Override
+	public CostBenefitAnalysisVO CBAnalysisListDtl(String oppId) {		
+		CostBenefitAnalysisVO cba = costBenefitAnalysisMapper.CBAnalysisListDtl(oppId);
+		return cba;
+	}
+
+	@Override
+	public int CBAnalysisUpdate(CostBenefitAnalysisVO c) {
+		
+		return costBenefitAnalysisMapper.CBAnalysisUpdate(c);
+	}
+
 }

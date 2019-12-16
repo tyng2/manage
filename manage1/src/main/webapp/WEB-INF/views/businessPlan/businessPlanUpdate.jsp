@@ -7,28 +7,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
 <script src="/resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {	
-	
-});
+
 </script>
 <title>수정 페이지</title>
-<style>
-tr {
-	background-color: #FFCCCC; 
-}
-td {
-	text-align: center;
-	background-color: #DDDDDD;
-}
-</style>
 </head>
 <body>
-	<form action="/businessPlanUpdate" id="dataForm" method="POST">
-		
-		<table>
-			<thead>
+
+<div class="main-section">
+<jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
+
+<section class="ftco-section pb-0">
+	<div class="container">
+		<div class="row">
+			<form action="/businessPlanUpdate" id="dataForm" method="POST">
+				<input type="hidden" id="page" name="listPage" value="${listPage}" />
+				<table class="table table-light table-hover table-borderless">
+				<thead class="thead-dark">
+
 				<tr>
 					<th>OPPID</th>
 					<th>프로젝트명</th>
@@ -54,7 +54,7 @@ td {
 						<td><input type="text" name="userNum" value="${data.userNum}"></td>
 						<td><input type="text" name="endUser" value="${data.endUser}"></td>
 						<td><input type="text" name="customer" value="${data.customer}"></td>
-						<td><input type="text" name="note" value="${data.expectedSales}"></td>
+						<td><input type="text" name="expectedSales" value="${data.expectedSales}"></td>
 						<td><input type="text" name="expectedPurchase" value="${data.expectedPurchase}"></td>
 						<td><input type="text" name="expectedProfit" value="${data.expectedProfit}"></td>
 						<td><input type="month" name="expectedSalesMonth" value="${data.expectedSalesMonth}"></td>
@@ -72,5 +72,12 @@ td {
 		<a href="#" onclick="history.back();" style="float: right;">돌아가기</a>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
+			</div>
+		</div>
+</section>
+</div>
+
+<jsp:include page="/WEB-INF/views/inc/js.jsp"></jsp:include>	
+
 </body>
 </html>

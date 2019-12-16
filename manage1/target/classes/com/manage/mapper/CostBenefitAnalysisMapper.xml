@@ -4,45 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.manage.mapper.CostBenefitAnalysisMapper">
 
+<!-- 영업관리에서 넘어온 데이터리스트 -->
 	<select id="getCBAnalysis" resultType="BusinessPlanVO">
 		SELECT * FROM manage.BusinessPlanning 
 		WHERE state = 4
 	</select>
 	
-<!-- 	<select id="getCBAnalysisPageList" resultType="CostBenefitAnalysisVO">
-		SELECT * FROM manage.BusinessPlanning
-		<where>
-		<if test="search != null and search != ''">
-			projectName LIKE CONCAT('%', #{search}, '%') 
-		</if>
-		</where>
-		ORDER BY regDate DESC 
-		LIMIT #{amount} OFFSET #{startRow} 
-	</select>
-	
-	<select id="getCBAnalysisPageCount" resultType="int" parameterType="string">
-		SELECT COUNT(*) FROM manage.BusinessPlanning
-		<where>
-		<if test="value != null and value != ''">
-			projectName LIKE CONCAT('%', #{value }, '%') 
-		</if>
-		</where>
-	</select> -->
-	
+<!-- 손익분석 작성시 띄우는 리스트 -->
 	<select id="CBAnalysisDtl" resultType="CostBenefitAnalysisVO">
 		SELECT * FROM manage.BusinessPlanning
 		WHERE oppId = #{oppId};	
 	</select>
 	
-<!-- 	<update id="CBAnalysisRegi">
-		UPDATE manage.CostBenefitAnalysis SET version=#{version}, projectName=#{projectName}, 
-				endUser=#{endUser}, customer=#{customer}, contractDate=#{contractDate},
-				expiredDate=#{expiredDate}, autoExtension=#{autoExtension},	profitSort=#{profitSort},
-				expectedSales=#{expectedSales}, expectedPurchase=#{expectedPurchase},
-				expectedProfit=#{expectedProfit}, exchangeRate=#{exchangeRate}
-		WHERE oppId = #{oppId};
-	</update> -->
-	
+<!-- 손익분석 작성 -->	
 	<insert id="CBAnalysisRegi">
 		INSERT INTO manage.CostBenefitAnalysis
 		(oppId, version, userNum, projectName, endUser, customer, contractDate, expiredDate, autoExtension, profitSort,
@@ -50,10 +24,23 @@
 		VALUES (#{oppId}, 1, #{userNum}, #{projectName}, #{endUser}, #{customer}, #{contractDate}, #{expiredDate}, #{autoExtension},
 				#{profitSort}, #{expectedSales}, #{expectedPurchase}, #{expectedProfit}, #{exchangeRate})
 	</insert>
-	
+
+<!-- 손익분석 리스트 -->	
 	<select id="getCBAnalysisList" resultType="CostBenefitAnalysisVO">
-		SELECT * FROM manage.CostBenefitAnalysis; 
+		SELECT * FROM manage.CostBenefitAnalysis;
 	</select>
+
+ 	<select id="CBAnalysisListDtl" resultType="CostBenefitAnalysisVO">
+		SELECT * FROM manage.CostBenefitAnalysis
+		WHERE oppId = #{oppId}; 
+	</select>
+
 	
+<!-- 손익분석 수정 -->
+	<update id="businessPlanUpdate">
+		UPDATE manage.CostBenefitAnalysis SET projectName=#{projectName}, userNum=#{userNum}, endUser=#{endUser}, customer=#{customer}, contractDate=#{contractDate}, expiredDate=#{expiredDate}, 
+			autoExtension=#{autoExtension}, profitSort=#{profitSort}, expectedSales=#{expectedSales}, expectedPurchase=#{expectedPurchase}, expectedProfit=#{expectedProfit}, exchangeRate=#{exchangeRate}
+		WHERE oppId = #{oppId};
+	</update>
 </mapper>
 
