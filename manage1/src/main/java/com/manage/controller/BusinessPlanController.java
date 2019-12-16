@@ -201,8 +201,9 @@ public class BusinessPlanController {
 		return "businessPlan/businessPlanGetReport";
 	}
 	 
-	 
-	@PostMapping("/bpReport")
+	
+//	@PostMapping("/bpReport")
+	@RequestMapping(value = "/bpReport", method = RequestMethod.POST, produces = "application/text; charset=utf8") // 한글 깨짐으로 인해 이 코드 사용
 	@ResponseBody
 	public String businessPlanReport(@RequestBody BpReportDTO bpr, Principal principal, Model model) {
 		String year = bpr.getYear();
@@ -272,26 +273,8 @@ public class BusinessPlanController {
 		jObj.put("bp42", calcExpectedSales(list42));
 		jObj.put("bp43", calcExpectedSales(list43));
 		
-		
-		Map<String, Integer> map = new HashMap<>();
-		map.put("bp11", calcExpectedSales(list11));
-		map.put("bp12", calcExpectedSales(list12));
-		map.put("bp13", calcExpectedSales(list13));
-		map.put("bp21", calcExpectedSales(list21));
-		map.put("bp22", calcExpectedSales(list22));
-		map.put("bp23", calcExpectedSales(list23));
-		map.put("bp31", calcExpectedSales(list31));
-		map.put("bp32", calcExpectedSales(list32));
-		map.put("bp33", calcExpectedSales(list33));
-		map.put("bp41", calcExpectedSales(list41));
-		map.put("bp42", calcExpectedSales(list42));
-		map.put("bp43", calcExpectedSales(list43));
-
-//		year = year.substring(0, 4);
-		model.addAttribute("year", year);
 		jObj.put("year", year);
-		
-		
+		jObj.put("depName", depName);
 
 		String yr = businessPlanMapper.getLastExpectedYearANDMonth(depName, "y", Integer.parseInt(year));
 		String month = businessPlanMapper.getLastExpectedYearANDMonth(depName, "m", Integer.parseInt(year));
@@ -304,11 +287,9 @@ public class BusinessPlanController {
 			jObj.put("month", month);
 		}
 
-		model.addAttribute("bp", map);
 		jArr.put(jObj);
 		System.out.println("jArr : " + jArr);
 		
-//		return "businessPlan/businessPlanReport";
 		return jArr.toString();
 	}
 
