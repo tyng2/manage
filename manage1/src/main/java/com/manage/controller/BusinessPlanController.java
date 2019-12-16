@@ -26,6 +26,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,6 +38,7 @@ import com.manage.mapper.UserMapper;
 import com.manage.service.BusinessPlanSevice;
 import com.manage.service.paging.IPagingService;
 import com.manage.service.paging.PagingBean;
+import com.manage.vo.BpReportDTO;
 import com.manage.vo.BusinessPlanVO;
 
 import lombok.Setter;
@@ -200,12 +204,20 @@ public class BusinessPlanController {
 	 
 	@PostMapping("/bpReport")
 	@ResponseBody
-	public String businessPlanReport(String year, String team, Principal principal, Model model) {
-		System.out.println("<< businessPlan Report, " + year + ", " + team + " >>\n");
+	public String businessPlanReport(@RequestBody BpReportDTO bpr, Principal principal, Model model) {
+		String year = bpr.getYear();
+		String team = bpr.getTeam();
+		
+		System.out.println("<< businessPlan Report, POST, " + year + ", " + team + " >>\n");
 
 		JSONArray jArr = new JSONArray(); 
 		
 		if (principal == null) {
+			return "";
+		}
+		
+		if (year == null || team == null ) {
+			System.out.println("year or team is null");
 			return "";
 		}
 
@@ -275,7 +287,7 @@ public class BusinessPlanController {
 		map.put("bp42", calcExpectedSales(list42));
 		map.put("bp43", calcExpectedSales(list43));
 
-		year = year.substring(0, 4);
+//		year = year.substring(0, 4);
 		model.addAttribute("year", year);
 		jObj.put("year", year);
 		

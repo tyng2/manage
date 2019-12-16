@@ -2,6 +2,7 @@ package com.manage.security;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,13 +22,19 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     	
     	if ("true".equals(ajaxHeader)) {
     		System.out.println("ajax 접근 : " + ajaxHeader);
-    		return;
+//    		System.out.println(request.getRequestURI());
+//    		System.out.println(request.getMethod());
+//    		
+//    		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getRequestURI());
+//    		dispatcher.forward(request, response);
+
+    	} else {
+    		log.error("Access Denied Handler");
+    		log.error("Redirect....");
+    		
+    		response.sendRedirect("/accessError");
     	}
     	
-    	log.error("Access Denied Handler");
-        log.error("Redirect....");
-        
-        response.sendRedirect("/accessError");
     }
 
 }

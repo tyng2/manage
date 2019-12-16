@@ -15,28 +15,24 @@
 $(document).ready(function() {
 	$("#getReport").click(function() {
 		$getReport = $("#getReport").attr("disabled", "disabled");
-		var year = $("#year").val();
-		var team = $("#team").val();
+		var param = JSON.stringify({
+			year: $("#year").val(),
+			team: $("#team").val()
+		});
 		
-		var param = {
-			"year": year,
-			"team": team
-		};
-		
-		alert(param.year);
-		alert(param.team);
-		
+		alert(param);
 		$.ajax({
 			contentType: "application/json; charset=UTF-8",
-			url: "/bpReport",
-			type: "post",
+			url: "bpReport",
+			type: "POST",
+			dataType: "json",
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("X-Ajax-call", "true");
+// 				xhr.setRequestHeader("X-Ajax-call", "true");
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 			}, // ajax 코드 예외처리 방지
 			data: param,
 			success: function(result) {
-				alert(result);
-				console.log(result);
+				console.log("ajax Success : " + result[0].toString());
 				report(result);
 			}
 			
@@ -72,7 +68,7 @@ function report(result) {
 			<div class="form-group">
 			<select name="year" id="year" class="form-control" required="required">
 				<c:forEach var="year" items="${listYear }">
-					<option>${year }년</option>
+					<option value="${year }">${year }년</option>
 				</c:forEach>
 			</select>
 			</div>
@@ -89,8 +85,9 @@ function report(result) {
 			</c:if>
 			<div class="col-lg-3 col-sm-4">
 				<button type="button" id="getReport" class="btn btn-primary">확인</button>
+				<button class="btn btn-primary">submit버튼</button>
 			</div>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</div>
 		</form>
 		</div>
