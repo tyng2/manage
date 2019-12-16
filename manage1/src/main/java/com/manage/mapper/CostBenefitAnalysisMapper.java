@@ -21,4 +21,8 @@ public interface CostBenefitAnalysisMapper {
 
 	public List<CostBenefitAnalysisVO> getCBAnalysisList();
 
+	public CostBenefitAnalysisVO CBAnalysisListDtl(String oppId);
+
+	public int CBAnalysisUpdate(CostBenefitAnalysisVO c);
+
 }

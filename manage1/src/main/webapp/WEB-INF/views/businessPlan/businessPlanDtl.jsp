@@ -7,15 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-tr {
-	background-color: #FFCCCC; 
-}
-td {
-	text-align: center;
-	background-color: #DDDDDD;
-}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
 <script src="/resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
@@ -23,10 +17,19 @@ td {
 <title>상세 페이지</title>
 </head>
 <body>
-	<form action="/businessPlanDtl" id="dataForm" method="POST">
-		
-		<table>
-			<thead>
+
+<div class="main-section">
+<jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
+
+
+<section class="ftco-section pb-0">
+	<div class="container">
+		<div class="row">
+			<form action="/businessPlanDtl" id="dataForm" method="POST">
+				<input type="hidden" id="page" name="listPage" value="${listPage}" />
+				<table class="table table-light table-hover table-borderless">
+				<thead class="thead-dark">
+
 				<tr>
 					<th>OPPID</th>
 					<th>프로젝트명</th>
@@ -63,6 +66,7 @@ td {
 						<td>${data.customerPhone}</td>
 						<td>${data.customerEmail}</td>
 					</tr>
+				</tbody>
 			</tbody>
 		</table>
 		
@@ -70,6 +74,14 @@ td {
 		<a href="/businessPlanDel?oppId=${data.oppId }">삭제</a>
 		<input type="button" value="목록으로" onclick="location.href='/businessPlanList'" style="float: right;" />
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		
 	</form>
+		</div>
+		</div>
+</section>
+	</div>
+	
+<jsp:include page="/WEB-INF/views/inc/js.jsp"></jsp:include>	
+	
 </body>
 </html>

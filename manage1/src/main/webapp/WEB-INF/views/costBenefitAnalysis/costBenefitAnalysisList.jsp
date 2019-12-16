@@ -54,7 +54,7 @@
 									<c:otherwise>
 										<c:forEach var="data" items="${list}">
 											<tr>
-												<td onclick="location.href='/costBenefitAnalysisRegi?oppId=${data.oppId}'">${data.oppId}</td>
+												<td onclick="location.href='/cbAnalysisListUpdate?oppId=${data.oppId}'">${data.oppId}</td>
 												<td>${data.projectName}</td>
 												<td>${data.userNum}</td>
 												<td>${data.endUser}"</td>
@@ -112,9 +112,6 @@
 								</div>
 							</div>
 
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}"> <a href="#"
-								onclick="history.back();" style="float: right;">돌아가기</a>
 						</form>
 					</div>
 				</div>

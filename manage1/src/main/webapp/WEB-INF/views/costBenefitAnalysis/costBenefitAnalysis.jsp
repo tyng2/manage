@@ -96,9 +96,6 @@
 								</div>
 							</div>
 
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}"> <a href="#"
-								onclick="history.back();" style="float: right;">돌아가기</a>
 						</form>
 					</div>
 				</div>
