@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,28 +16,23 @@
 $(document).ready(function() {
 	$("#getReport").click(function() {
 		$getReport = $("#getReport").attr("disabled", "disabled");
-		var year = $("#year").val();
-		var team = $("#team").val();
-		
-		var param = {
-			"year": year,
-			"team": team
-		};
-		
-		alert(param.year);
-		alert(param.team);
+		var param = JSON.stringify({
+			year: $("#year").val(),
+			team: $("#team").val()
+		});
 		
 		$.ajax({
 			contentType: "application/json; charset=UTF-8",
-			url: "/bpReport",
-			type: "post",
+			url: "bpReport",
+			type: "POST",
+			dataType: "json",
 			beforeSend: function(xhr) {
-				xhr.setRequestHeader("X-Ajax-call", "true");
+// 				xhr.setRequestHeader("X-Ajax-call", "true");
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 			}, // ajax 코드 예외처리 방지
 			data: param,
 			success: function(result) {
-				alert(result);
-				console.log(result);
+				console.log("ajax Success : " + result[0].toString());
 				report(result);
 			}
 			
@@ -48,8 +44,42 @@ $(document).ready(function() {
 
 function report(result) {
 	
-	var output = "<h3>" + result[0].year + "년 분기별 매출 계획</h3>";
+	var output = "<div class='col-md-12 heading-title'>";
+	output += "<h2 style='text-align: center;'>" + result[0].year + "년 분기별 매출 계획</h2>";
 	
+	if (result[0].month != null) {
+		output += "<h3>" + result[0].yr + "년 " + result[0].month + "월 현재</h3>";
+	}
+	
+	output += "<h3>부서 : " + result[0].depName + "(단위:백만원)</h3>";
+	output += "<table class='table table-light table-hover table-borderless'>";
+	output += "<thead class='thead-dark'><tr><th>구분</th><th>1분기</th><th>2분기</th><th>3분기</th><th>4분기</th><th>연간</th></tr></thead>";
+	output += "<tbody>";
+	output += "<tr><th>물품공급부문</th><td id='bp11'>" + result[0].bp11 + "</td>";
+	output += "<td id='bp21'>" + result[0].bp21 + "</td>";
+	output += "<td id='bp31'>" + result[0].bp31 + "</td>";
+	output += "<td id='bp41'>" + result[0].bp41 + "</td>";
+	output += "<td id='bp51'>" + (Number(result[0].bp11) + Number(result[0].bp21) + Number(result[0].bp31) + Number(result[0].bp41)) + "</td></tr>";
+	output += "<tr><th>개발용역부문</th><td id='bp12'>" + result[0].bp12 + "</td>";
+	output += "<td id='bp22'>" + result[0].bp22 + "</td>";
+	output += "<td id='bp32'>" + result[0].bp32 + "</td>";
+	output += "<td id='bp42'>" + result[0].bp42 + "</td>";
+	output += "<td id='bp52'>" + (Number(result[0].bp12) + Number(result[0].bp22) + Number(result[0].bp32) + Number(result[0].bp42)) + "</td></tr>";
+	output += "<tr><th>유지보수부문</th><td id='bp13'>" + result[0].bp13 + "</td>";
+	output += "<td id='bp23'>" + result[0].bp21 + "</td>";
+	output += "<td id='bp33'>" + result[0].bp31 + "</td>";
+	output += "<td id='bp43'>" + result[0].bp41 + "</td>";
+	output += "<td id='bp53'>" + (Number(result[0].bp13) + Number(result[0].bp23) + Number(result[0].bp33) + Number(result[0].bp43)) + "</td></tr>";
+	output += "<tr><th>합계</th><td>" + (Number(result[0].bp11) + Number(result[0].bp12) + Number(result[0].bp13)) + "</td>";
+	output += "<td>" + (Number(result[0].bp21) + Number(result[0].bp22) + Number(result[0].bp23)) + "</td>";
+	output += "<td>" + (Number(result[0].bp31) + Number(result[0].bp32) + Number(result[0].bp33)) + "</td>";
+	output += "<td>" + (Number(result[0].bp41) + Number(result[0].bp42) + Number(result[0].bp43)) + "</td>";
+	output += "<td>" + (Number(result[0].bp11) + Number(result[0].bp12) + Number(result[0].bp13) 
+			+ Number(result[0].bp21) + Number(result[0].bp22) + Number(result[0].bp23) 
+			+ Number(result[0].bp31) + Number(result[0].bp32) + Number(result[0].bp33) 
+			+ Number(result[0].bp41) + Number(result[0].bp42) + Number(result[0].bp43)) + "</td></tr></tbody></table></div>";
+	
+	console.log(result[0].depName);
 	$("#report").html(output);
 }
 </script>
@@ -59,7 +89,6 @@ function report(result) {
 <div class="main-section">
 <jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 
-	
 <section class="ftco-section pb-0">
 <div class="container">
 	<div class="row">
@@ -67,18 +96,18 @@ function report(result) {
 		<h2 class="heading-section">예산 보고서 확인</h2><br><br>
 
 		<form action="/bpReport" method="POST">
-		<div class="row" style="margin-bottom: 5rem;">
-			<div class="col-lg-4 col-sm-4">
+		<div class="row mb-5rem">
+			<div class="col-lg-3 col-sm-3">
 			<div class="form-group">
 			<select name="year" id="year" class="form-control" required="required">
 				<c:forEach var="year" items="${listYear }">
-					<option>${year }년</option>
+					<option value="${year }">${year }년</option>
 				</c:forEach>
 			</select>
 			</div>
 			</div>
 			<c:if test="${select != null }">
-			<div class="col-lg-4 col-sm-4">
+			<div class="col-lg-3 col-sm-3">
 			<div class="form-group">
 				<select name="team" id="team" class="form-control">
 					<option>영업 1팀</option>
@@ -87,15 +116,17 @@ function report(result) {
 			</div>
 			</div>
 			</c:if>
-			<div class="col-lg-3 col-sm-4">
+			<div class="col-lg-3 col-sm-3">
 				<button type="button" id="getReport" class="btn btn-primary">확인</button>
 			</div>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</div>
 		</form>
 		</div>
 	</div>
+	<div class="container">
 	<div class="row" id="report"></div>
+	</div>
 </div>
 </section>
 

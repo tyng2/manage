@@ -2,6 +2,10 @@ body {
 	font-family: "Open Sans", 'Nanum Gothic', sans-serif;
 }
 
+.mb-5rem {
+	margin-bottom: 5rem !important;
+}
+
 
 .ftco-navbar-light-nonAbsolute {
   background: #000 !important;

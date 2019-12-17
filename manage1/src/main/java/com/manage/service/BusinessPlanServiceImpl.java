@@ -103,7 +103,7 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 
 	@Override
 	public List<BusinessPlanVO> getBusinessPlanPeriodService(String roleName, int sort1, String year, int quarter) {
-		year = year.substring(0, 4);
+//		year = year.substring(0, 4);
 		StringBuilder month1 = new StringBuilder();
 		StringBuilder month2 = new StringBuilder();
 		month1.append(year).append("-");
