@@ -12,21 +12,21 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 <!-- 	인터넷 접속 안될 때 -->	
- 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+<!--  	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
     	<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
     	<property name="jdbcUrl" value="jdbc:mariadb://127.0.0.1:3306/manage" />
     	<property name="username" value="root" />
     	<property name="password" value="root" />
-    </bean>
+    </bean> -->
+    
 <!--     인터넷 접속 안될 때 -->
     
-<!-- 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
->>>>>>> branch 'master' of https://github.com/QWERvTY/manage.git
+ 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
     	<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
     	<property name="jdbcUrl" value="jdbc:mariadb://211.236.162.32:3307/manage" />
     	<property name="username" value="root" />
     	<property name="password" value="" />
-    </bean> -->
+    </bean>
     
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig"/>
