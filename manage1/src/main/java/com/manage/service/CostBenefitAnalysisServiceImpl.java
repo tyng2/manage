@@ -18,8 +18,8 @@ public class CostBenefitAnalysisServiceImpl implements CostBenefitAnalysisServic
 	private CostBenefitAnalysisMapper costBenefitAnalysisMapper;
 
 	@Override
-	public List<BusinessPlanVO> getCBAnalysis(String oppId) {
-		List<BusinessPlanVO> list = costBenefitAnalysisMapper.getCBAnalysis(oppId);
+	public List<BusinessPlanVO> getCBAnalysis(String search, int amount, int startRow) {
+		List<BusinessPlanVO> list = costBenefitAnalysisMapper.getCBAnalysis(search, amount, startRow);
 		
 		return list;
 	}
@@ -42,15 +42,9 @@ public class CostBenefitAnalysisServiceImpl implements CostBenefitAnalysisServic
 	}
 
 	@Override
-	public List<CostBenefitAnalysisVO> getCBAnalysisPageList(String search, int amount, int startRow) {
-		return costBenefitAnalysisMapper.getCBAnalysisPageList(search, amount, startRow);
-	}
+	public List<CostBenefitAnalysisVO> getCBAnalysisList(String search, int amount, int startRow) {
 
-	@Override
-	public List<CostBenefitAnalysisVO> getCBAnalysisList() {
-		List<CostBenefitAnalysisVO> list = costBenefitAnalysisMapper.getCBAnalysisList();
-
-		return list;
+		return costBenefitAnalysisMapper.getCBAnalysisList(search, amount, startRow);
 	}
 
 	@Override

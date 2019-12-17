@@ -42,5 +42,15 @@
 			autoExtension=#{autoExtension}, profitSort=#{profitSort}, expectedSales=#{expectedSales}, expectedPurchase=#{expectedPurchase}, expectedProfit=#{expectedProfit}, exchangeRate=#{exchangeRate}
 		WHERE oppId = #{oppId};
 	</update>
+	
+<!-- 카운트 -->
+	<select id="getCBAnalysisPageCount" resultType="int" parameterType="string">
+	SELECT COUNT(*) FROM manage.CostBenefitAnalysis
+	<where>
+		<if test="value != null and value != ''">
+			projectName LIKE CONCAT('%', #{value }, '%') 
+		</if>
+	</where>
+</select>
 </mapper>
 
