@@ -119,26 +119,27 @@ public class CostBenefitAnalysisController {
 
 	
 // 손익분석 업데이트	
-	@GetMapping("/cbAnalysisListUpdate")
-	public String cbAnalysisListUpdate(String oppId, Model model, HttpSession session) {
+	@GetMapping("/costBenefitAnalysisUpdate")
+	public String costBenefitAnalysisUpdate(String oppId, Model model, HttpSession session) {
 
 		CostBenefitAnalysisVO list = costBenefitAnalysisService.CBAnalysisListDtl(oppId);
 		
 		model.addAttribute("data", list);
 		
-		return "costBenefitAnalysis/cbAnalysisListUpdate";
+		return "costBenefitAnalysis/costBenefitAnalysisUpdate";
 	}
 	
 	
-	@PostMapping("/cbAnalysisListUpdate")
-	public ResponseEntity<String> cbAnalysisListUpdate(CostBenefitAnalysisVO c, Model model) {
+	@PostMapping("/costBenefitAnalysisUpdate")
+	public ResponseEntity<String> costBenefitAnalysisUpdate(CostBenefitAnalysisVO c, Model model) {
 		System.out.println("<< cbAnalysisList Update, POST >>\n");
 		
 		HttpHeaders headers = new HttpHeaders();
 		
 		costBenefitAnalysisService.CBAnalysisUpdate(c);
 		
-		return new ResponseEntity<String>(headers, HttpStatus.OK);
+		headers.add("Location", "/cbAnalysisList");
+		return new ResponseEntity<String>(headers, HttpStatus.FOUND);
 	}
 	
 }

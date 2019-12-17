@@ -25,7 +25,7 @@ $(document).ready(function() {
 <title>손익 분석 수정</title>
 </head>
 <body>
-	<form action="/cbAnalysisListUpdate" id="dataForm" method="POST">
+	<form action="/costBenefitAnalysisUpdate" id="dataForm" method="POST">
 		
 		<table>
 			<thead>

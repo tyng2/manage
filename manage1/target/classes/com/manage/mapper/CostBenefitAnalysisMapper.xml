@@ -37,8 +37,8 @@
 
 	
 <!-- 손익분석 수정 -->
-	<update id="businessPlanUpdate">
-		UPDATE manage.CostBenefitAnalysis SET projectName=#{projectName}, userNum=#{userNum}, endUser=#{endUser}, customer=#{customer}, contractDate=#{contractDate}, expiredDate=#{expiredDate}, 
+	<update id="CBAnalysisUpdate">
+		UPDATE manage.CostBenefitAnalysis SET version=#{version}, projectName=#{projectName}, userNum=#{userNum}, endUser=#{endUser}, customer=#{customer}, contractDate=#{contractDate}, expiredDate=#{expiredDate}, 
 			autoExtension=#{autoExtension}, profitSort=#{profitSort}, expectedSales=#{expectedSales}, expectedPurchase=#{expectedPurchase}, expectedProfit=#{expectedProfit}, exchangeRate=#{exchangeRate}
 		WHERE oppId = #{oppId};
 	</update>
