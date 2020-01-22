@@ -54,7 +54,7 @@
 									<c:otherwise>
 										<c:forEach var="data" items="${list}">
 											<tr>
-												<td onclick="location.href='/cbAnalysisListUpdate?oppId=${data.oppId}'">${data.oppId}</td>
+												<td onclick="location.href='/costBenefitAnalysisUpdate?oppId=${data.oppId}'">${data.oppId}</td>
 												<td>${data.projectName}</td>
 												<td>${data.userNum}</td>
 												<td>${data.endUser}"</td>
