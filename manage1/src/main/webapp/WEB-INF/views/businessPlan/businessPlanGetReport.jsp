@@ -11,6 +11,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
+<style>
+#reportContent {
+	padding-bottom: 40px;
+}
+</style>
 <script src="/resources/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -44,12 +49,12 @@ $(document).ready(function() {
 
 function report(result) {
 	
-	var output = "<div class='col-md-12 heading-title'>";
-	output += "<h2 style='text-align: center;'>" + result[0].year + "년 분기별 매출 계획</h2>";
+	var output = "<div id='reportContent' class='col-md-12 heading-title'>";
 	
 	if (result[0].month != null) { // 해당 년도 해당 부서의 매출 계획이 존재하는 경우
-		output += "<h3>" + result[0].yr + "년 " + result[0].month + "월 현재</h3>";
-		output += "<h3>부서 : " + result[0].depName + "(단위:백만원)</h3>";
+		output += "<h2 style='text-align: center; padding: 20px 0 20px 0;'>" + result[0].year + "년 분기별 매출 계획</h2>";
+		output += "<h5>" + result[0].yr + "년 " + result[0].month + "월 현재</h5>";
+		output += "<h5>부서 : " + result[0].depName + "(단위:백만원)</h5>";
 		output += "<table class='table table-light table-hover table-borderless'>";
 		output += "<thead class='thead-dark'><tr><th>구분</th><th>1분기</th><th>2분기</th><th>3분기</th><th>4분기</th><th>연간</th></tr></thead>";
 		output += "<tbody>";
@@ -77,7 +82,7 @@ function report(result) {
 			+ Number(result[0].bp31) + Number(result[0].bp32) + Number(result[0].bp33) 
 			+ Number(result[0].bp41) + Number(result[0].bp42) + Number(result[0].bp43)) + "</td></tr></tbody></table></div><br><br>";
 	} else { // 해당 년도 해당 부서의 매출 계획이 없는 경우
-		output += "<h3>작성된 매출 계획이 없습니다.</h3></div>";
+		output += "<<h2 style='text-align: center; padding: 20px 0 20px 0;'>작성된 매출 계획이 없습니다.</h2></div>";
 	}
 	
 	console.log(result[0].depName);
