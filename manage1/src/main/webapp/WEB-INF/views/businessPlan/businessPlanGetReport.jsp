@@ -80,7 +80,7 @@ function report(result) {
 		output += "<td>" + (Number(result[0].bp11) + Number(result[0].bp12) + Number(result[0].bp13) 
 			+ Number(result[0].bp21) + Number(result[0].bp22) + Number(result[0].bp23) 
 			+ Number(result[0].bp31) + Number(result[0].bp32) + Number(result[0].bp33) 
-			+ Number(result[0].bp41) + Number(result[0].bp42) + Number(result[0].bp43)) + "</td></tr></tbody></table></div><br><br>";
+			+ Number(result[0].bp41) + Number(result[0].bp42) + Number(result[0].bp43)) + "</td></tr></tbody></table></div>";
 	} else { // 해당 년도 해당 부서의 매출 계획이 없는 경우
 		output += "<h2 style='text-align: center; padding: 20px 0 20px 0;'>작성된 매출 계획이 없습니다.</h2></div>";
 	}
