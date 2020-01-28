@@ -104,7 +104,7 @@ public class BusinessPlanController {
         String roleName = roleName(roleNames);
 		
 		
-        if ("마케팅".equals(roleName) || "이사".equals(roleName)) {
+        if ("마케팅".equals(roleName) || "대표이사".equals(roleName)) {
         	model.addAttribute("select", roleName);
         }
         
@@ -191,7 +191,7 @@ public class BusinessPlanController {
         String roleName = roleName(roleNames);
 		
 		
-        if ("마케팅".equals(roleName) || "이사".equals(roleName)) {
+        if ("마케팅".equals(roleName) || "대표이사".equals(roleName)) {
         	model.addAttribute("select", roleName);
         }
 		
@@ -217,10 +217,11 @@ public class BusinessPlanController {
 			return "";
 		}
 		
-		if (year == null || team == null ) {
-			System.out.println("year or team is null");
+		if (year == null ) {
+			System.out.println("year is null");
 			return "";
 		}
+		
 
 //		로그인 한 아이디의 권한 가져오기
 		List<String> roleNames = new ArrayList<>();
@@ -235,12 +236,16 @@ public class BusinessPlanController {
 
 		String depName = roleName(roleNames);
 		System.out.println("String " + depName);
-		if ("마케팅".equals(depName) || "이사".equals(depName)) {
+		if ("마케팅".equals(depName) || "대표이사".equals(depName)) {
 			depName = team;
         }
     	model.addAttribute("depName", depName);
 		System.out.println("getBPPeriodService : " + depName + " " + year);
 		
+		if (team == null) {
+			System.out.println("team is null");
+			team = depName;
+		}
 
 		// 1분기의 영업 계획 내용 (부서, 구분, 연도, 분기) < 구분 : (1. 물품, 2. 유지보수, 3. 개발) >
 		List<BusinessPlanVO> list11 = businessPlanService.getBusinessPlanPeriodService(depName, 1, year, 1);
@@ -373,7 +378,7 @@ public class BusinessPlanController {
 		} else if (list.get(0).equals("ROLE_MARKETING")) {
 			depName = "마케팅";
 		} else if (list.get(0).equals("ROLE_CEO")) {
-			depName = "이사";
+			depName = "대표이사";
 		}
 
 		System.out.println(depName);
