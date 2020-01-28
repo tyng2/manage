@@ -34,7 +34,7 @@
 <div class="container">
 	<div class="row">
 	<div class="col-lg-6 col-md-6 ml-auto mr-auto" style="border: 1px solid #BBB;">
-		s<div class="card card-login py-4">
+		<div class="card card-login py-4">
 			<form class="form-login" action="/login" method="POST">
 				<div class="card-header card-header-primary text-center">
 				<h4 class="card-title">
