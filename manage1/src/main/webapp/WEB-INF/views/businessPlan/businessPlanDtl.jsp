@@ -67,9 +67,9 @@
 			</tbody>
 		</table>
 		
-		<br><input type="button" value="수정" onclick="location.href='/businessPlanUpdate?oppId=${data.oppId}'" />
-		<a href="/businessPlanDel?oppId=${data.oppId }">삭제</a>
-		<input type="button" value="목록으로" onclick="location.href='/businessPlanList'" style="float: right;" />
+		<br><input type="button" class="btn btn-outline-primary" value="수정" onclick="location.href='/businessPlanUpdate?oppId=${data.oppId}'" />
+		<input type="button" class="btn btn-outline-primary" value="삭제" onclick="location.href='/businessPlanDel?oppId=${data.oppId }'"/>
+		<input type="button" class="btn btn-outline-primary" value="목록으로" onclick="location.href='/businessPlanList'" style="float: right;" />
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		
 	</form>
