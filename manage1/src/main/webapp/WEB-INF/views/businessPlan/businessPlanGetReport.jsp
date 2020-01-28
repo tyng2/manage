@@ -11,11 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
-<style>
-#reportContent {
-	padding-bottom: 40px;
-}
-</style>
 <script src="/resources/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -49,7 +44,7 @@ $(document).ready(function() {
 
 function report(result) {
 	
-	var output = "<div id='reportContent' class='col-md-12 heading-title'>";
+	var output = "<div class='col-md-12 heading-title bp40'>";
 	
 	if (result[0].month != null) { // 해당 년도 해당 부서의 매출 계획이 존재하는 경우
 		output += "<h2 style='text-align: center; padding: 20px 0 20px 0;'>" + result[0].year + "년 분기별 매출 계획</h2>";

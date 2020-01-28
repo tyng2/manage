@@ -19,7 +19,7 @@
 <jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 
 	
-<section class="ftco-section pb-0">
+<section class="ftco-section">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 heading-title">
