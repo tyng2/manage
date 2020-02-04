@@ -30,10 +30,10 @@
 </sec:authorize>
 <div class="main-section">
 
-<section class="mn-section mn-section-2 section-signup page-header img" style="background-image: url(resources/images/bg_2.jpg);">
+<section class="mn-section mn-section-2 section-signup page-header img">
 <div class="container">
 	<div class="row">
-	<div class="col-lg-6 col-md-6 ml-auto mr-auto">
+	<div class="col-lg-6 col-md-6 ml-auto mr-auto" style="border: 1px solid #BBB;">
 		<div class="card card-login py-4">
 			<form class="form-login" action="/login" method="POST">
 				<div class="card-header card-header-primary text-center">

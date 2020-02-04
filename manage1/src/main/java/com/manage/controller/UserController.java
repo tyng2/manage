@@ -45,7 +45,7 @@ public class UserController {
 		StringBuffer auth = new StringBuffer();
 		auth.append("ROLE_");
 		
-		if ("이사".equals(userVO.getPosition())) {
+		if ("대표이사".equals(userVO.getPosition())) {
 			auth.append("CEO");
 		} else if ("영업 1팀".equals(userVO.getDepartment())) {
 			

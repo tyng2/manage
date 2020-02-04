@@ -71,7 +71,7 @@
 						<option>부장</option>
 						<option>팀장</option>
 						<option>상무</option>
-						<option>이사</option>
+						<option>대표이사</option>
 					</select>
 					<label class="form-control-placeholder" for="position">직급</label>			
 				</div>

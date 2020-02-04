@@ -22,6 +22,36 @@ body {
 	padding: 0.5rem 4rem 1rem 4rem !important;
 }
 
+.bp40 {
+	padding-bottom: 40px;
+}
+
+
+
+
+        
+.user {
+	color: #FFF;
+	text-decoration: blink;
+}
+.userId {
+
+}
+
+#logout {
+	text-decoration: none;
+	color: #FFF;
+}
+        
+        
+
+
+
+
+
+
+
+
 .mn-section {
   padding: 4em 0; }
   .mn-section.mn-section-2 {
@@ -193,20 +223,6 @@ body {
         background: transparent;
         color: #000; }
         
-        
-.user {
-	color: #FFF;
-	text-decoration: blink;
-}
-.userId {
 
-}
-
-#logout {
-	text-decoration: none;
-	color: #FFF;
-}
-        
-        
 
 	

@@ -44,40 +44,43 @@ $(document).ready(function() {
 
 function report(result) {
 	
-	var output = "<div class='col-md-12 heading-title'>";
-	output += "<h2 style='text-align: center;'>" + result[0].year + "년 분기별 매출 계획</h2>";
+	var date = new Date();
+	var output = "<div class='col-md-12 heading-title bp40'><hr>";
 	
-	if (result[0].month != null) {
-		output += "<h3>" + result[0].yr + "년 " + result[0].month + "월 현재</h3>";
-	}
-	
-	output += "<h3>부서 : " + result[0].depName + "(단위:백만원)</h3>";
-	output += "<table class='table table-light table-hover table-borderless'>";
-	output += "<thead class='thead-dark'><tr><th>구분</th><th>1분기</th><th>2분기</th><th>3분기</th><th>4분기</th><th>연간</th></tr></thead>";
-	output += "<tbody>";
-	output += "<tr><th>물품공급부문</th><td id='bp11'>" + result[0].bp11 + "</td>";
-	output += "<td id='bp21'>" + result[0].bp21 + "</td>";
-	output += "<td id='bp31'>" + result[0].bp31 + "</td>";
-	output += "<td id='bp41'>" + result[0].bp41 + "</td>";
-	output += "<td id='bp51'>" + (Number(result[0].bp11) + Number(result[0].bp21) + Number(result[0].bp31) + Number(result[0].bp41)) + "</td></tr>";
-	output += "<tr><th>개발용역부문</th><td id='bp12'>" + result[0].bp12 + "</td>";
-	output += "<td id='bp22'>" + result[0].bp22 + "</td>";
-	output += "<td id='bp32'>" + result[0].bp32 + "</td>";
-	output += "<td id='bp42'>" + result[0].bp42 + "</td>";
-	output += "<td id='bp52'>" + (Number(result[0].bp12) + Number(result[0].bp22) + Number(result[0].bp32) + Number(result[0].bp42)) + "</td></tr>";
-	output += "<tr><th>유지보수부문</th><td id='bp13'>" + result[0].bp13 + "</td>";
-	output += "<td id='bp23'>" + result[0].bp21 + "</td>";
-	output += "<td id='bp33'>" + result[0].bp31 + "</td>";
-	output += "<td id='bp43'>" + result[0].bp41 + "</td>";
-	output += "<td id='bp53'>" + (Number(result[0].bp13) + Number(result[0].bp23) + Number(result[0].bp33) + Number(result[0].bp43)) + "</td></tr>";
-	output += "<tr><th>합계</th><td>" + (Number(result[0].bp11) + Number(result[0].bp12) + Number(result[0].bp13)) + "</td>";
-	output += "<td>" + (Number(result[0].bp21) + Number(result[0].bp22) + Number(result[0].bp23)) + "</td>";
-	output += "<td>" + (Number(result[0].bp31) + Number(result[0].bp32) + Number(result[0].bp33)) + "</td>";
-	output += "<td>" + (Number(result[0].bp41) + Number(result[0].bp42) + Number(result[0].bp43)) + "</td>";
-	output += "<td>" + (Number(result[0].bp11) + Number(result[0].bp12) + Number(result[0].bp13) 
+	if (result[0].month != null) { // 해당 년도 해당 부서의 매출 계획이 존재하는 경우
+		output += "<h2 style='text-align: center; padding: 5rem 0 2rem 0;'>" + result[0].year + "년 분기별 매출 계획</h2>";
+// 		output += "<h5>" + result[0].yr + "년 " + result[0].month + "월 현재</h5>";
+		output += "<h5>" + date.getFullYear() + "년 " + (date.getMonth() + 1) + "월 현재</h5>";
+		output += "<h5>부서 : " + result[0].depName + "</h5><h5 style='float: right;'>(단위:백만원)</h5>";
+		output += "<table class='table table-light table-hover table-borderless'>";
+		output += "<thead class='thead-dark'><tr><th>구분</th><th>1분기</th><th>2분기</th><th>3분기</th><th>4분기</th><th>연간</th></tr></thead>";
+		output += "<tbody>";
+		output += "<tr><th>물품공급부문</th><td id='bp11'>" + result[0].bp11 + "</td>";
+		output += "<td id='bp21'>" + result[0].bp21 + "</td>";
+		output += "<td id='bp31'>" + result[0].bp31 + "</td>";
+		output += "<td id='bp41'>" + result[0].bp41 + "</td>";
+		output += "<td id='bp51'>" + (Number(result[0].bp11) + Number(result[0].bp21) + Number(result[0].bp31) + Number(result[0].bp41)) + "</td></tr>";
+		output += "<tr><th>개발용역부문</th><td id='bp12'>" + result[0].bp12 + "</td>";
+		output += "<td id='bp22'>" + result[0].bp22 + "</td>";
+		output += "<td id='bp32'>" + result[0].bp32 + "</td>";
+		output += "<td id='bp42'>" + result[0].bp42 + "</td>";
+		output += "<td id='bp52'>" + (Number(result[0].bp12) + Number(result[0].bp22) + Number(result[0].bp32) + Number(result[0].bp42)) + "</td></tr>";
+		output += "<tr><th>유지보수부문</th><td id='bp13'>" + result[0].bp13 + "</td>";
+		output += "<td id='bp23'>" + result[0].bp21 + "</td>";
+		output += "<td id='bp33'>" + result[0].bp31 + "</td>";
+		output += "<td id='bp43'>" + result[0].bp41 + "</td>";
+		output += "<td id='bp53'>" + (Number(result[0].bp13) + Number(result[0].bp23) + Number(result[0].bp33) + Number(result[0].bp43)) + "</td></tr>";
+		output += "<tr><th>합계</th><td>" + (Number(result[0].bp11) + Number(result[0].bp12) + Number(result[0].bp13)) + "</td>";
+		output += "<td>" + (Number(result[0].bp21) + Number(result[0].bp22) + Number(result[0].bp23)) + "</td>";
+		output += "<td>" + (Number(result[0].bp31) + Number(result[0].bp32) + Number(result[0].bp33)) + "</td>";
+		output += "<td>" + (Number(result[0].bp41) + Number(result[0].bp42) + Number(result[0].bp43)) + "</td>";
+		output += "<td>" + (Number(result[0].bp11) + Number(result[0].bp12) + Number(result[0].bp13) 
 			+ Number(result[0].bp21) + Number(result[0].bp22) + Number(result[0].bp23) 
 			+ Number(result[0].bp31) + Number(result[0].bp32) + Number(result[0].bp33) 
 			+ Number(result[0].bp41) + Number(result[0].bp42) + Number(result[0].bp43)) + "</td></tr></tbody></table></div>";
+	} else { // 해당 년도 해당 부서의 매출 계획이 없는 경우
+		output += "<h2 style='text-align: center; padding: 20px 0 20px 0;'>작성된 매출 계획이 없습니다.</h2></div>";
+	}
 	
 	console.log(result[0].depName);
 	$("#report").html(output);
