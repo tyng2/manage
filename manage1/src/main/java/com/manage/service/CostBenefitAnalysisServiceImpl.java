@@ -43,7 +43,7 @@ public class CostBenefitAnalysisServiceImpl implements CostBenefitAnalysisServic
 
 	@Override
 	public List<CostBenefitAnalysisVO> getCBAnalysisList(String search, int amount, int startRow) {
-
+		
 		return costBenefitAnalysisMapper.getCBAnalysisList(search, amount, startRow);
 	}
 

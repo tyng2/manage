@@ -57,15 +57,15 @@
 												<td onclick="location.href='/costBenefitAnalysisUpdate?oppId=${data.oppId}'">${data.oppId}</td>
 												<td>${data.projectName}</td>
 												<td>${data.userNum}</td>
-												<td>${data.endUser}"</td>
+												<td>${data.endUser}</td>
 												<td>${data.customer}</td>
-												<td>${data.contractDate}"</td>
-												<td>${data.expiredDate}"</td>
-												<td>${data.autoExtension}"</td>
-												<td>${data.profitSort}"></td>
-												<td>${data.expectedSales}"</td>
-												<td>${data.expectedPurchase}"</td>
-												<td>${data.expectedProfit}"</td>
+												<td>${data.contractDate}</td>
+												<td>${data.expiredDate}</td>
+												<td>${data.autoExtension}</td>
+												<td>${data.profitSort}</td>
+												<td>${data.expectedSales}</td>
+												<td>${data.expectedPurchase}</td>
+												<td>${data.expectedProfit}</td>
 												<td>${data.exchangeRate}</td>
 											</tr>
 										</c:forEach>
