@@ -64,6 +64,43 @@ public class BusinessPlanController {
 	@Setter(onMethod_= @Autowired)
 	private UserMapper userMapper;
 	
+	
+	
+	
+// 로그인 한 아이디의 권한 리스트 가져오기
+	@SuppressWarnings("unchecked")
+	public static List<String> getAuthUser() {
+		List<String> roleNames = new ArrayList<>();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Collection<GrantedAuthority> collection = (Collection<GrantedAuthority>) auth.getAuthorities();
+        
+        for (GrantedAuthority authority : collection) {
+            roleNames.add(authority.getAuthority());
+        }
+        System.out.println("권한 : " + roleNames);
+       
+		return roleNames;
+	}
+	
+// 권한리스트로 해당 권한 이름 찾기
+	public static String roleName(List<String> list) {
+		String depName = null;
+		if (list.get(0).equals("ROLE_SALES1") || list.get(0).equals("ROLE_DIRECTOR1")) {
+			depName = "영업 1팀";
+		} else if (list.get(0).equals("ROLE_SALES2") || list.get(0).equals("ROLE_DIRECTOR2")) {
+			depName = "영업 2팀";
+		} else if (list.get(0).equals("ROLE_MARKETING")) {
+			depName = "마케팅";
+		} else if (list.get(0).equals("ROLE_CEO")) {
+			depName = "대표이사";
+		}
+
+		System.out.println(depName);
+		return depName;
+	}
+	
+	
+	
 //	POST 방식으로 businessPlan 주소 접근 시 예산 작성 처리
 	@PostMapping("/businessPlan")
 	public ResponseEntity<String> addBusinessPlan(BusinessPlanVO businessPlanVO, Model model) {
@@ -92,17 +129,7 @@ public class BusinessPlanController {
 		System.out.println("param : " + userNum + " " + pageNum + " " + search);
 		
 //		로그인 한 아이디의 권한 가져오기
-		List<String> roleNames = new ArrayList<>();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Collection<GrantedAuthority> collection 
-            = (Collection<GrantedAuthority>) auth.getAuthorities();
-        
-        for (GrantedAuthority authority : collection) {
-            roleNames.add(authority.getAuthority());
-        }
-        System.out.println("권한 : " + roleNames);
-        String roleName = roleName(roleNames);
-		
+        String roleName = roleName(getAuthUser());
 		
         if ("마케팅".equals(roleName) || "대표이사".equals(roleName)) {
         	model.addAttribute("select", roleName);
@@ -180,15 +207,7 @@ public class BusinessPlanController {
 		}
 		
 //		로그인 한 아이디의 권한 가져오기
-		List<String> roleNames = new ArrayList<>();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Collection<GrantedAuthority> collection = (Collection<GrantedAuthority>) auth.getAuthorities();
-        
-        for (GrantedAuthority authority : collection) {
-            roleNames.add(authority.getAuthority());
-        }
-        System.out.println("권한 : " + roleNames);
-        String roleName = roleName(roleNames);
+		String roleName = roleName(getAuthUser());
 		
 		
         if ("마케팅".equals(roleName) || "대표이사".equals(roleName)) {
@@ -222,20 +241,12 @@ public class BusinessPlanController {
 			return "";
 		}
 		
-
-//		로그인 한 아이디의 권한 가져오기
-		List<String> roleNames = new ArrayList<>();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Collection<GrantedAuthority> collection = (Collection<GrantedAuthority>) auth.getAuthorities();
-
-		for (GrantedAuthority authority : collection) {
-			roleNames.add(authority.getAuthority());
-		}
-		System.out.println("권한 : " + roleNames);
 		System.out.println("year : " + year);
 
-		String depName = roleName(roleNames);
+//		로그인 한 아이디의 권한 가져오기
+		String depName = roleName(getAuthUser());
 		System.out.println("String " + depName);
+		
 		if ("마케팅".equals(depName) || "대표이사".equals(depName)) {
 			depName = team;
         }
@@ -366,22 +377,6 @@ public class BusinessPlanController {
 	        return;
 	    }
 	  
-	public String roleName(List<String> list) {
-		String depName = null;
-		if (list.get(0).equals("ROLE_SALES1") || list.get(0).equals("ROLE_DIRECTOR1")) {
-			depName = "영업 1팀";
-		} else if (list.get(0).equals("ROLE_SALES2") || list.get(0).equals("ROLE_DIRECTOR2")) {
-			depName = "영업 2팀";
-		} else if (list.get(0).equals("ROLE_MARKETING")) {
-			depName = "마케팅";
-		} else if (list.get(0).equals("ROLE_CEO")) {
-			depName = "대표이사";
-		}
-
-		System.out.println(depName);
-		return depName;
-	}
-
 	@PostMapping("/bpReport/Detail")
 	public String businessPlanReportDetail() {
 

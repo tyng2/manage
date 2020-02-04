@@ -3,9 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <sec:authorize access="isAnonymous()">
-<script>
-location.href="/";
-</script>
+	<script>location.href="/";</script>
 </sec:authorize>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-info ftco-navbar-custom" id="ftco-navbar">
 <div class="container">
