@@ -23,5 +23,5 @@ public interface BusinessPlanSevice {
 	public List<BusinessPlanVO> getBusinessPlanList(String startCnt, String endCnt);
 	
 	
-	public List<BusinessPlanVO> getBusinessPlanPageList(String search, int amount, int startRow);
+	public List<BusinessPlanVO> getBusinessPlanPageList(String search, String userNum, int amount, int startRow);
 }

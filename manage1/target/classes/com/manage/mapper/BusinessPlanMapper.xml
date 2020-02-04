@@ -12,10 +12,16 @@
 	
 	
 	<select id="getBusinessPlanPageList" resultType="businessPlanVO">
-		SELECT * FROM manage.BusinessPlanning
+		SELECT * FROM 
+		(SELECT * FROM manage.BusinessPlanning
 		<where>
 		<if test="search != null and search != ''">
-			projectName LIKE CONCAT('%', #{search}, '%') 
+		projectName LIKE CONCAT('%', #{search}, '%')
+		</if>
+		</where>) bp
+		<where>
+		<if test="userNum != null and userNum != ''">
+			userNum = #{userNum}
 		</if>
 		</where>
 		ORDER BY regDate DESC 
@@ -23,13 +29,19 @@
 	</select>
 	
 	<select id="getBusinessPlanPageCount" resultType="int" parameterType="string">
-	SELECT COUNT(*) FROM manage.BusinessPlanning
-	<where>
-		<if test="value != null and value != ''">
-			projectName LIKE CONCAT('%', #{value }, '%') 
+		SELECT COUNT(*) FROM 
+		(SELECT * FROM manage.BusinessPlanning
+		<where>
+		<if test="search != null and search != ''">
+		projectName LIKE CONCAT('%', #{search}, '%')
 		</if>
-	</where>
-</select>
+		</where>) bp
+		<where>
+		<if test="userNum != null and userNum != ''">
+			userNum = #{userNum}
+		</if>
+		</where>
+	</select>
 	
 	
 <!-- 	userNum이 null인 경우 목록을 모두 가져옴 -->

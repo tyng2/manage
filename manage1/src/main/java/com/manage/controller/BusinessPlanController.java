@@ -36,8 +36,8 @@ import com.manage.mapper.AuthMapper;
 import com.manage.mapper.BusinessPlanMapper;
 import com.manage.mapper.UserMapper;
 import com.manage.service.BusinessPlanSevice;
+import com.manage.service.UserService;
 import com.manage.service.paging.IPagingService;
-import com.manage.service.paging.PagingBean;
 import com.manage.vo.BpReportDTO;
 import com.manage.vo.BusinessPlanVO;
 
@@ -62,7 +62,7 @@ public class BusinessPlanController {
 	private IPagingService iPagingService;
 	
 	@Setter(onMethod_= @Autowired)
-	private UserMapper userMapper;
+	private UserService userService;
 	
 	
 	
@@ -131,9 +131,12 @@ public class BusinessPlanController {
 	
 //GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
 	@GetMapping("/businessPlanList")
-	public String getBusinessPlanByUserNum(String userNum, Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(required = false) String search) { 
+	public String getBusinessPlanByUserNum(Principal principal, Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(required = false) String search) { 
 		System.out.println("<< businessPlanList >>\n");
-		System.out.println("param : " + userNum + " " + pageNum + " " + search);
+		System.out.println("param : " + pageNum + " " + search);
+		
+		String userNum = userService.getUserById(principal.getName()).getUserNum(); // 현재 로그인된 사용자의 userNum 가져오기
+		System.out.println("userNum : " + userNum);
 		
 //		로그인 한 아이디의 권한 가져오기
 		String auth = getAuthUser().get(0);
@@ -141,16 +144,19 @@ public class BusinessPlanController {
 		
         if ("ROLE_MARKETING".equals(auth) || "ROLE_CEO".equals(auth)) {
         	model.addAttribute("select", roleName(getAuthUser()));
+        	userNum = null;
+        } else if ("ROLE_DIRECTOR1".equals(auth) || "ROLE_DIRECTOR2".equals(auth)) {
+        	
         }
         
         
         int amount = 5; // 한 페이지 당 보여줄 글 갯수
         int startRow = (pageNum - 1) * amount; // 시작 행 번호
         
-        List<BusinessPlanVO> list = businessPlanService.getBusinessPlanPageList(search, amount, startRow);;
+        List<BusinessPlanVO> list = businessPlanService.getBusinessPlanPageList(search, userNum, amount, startRow);;
 
         int allRowCount = 0; // 전체 행 갯수
-        allRowCount = businessPlanMapper.getBusinessPlanPageCount(search);
+        allRowCount = businessPlanMapper.getBusinessPlanPageCount(search, userNum);
         
         int maxPage = allRowCount / amount + (allRowCount % amount == 0 ? 0 : 1);
         
@@ -365,7 +371,7 @@ public class BusinessPlanController {
 	public void businessPlanDel(String oppId, Principal principal, HttpServletResponse response) throws IOException {
         System.out.println("<< businessPlanDel >>");
         
-        String userNum = userMapper.getUserById(principal.getName()).getUserNum();
+        String userNum = userService.getUserById(principal.getName()).getUserNum();
         
         boolean isSuccess = businessPlanService.businessPlanDel(oppId, userNum);
         

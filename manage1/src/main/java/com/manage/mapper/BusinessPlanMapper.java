@@ -32,8 +32,8 @@ public interface BusinessPlanMapper {
 	public List<BusinessPlanVO> getBusinessPlanList(@Param("startCnt") String startCnt, @Param("endCnt") String endCnt);	
 	
 	
-	public List<BusinessPlanVO> getBusinessPlanPageList(@Param("search") String search, @Param("amount") int amount, @Param("startRow") int startRow);
+	public List<BusinessPlanVO> getBusinessPlanPageList(@Param("search") String search, @Param("userNum") String userNum, @Param("amount") int amount, @Param("startRow") int startRow);
 	
-	public int getBusinessPlanPageCount(String search);
+	public int getBusinessPlanPageCount(@Param("search") String search, @Param("userNum") String userNum);
 	
 }

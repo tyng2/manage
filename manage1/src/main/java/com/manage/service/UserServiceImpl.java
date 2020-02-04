@@ -19,6 +19,12 @@ public class UserServiceImpl implements UserService {
 		System.out.println("\n" + userVO + "\n");
 		return userMapper.insert(userVO);
 	}
+
+	@Override
+	public UserVO getUserById(String userId) {
+		return userMapper.getUserById(userId);
+	}
+	
 	
 	
 }
