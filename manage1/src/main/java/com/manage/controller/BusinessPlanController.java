@@ -104,8 +104,6 @@ public class BusinessPlanController {
 	@GetMapping("/businessPlan")
 	public String businessplan(Model model) {
 		System.out.println("<< businessPlan >>\n");
-		String auth = getAuthUser().get(0);
-		model.addAttribute("auth", auth);
 		
 		return "businessPlan/businessPlan";
 	}
@@ -114,10 +112,6 @@ public class BusinessPlanController {
 	@PostMapping("/businessPlan")
 	public ResponseEntity<String> addBusinessPlan(BusinessPlanVO businessPlanVO, Model model) {
 		System.out.println("<< businessPlan, POST >>\n");
-
-//		로그인 한 아이디의 권한 가져오기
-		String auth = getAuthUser().get(0);
-		model.addAttribute("auth", auth);
 
 		businessPlanService.insertBusinessPlan(businessPlanVO);
 		
@@ -195,10 +189,6 @@ public class BusinessPlanController {
 	public ResponseEntity<List> getBusinessPlanByUserNum(@RequestParam HashMap<String, String> params, Model model) {
 		System.out.println("listPage : " + params);
 		
-//		로그인 한 아이디의 권한 가져오기
-		String auth = getAuthUser().get(0);
-		model.addAttribute("auth", auth);
-		
 		HttpHeaders headers = new HttpHeaders();
 		
 //		List<BusinessPlanVO> list2 = businessPlanService.getBusinessPlanList(params);
@@ -211,10 +201,6 @@ public class BusinessPlanController {
 	public String businessPlanDtl(String oppId, Model model) {
 		System.out.println("<<businessPlanDtl>>");
 		
-//		로그인 한 아이디의 권한 가져오기
-		String auth = getAuthUser().get(0);
-		model.addAttribute("auth", auth);
-		 
 		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
 		 
 		model.addAttribute("data", list);
@@ -341,10 +327,6 @@ public class BusinessPlanController {
 	@GetMapping("/businessPlanUpdate")
 	public String businessPlanUpdate(String oppId, Model model, HttpSession session) {
 		System.out.println("<<businessPlanUpdate>>");
-		
-//		로그인 한 아이디의 권한 가져오기
-		String auth = getAuthUser().get(0);
-		model.addAttribute("auth", auth);
 		
 		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
 		

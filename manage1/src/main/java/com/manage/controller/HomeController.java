@@ -36,11 +36,7 @@ public class HomeController {
 	
 	@GetMapping("/main")
 	public String main(Model model) {
-		String auth = BusinessPlanController.getAuthUser().get(0);
-		model.addAttribute("auth", auth);
-		System.out.println("auth : " + auth);
 		
-		System.out.println("ROLE_SALES1".equals(auth));
 		return "main";
 	}
 	
