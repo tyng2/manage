@@ -18,7 +18,9 @@
 				영업 관리 <b class="caret"></b>
 				</a>
 				<div class="dropdown-menu dropdown-menu-left">
+				<c:if test="${auth eq 'ROLE_SALES1' || auth eq 'ROLE_SALES2'}">
 					<a href="/businessPlan" class="dropdown-item">예산 작성</a>
+				</c:if>
 					<a href="/businessPlanList" class="dropdown-item">예산 목록</a>
 					<a href="/bpReport" class="dropdown-item">예산 보고서</a>
 				</div></li>

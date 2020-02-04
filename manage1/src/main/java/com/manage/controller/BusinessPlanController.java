@@ -82,7 +82,7 @@ public class BusinessPlanController {
 		return roleNames;
 	}
 	
-// 권한리스트로 해당 권한 이름 찾기
+// 권한리스트로 부서 이름 찾기
 	public static String roleName(List<String> list) {
 		String depName = null;
 		if (list.get(0).equals("ROLE_SALES1") || list.get(0).equals("ROLE_DIRECTOR1")) {
@@ -100,12 +100,25 @@ public class BusinessPlanController {
 	}
 	
 	
+//	GET 방식으로 businessPlan 주소 접근 시 businessPlan.jsp 페이지로 이동
+	@GetMapping("/businessPlan")
+	public String businessplan(Model model) {
+		System.out.println("<< businessPlan >>\n");
+		String auth = getAuthUser().get(0);
+		model.addAttribute("auth", auth);
+		
+		return "businessPlan/businessPlan";
+	}
 	
 //	POST 방식으로 businessPlan 주소 접근 시 예산 작성 처리
 	@PostMapping("/businessPlan")
 	public ResponseEntity<String> addBusinessPlan(BusinessPlanVO businessPlanVO, Model model) {
 		System.out.println("<< businessPlan, POST >>\n");
-		
+
+//		로그인 한 아이디의 권한 가져오기
+		String auth = getAuthUser().get(0);
+		model.addAttribute("auth", auth);
+
 		businessPlanService.insertBusinessPlan(businessPlanVO);
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -129,10 +142,11 @@ public class BusinessPlanController {
 		System.out.println("param : " + userNum + " " + pageNum + " " + search);
 		
 //		로그인 한 아이디의 권한 가져오기
-        String roleName = roleName(getAuthUser());
+		String auth = getAuthUser().get(0);
+		model.addAttribute("auth", auth);
 		
-        if ("마케팅".equals(roleName) || "대표이사".equals(roleName)) {
-        	model.addAttribute("select", roleName);
+        if ("ROLE_MARKETING".equals(auth) || "ROLE_CEO".equals(auth)) {
+        	model.addAttribute("select", roleName(getAuthUser()));
         }
         
         
@@ -180,6 +194,11 @@ public class BusinessPlanController {
 	@PostMapping("/businessPlanList")
 	public ResponseEntity<List> getBusinessPlanByUserNum(@RequestParam HashMap<String, String> params, Model model) {
 		System.out.println("listPage : " + params);
+		
+//		로그인 한 아이디의 권한 가져오기
+		String auth = getAuthUser().get(0);
+		model.addAttribute("auth", auth);
+		
 		HttpHeaders headers = new HttpHeaders();
 		
 //		List<BusinessPlanVO> list2 = businessPlanService.getBusinessPlanList(params);
@@ -188,15 +207,19 @@ public class BusinessPlanController {
 		return new ResponseEntity<List>(list2, headers, HttpStatus.OK);
 	}
 	 
-	 @GetMapping("/businessPlanDtl")
-	 public String businessPlanDtl(String oppId, Model model) {
-		 System.out.println("<<businessPlanDtl>>");
+	@GetMapping("/businessPlanDtl")
+	public String businessPlanDtl(String oppId, Model model) {
+		System.out.println("<<businessPlanDtl>>");
+		
+//		로그인 한 아이디의 권한 가져오기
+		String auth = getAuthUser().get(0);
+		model.addAttribute("auth", auth);
 		 
-		 BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
-		  
-		 model.addAttribute("data", list);
+		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
 		 
-		 return "businessPlan/businessPlanDtl";
+		model.addAttribute("data", list);
+		
+		return "businessPlan/businessPlanDtl";
 	 }
 	 
 	@GetMapping("/bpReport")
@@ -208,7 +231,6 @@ public class BusinessPlanController {
 		
 //		로그인 한 아이디의 권한 가져오기
 		String roleName = roleName(getAuthUser());
-		
 		
         if ("마케팅".equals(roleName) || "대표이사".equals(roleName)) {
         	model.addAttribute("select", roleName);
@@ -320,6 +342,10 @@ public class BusinessPlanController {
 	public String businessPlanUpdate(String oppId, Model model, HttpSession session) {
 		System.out.println("<<businessPlanUpdate>>");
 		
+//		로그인 한 아이디의 권한 가져오기
+		String auth = getAuthUser().get(0);
+		model.addAttribute("auth", auth);
+		
 		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
 		
 		model.addAttribute("data", list);
@@ -327,55 +353,55 @@ public class BusinessPlanController {
 		return "businessPlan/businessPlanUpdate";
 	}
 	
-	  @PostMapping("/businessPlanUpdate") 
-	  public ResponseEntity<String> businessPlanUpdate(String oppId, BusinessPlanVO b, Model model, Principal principal) {
-	  System.out.println("<< businessPlan Update, POST >>\n");
-	  System.out.println(b);
-      
-      HttpHeaders headers = new HttpHeaders();
-      
-      boolean isSuccess = businessPlanService.businessPlanUpdate(b);
-      
-      if(!isSuccess) { // 수정 실패
-      	headers.add("Content-Type", "text/html; charset=UTF-8");
-          StringBuilder sb = new StringBuilder();
-          sb.append("<script>");
-          sb.append("alert('글 작성자가 다릅니다!');");
-          sb.append("history.back();");
-          sb.append("</script>");
-          
-          return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
-      }
-      
-      //글 수정 성공 이후 글목록으로 리다이렉트
-      headers.add("Location", "/businessPlanDtl?oppId=" + oppId);
-      return new ResponseEntity<String>(headers, HttpStatus.FOUND);
-	  
-	  }
+	@PostMapping("/businessPlanUpdate") 
+	public ResponseEntity<String> businessPlanUpdate(String oppId, BusinessPlanVO b, Model model, Principal principal) {
+		System.out.println("<< businessPlan Update, POST >>\n");
+		System.out.println(b);
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		boolean isSuccess = businessPlanService.businessPlanUpdate(b);
+		
+		if(!isSuccess) { // 수정 실패
+			headers.add("Content-Type", "text/html; charset=UTF-8");
+			StringBuilder sb = new StringBuilder();
+			sb.append("<script>");
+			sb.append("alert('글 작성자가 다릅니다!');");
+			sb.append("history.back();");
+			sb.append("</script>");
+			
+			return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
+		}
+    
+		// 글 수정 성공 이후 글목록으로 리다이렉트
+		headers.add("Location", "/businessPlanDtl?oppId=" + oppId);
+		return new ResponseEntity<String>(headers, HttpStatus.FOUND);
+	
+	}
 	 
-	  @GetMapping("/businessPlanDel")
-	    public void businessPlanDel(String oppId, Principal principal, HttpServletResponse response) throws IOException {
-	        System.out.println("<< businessPlanDel >>");
-	        
-	        String userNum = userMapper.getUserById(principal.getName()).getUserNum();
-	        
-	        boolean isSuccess = businessPlanService.businessPlanDel(oppId, userNum);
-	        
-	        response.setContentType("text/html; charset=UTF-8");
-	        PrintWriter out = response.getWriter();
-	        String msg = null;
-	        if (isSuccess) {
-	        	msg = "삭제되었습니다.";
-	        } else {
-	        	msg = "잘못된 접근입니다.";
-	        }
-	        out.println("<script>");
-	        out.println("alert('" + msg + "');");
-	        out.println("location.href='/businessPlanList';");
-	        out.println("</script>");
-	        out.close();
-	        return;
-	    }
+	@GetMapping("/businessPlanDel")
+	public void businessPlanDel(String oppId, Principal principal, HttpServletResponse response) throws IOException {
+        System.out.println("<< businessPlanDel >>");
+        
+        String userNum = userMapper.getUserById(principal.getName()).getUserNum();
+        
+        boolean isSuccess = businessPlanService.businessPlanDel(oppId, userNum);
+        
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        String msg = null;
+        if (isSuccess) {
+        	msg = "삭제되었습니다.";
+        } else {
+        	msg = "잘못된 접근입니다.";
+        }
+        out.println("<script>");
+        out.println("alert('" + msg + "');");
+        out.println("location.href='/businessPlanList';");
+        out.println("</script>");
+        out.close();
+        return;
+    }
 	  
 	@PostMapping("/bpReport/Detail")
 	public String businessPlanReportDetail() {
