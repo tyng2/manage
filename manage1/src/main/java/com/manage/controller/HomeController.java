@@ -36,7 +36,11 @@ public class HomeController {
 	
 	@GetMapping("/main")
 	public String main(Model model) {
+		String auth = BusinessPlanController.getAuthUser().get(0);
+		model.addAttribute("auth", auth);
+		System.out.println("auth : " + auth);
 		
+		System.out.println("ROLE_SALES1".equals(auth));
 		return "main";
 	}
 	
@@ -61,13 +65,7 @@ public class HomeController {
 //		return "login";
 //	}
 	
-//	GET 방식으로 businessPlan 주소 접근 시 businessPlan.jsp 페이지로 이동
-	@GetMapping("/businessPlan")
-	public String businessplan(Model model) {
-		System.out.println("<< businessPlan >>\n");
-		
-		return "businessPlan/businessPlan";
-	}
+
 	
 	
 }
