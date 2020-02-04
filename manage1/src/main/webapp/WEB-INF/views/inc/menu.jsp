@@ -15,12 +15,12 @@
 		<ul class="navbar-nav mr-auto">
 			<li class="dropdown nav-item">
 				<a href="#" class="dropdown-toggle nav-link icon d-flex align-items-center" data-toggle="dropdown">
-				영업 관리 <b class="caret"></b>
+				영업 관리<b class="caret"></b>
 				</a>
 				<div class="dropdown-menu dropdown-menu-left">
-				<c:if test="${auth eq 'ROLE_SALES1' || auth eq 'ROLE_SALES2'}">
+				<sec:authorize access="hasAnyRole('ROLE_SALES1', 'ROLE_SALES2')">
 					<a href="/businessPlan" class="dropdown-item">예산 작성</a>
-				</c:if>
+				</sec:authorize>
 					<a href="/businessPlanList" class="dropdown-item">예산 목록</a>
 					<a href="/bpReport" class="dropdown-item">예산 보고서</a>
 				</div></li>

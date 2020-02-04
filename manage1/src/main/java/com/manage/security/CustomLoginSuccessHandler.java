@@ -30,7 +30,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication auth) throws IOException, ServletException {
-    	log.warn("Login Success");
+    	log.info("Login Success");
     	System.out.println("Login Success!");
     	
     	CustomUser customUser = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -52,7 +52,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
             roleNames.add(authority.getAuthority());
         }
         
-//        log.warn("ROLE NAMES: " + roleNames);
+//        log.info("ROLE NAMES: " + roleNames);
         System.out.println("ROLE NAMES: " + roleNames);
         
 //        if (roleNames.contains("ROLE_ADMIN")) {
