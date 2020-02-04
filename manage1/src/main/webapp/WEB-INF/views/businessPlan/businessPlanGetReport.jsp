@@ -44,11 +44,13 @@ $(document).ready(function() {
 
 function report(result) {
 	
+	var date = new Date();
 	var output = "<div class='col-md-12 heading-title bp40'><hr>";
 	
 	if (result[0].month != null) { // 해당 년도 해당 부서의 매출 계획이 존재하는 경우
 		output += "<h2 style='text-align: center; padding: 5rem 0 2rem 0;'>" + result[0].year + "년 분기별 매출 계획</h2>";
-		output += "<h5>" + result[0].yr + "년 " + result[0].month + "월 현재</h5>";
+// 		output += "<h5>" + result[0].yr + "년 " + result[0].month + "월 현재</h5>";
+		output += "<h5>" + date.getFullYear() + "년 " + (date.getMonth() + 1) + "월 현재</h5>";
 		output += "<h5>부서 : " + result[0].depName + "</h5><h5 style='float: right;'>(단위:백만원)</h5>";
 		output += "<table class='table table-light table-hover table-borderless'>";
 		output += "<thead class='thead-dark'><tr><th>구분</th><th>1분기</th><th>2분기</th><th>3분기</th><th>4분기</th><th>연간</th></tr></thead>";

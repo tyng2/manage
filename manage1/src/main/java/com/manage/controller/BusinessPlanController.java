@@ -205,7 +205,7 @@ public class BusinessPlanController {
 //	@PostMapping("/bpReport")
 	@RequestMapping(value = "/bpReport", method = RequestMethod.POST, produces = "application/text; charset=utf8") // 한글 깨짐으로 인해 이 코드 사용
 	@ResponseBody
-	public String businessPlanReport(@RequestBody BpReportDTO bpr, Principal principal, Model model) {
+	public String businessPlanReport(@RequestBody BpReportDTO bpr, Principal principal) {
 		String year = bpr.getYear();
 		String team = bpr.getTeam();
 		
@@ -239,7 +239,6 @@ public class BusinessPlanController {
 		if ("마케팅".equals(depName) || "대표이사".equals(depName)) {
 			depName = team;
         }
-    	model.addAttribute("depName", depName);
 		System.out.println("getBPPeriodService : " + depName + " " + year);
 		
 		if (team == null) {
@@ -286,10 +285,8 @@ public class BusinessPlanController {
 		System.out.println("year, month : " + year + ", " +month);
 
 		if (month != null) {
-			model.addAttribute("yr", yr);
-			model.addAttribute("month", month);
-			jObj.put("yr", yr);
-			jObj.put("month", month);
+			jObj.put("yr", yr); // 해당 년도 가장 마지막으로 예산 작성한 해 (확인!)
+			jObj.put("month", month); //  해당 년도 가장 마지막으로 예산 작성한 달
 		}
 
 		jArr.put(jObj);
