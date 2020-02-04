@@ -16,7 +16,7 @@
 		(SELECT * FROM manage.BusinessPlanning
 		<where>
 		<if test="search != null and search != ''">
-		projectName LIKE CONCAT('%', #{search}, '%')
+			projectName LIKE CONCAT('%', #{search}, '%')
 		</if>
 		</where>) bp
 		<where>
@@ -33,7 +33,7 @@
 		(SELECT * FROM manage.BusinessPlanning
 		<where>
 		<if test="search != null and search != ''">
-		projectName LIKE CONCAT('%', #{search}, '%')
+			projectName LIKE CONCAT('%', #{search}, '%')
 		</if>
 		</where>) bp
 		<where>

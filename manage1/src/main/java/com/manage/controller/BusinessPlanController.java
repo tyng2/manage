@@ -146,7 +146,7 @@ public class BusinessPlanController {
         	model.addAttribute("select", roleName(getAuthUser()));
         	userNum = null;
         } else if ("ROLE_DIRECTOR1".equals(auth) || "ROLE_DIRECTOR2".equals(auth)) {
-        	
+        	userNum = null;
         }
         
         
