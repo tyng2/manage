@@ -13,10 +13,16 @@
 	
 	<select id="getBusinessPlanPageList" resultType="businessPlanVO">
 		SELECT * FROM 
-		(SELECT * FROM manage.BusinessPlanning
+		(SELECT b.* FROM manage.BusinessPlanning b
+		<if test="department != null and department != ''">
+			INNER JOIN manage.user ur ON b.userNum = ur.userNum 
+		</if>
 		<where>
 		<if test="search != null and search != ''">
 			projectName LIKE CONCAT('%', #{search}, '%')
+		</if>
+		<if test="department != null and department != ''">
+			ur.department = #{department} 
 		</if>
 		</where>) bp
 		<where>
@@ -30,10 +36,16 @@
 	
 	<select id="getBusinessPlanPageCount" resultType="int" parameterType="string">
 		SELECT COUNT(*) FROM 
-		(SELECT * FROM manage.BusinessPlanning
+		(SELECT b.* FROM manage.BusinessPlanning b
+		<if test="department != null and department != ''">
+			INNER JOIN manage.user ur ON b.userNum = ur.userNum 
+		</if>
 		<where>
 		<if test="search != null and search != ''">
 			projectName LIKE CONCAT('%', #{search}, '%')
+		</if>
+		<if test="department != null and department != ''">
+			ur.department = #{department} 
 		</if>
 		</where>) bp
 		<where>

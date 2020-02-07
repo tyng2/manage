@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.manage.mapper.AuthMapper;
 import com.manage.mapper.BusinessPlanMapper;
-import com.manage.mapper.UserMapper;
 import com.manage.service.BusinessPlanSevice;
 import com.manage.service.UserService;
 import com.manage.service.paging.IPagingService;
@@ -83,7 +82,7 @@ public class BusinessPlanController {
 	}
 	
 // 권한리스트로 부서 이름 찾기
-	public static String roleName(List<String> list) {
+	public static String depName(List<String> list) {
 		String depName = null;
 		if (list.get(0).equals("ROLE_SALES1") || list.get(0).equals("ROLE_DIRECTOR1")) {
 			depName = "영업 1팀";
@@ -139,13 +138,13 @@ public class BusinessPlanController {
 		System.out.println("userNum : " + userNum);
 		
 //		로그인 한 아이디의 권한 가져오기
-		String auth = getAuthUser().get(0);
-		model.addAttribute("auth", auth);
-		
-        if ("ROLE_MARKETING".equals(auth) || "ROLE_CEO".equals(auth)) {
-        	model.addAttribute("select", roleName(getAuthUser()));
+		List<String> auth = getAuthUser();
+		String department = null;
+        if ("ROLE_MARKETING".equals(auth.get(0)) || "ROLE_CEO".equals(auth.get(0))) {
+        	model.addAttribute("select", depName(getAuthUser()));
         	userNum = null;
-        } else if ("ROLE_DIRECTOR1".equals(auth) || "ROLE_DIRECTOR2".equals(auth)) {
+        } else if ("ROLE_DIRECTOR1".equals(auth.get(0)) || "ROLE_DIRECTOR2".equals(auth.get(0))) {
+        	department = depName(auth);
         	userNum = null;
         }
         
@@ -153,10 +152,10 @@ public class BusinessPlanController {
         int amount = 5; // 한 페이지 당 보여줄 글 갯수
         int startRow = (pageNum - 1) * amount; // 시작 행 번호
         
-        List<BusinessPlanVO> list = businessPlanService.getBusinessPlanPageList(search, userNum, amount, startRow);;
-
+        List<BusinessPlanVO> list = businessPlanService.getBusinessPlanPageList(search, department, userNum, amount, startRow);;
+        
         int allRowCount = 0; // 전체 행 갯수
-        allRowCount = businessPlanMapper.getBusinessPlanPageCount(search, userNum);
+        allRowCount = businessPlanMapper.getBusinessPlanPageCount(search, department, userNum);
         
         int maxPage = allRowCount / amount + (allRowCount % amount == 0 ? 0 : 1);
         
@@ -222,12 +221,12 @@ public class BusinessPlanController {
 		}
 		
 //		로그인 한 아이디의 권한 가져오기
-		String roleName = roleName(getAuthUser());
+		List<String> auth = getAuthUser();
 		
-        if ("마케팅".equals(roleName) || "대표이사".equals(roleName)) {
-        	model.addAttribute("select", roleName);
-        }
-		
+        if ("ROLE_MARKETING".equals(auth.get(0)) || "ROLE_CEO".equals(auth.get(0))) {
+        	model.addAttribute("select", depName(auth));
+        } 
+        
 		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
 		model.addAttribute("listYear", listYear);
 		
@@ -258,7 +257,7 @@ public class BusinessPlanController {
 		System.out.println("year : " + year);
 
 //		로그인 한 아이디의 권한 가져오기
-		String depName = roleName(getAuthUser());
+		String depName = depName(getAuthUser());
 		System.out.println("String " + depName);
 		
 		if ("마케팅".equals(depName) || "대표이사".equals(depName)) {
