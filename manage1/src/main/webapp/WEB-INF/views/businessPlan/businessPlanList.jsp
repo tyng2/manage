@@ -23,7 +23,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 heading-title">
-			<h2 style="margin-bottom: 2rem;">예산 목록 : 총 ${page.allRowCount }건</h2>
+			<h2 style="margin-bottom: 2rem;">예산 목록 : ${page.allRowCount }건</h2>
 			<form action="/businessPlanList" id="dataForm" method="POST">
 				<input type="hidden" id="page" name="listPage" value="${listPage}" />
 				<table class="table table-light table-hover table-borderless">

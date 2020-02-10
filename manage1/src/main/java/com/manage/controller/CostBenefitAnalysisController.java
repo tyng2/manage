@@ -101,7 +101,7 @@ public class CostBenefitAnalysisController {
 // 손익분석 목록	
 	@GetMapping("/cbAnalysisList")
 	public String getCBAnalysisList(String userNum, Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(required = false) String search) {
-		System.out.println("<< 손익분석 목록 >>\n");
+		System.out.println("<< 손익 분석 목록 >>\n");
 
 		int amount = 5; // 한 페이지 당 보여줄 글 갯수
         int startRow = (pageNum - 1) * amount; // 시작 행 번호

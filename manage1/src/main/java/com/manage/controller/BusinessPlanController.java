@@ -141,7 +141,7 @@ public class BusinessPlanController {
 		List<String> auth = getAuthUser();
 		String department = null;
         if ("ROLE_MARKETING".equals(auth.get(0)) || "ROLE_CEO".equals(auth.get(0))) {
-        	model.addAttribute("select", depName(getAuthUser()));
+        	model.addAttribute("select", depName(auth));
         	userNum = null;
         } else if ("ROLE_DIRECTOR1".equals(auth.get(0)) || "ROLE_DIRECTOR2".equals(auth.get(0))) {
         	department = depName(auth);
@@ -190,6 +190,7 @@ public class BusinessPlanController {
 		return "businessPlan/businessPlanList";
 	}
 	
+	// 사용하지 않음
 	@PostMapping("/businessPlanList")
 	public ResponseEntity<List> getBusinessPlanByUserNum(@RequestParam HashMap<String, String> params, Model model) {
 		System.out.println("listPage : " + params);
