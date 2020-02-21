@@ -1,3 +1,4 @@
+<%@page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -10,10 +11,56 @@
 
 <jsp:include page="/WEB-INF/views/inc/link.jsp"></jsp:include>
 <script src="/resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-
-</script>
 <title>(주)케이씨에스 영업 관리 시스템 - 예산 수정</title>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	var sort1 = $("#sort1").attr('value');
+	var sort2 = $("#sort2").val();
+	var state = $("#state").val();
+	
+	console.log(sort1);
+	console.log(sort2);
+	console.log(state);
+	
+	if (sort1 == "1") {
+		$("#o11").attr("selected", "selected");
+	} else if (sort1 == "2") {
+		$("#o12").attr("selected", "selected");
+	} else if (sort1 == "3") {
+		$("#o13").attr("selected", "selected");
+	}
+	
+	if (sort2 == "1") {
+		$("#o21").attr("selected", "selected");
+	} else if (sort2 == "2") {
+		$("#o22").attr("selected", "selected");
+	} else if (sort2 == "3") {
+		$("#o23").attr("selected", "selected");
+	} else if (sort2 == "4") {
+		$("#o24").attr("selected", "selected");
+	} else if (sort2 == "5") {
+		$("#o25").attr("selected", "selected");
+	} else if (sort2 == "6") {
+		$("#o26").attr("selected", "selected");
+	} else if (sort2 == "7") {
+		$("#o27").attr("selected", "selected");
+	}
+	
+	if (state == "1") {
+		$("#o31").attr("selected", "selected");
+	} else if (state == "2") {
+		$("#o32").attr("selected", "selected");
+	} else if (state == "3") {
+		$("#o33").attr("selected", "selected");
+	} else if (state == "4") {
+		$("#o34").attr("selected", "selected");
+	} else if (state == "5") {
+		$("#o35").attr("selected", "selected");
+	}
+	
+});
+</script>
 <style>
 tr {
 	border: 1px solid #AAAAAA;
@@ -24,7 +71,9 @@ tr {
 
 <div class="main-section">
 <jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
-
+<input type="hidden" id="sort1" value="${data.sort1}">
+<input type="hidden" id="sort2" value="${data.sort2}">
+<input type="hidden" id="state" value="${data.state}">
 <section class="ftco-section">
 <div class="container">
 	<form action="/businessPlanUpdate" id="dataForm" method="POST">
@@ -45,19 +94,19 @@ tr {
 		<tr>
 			<th style="vertical-align: middle;">구분1</th>
 			<td><select name="sort1" class="form-control">
-				<option value="1">상품</option>
-				<option value="2">유지보수</option>
-				<option value="3">개발</option>
+				<option id="o11" value="1">상품</option>
+				<option id="o12" value="2">유지보수</option>
+				<option id="o13" value="3">개발</option>
 			</select></td>
 			<th style="vertical-align: middle;">구분2</th>
 			<td><select name="sort2" class="form-control">
-				<option value="1">Nonstop</option>
-				<option value="2">ACI</option>
-				<option value="3">HSM</option>
-				<option value="4">Oracle</option>
-				<option value="5">OGG</option>
-				<option value="6">Solution</option>
-				<option value="7">이벤트</option>
+				<option id="o21" value="1">Nonstop</option>
+				<option id="o22" value="2">ACI</option>
+				<option id="o23" value="3">HSM</option>
+				<option id="o24" value="4">Oracle</option>
+				<option id="o25" value="5">OGG</option>
+				<option id="o26" value="6">Solution</option>
+				<option id="o27" value="7">이벤트</option>
 			</select></td>
 		</tr>
 		<tr>
@@ -76,11 +125,11 @@ tr {
 		<tr>
 			<th style="vertical-align: middle;">상태</th>
 			<td><select name="state" class="form-control">
-				<option value="1">Lead</option>
-				<option value="2">Opportunity</option>
-				<option value="3">Negotiation</option>
-				<option value="4">Win</option>
-				<option value="5">Lose</option>
+				<option id="o31" value="1">Lead</option>
+				<option id="o32" value="2">Opportunity</option>
+				<option id="o33" value="3">Negotiation</option>
+				<option id="o34" value="4">Win</option>
+				<option id="o35" value="5">Lose</option>
 			</select></td>
 			<td></td>
 			<td></td>
