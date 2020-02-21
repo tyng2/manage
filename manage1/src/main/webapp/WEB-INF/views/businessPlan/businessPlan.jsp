@@ -28,6 +28,11 @@ $(document).ready(function() {
 	$('input[name=expectedSalesMonth]').attr("value", setting);
 })
 </script>
+<style>
+tr {
+	border: 1px solid #AAAAAA;
+}
+</style>
 <body>
 <c:set var="userNum"><sec:authentication property="principal.user.userNum"/></c:set>
 <div class="main-section">
@@ -43,10 +48,82 @@ $(document).ready(function() {
 		</div>
 	</div>
 	<input type="hidden" name="userNum" value="${userNum }" />
-	<div class="row">
+	
+	<table class="table table-light table-hover table-borderless">
+	<thead class="thead-dark">
+		<tr>
+			<th style="vertical-align: middle;">프로젝트명</th>
+			<td colspan="3"><input type="text" name="projectName" class="form-control" style="width:100%;" maxlength="40" required></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">구분1</th>
+			<td><select name="sort1" class="form-control">
+				<option value="1">상품</option>
+				<option value="2">유지보수</option>
+				<option value="3">개발</option>
+			</select></td>
+			<th style="vertical-align: middle;">구분2</th>
+			<td><select name="sort2" class="form-control">
+				<option value="1">Nonstop</option>
+				<option value="2">ACI</option>
+				<option value="3">HSM</option>
+				<option value="4">Oracle</option>
+				<option value="5">OGG</option>
+				<option value="6">Solution</option>
+				<option value="7">이벤트</option>
+			</select></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">예상매출액</th>
+			<td><input type="text" name="expectedSales" class="form-control" maxlength="12" required></td>
+			<th style="vertical-align: middle;">예상매입금</th>
+			<td><input type="text" name="expectedPurchase" class="form-control" maxlength="12" required></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">예상매출월</th>
+			<td><input type="month" name="expectedSalesMonth" class="form-control" value="" required></td>
+			<th style="vertical-align: middle;">예상이익</th>
+			<td><input type="text" name="expectedProfit" class="form-control" maxlength="12" required></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">상태</th>
+			<td><select name="state" class="form-control">
+				<option value="1">Lead</option>
+				<option value="2">Opportunity</option>
+				<option value="3">Negotiation</option>
+				<option value="4">Win</option>
+				<option value="5">Lose</option>
+			</select></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">최종사용자</th>
+			<td><input type="text" name="endUser" class="form-control" maxlength="6" required></td>
+			<th style="vertical-align: middle;">납품처</th>
+			<td><input type="text" name="customer" class="form-control" maxlength="6" required></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">고객명</th>
+			<td><input type="text" name="customerName" class="form-control" maxlength="12"></td>
+			<th style="vertical-align: middle;">고객연락처</th>
+			<td><input type="text" name="customerPhone" class="form-control" maxlength="14"></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">고객이메일</th>
+			<td colspan="3"><input type="email" name="customerEmail" class="form-control" maxlength="30"></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">비고</th>
+			<td colspan="3"><input type="text" name="note" class="form-control" maxlength="100"></td>
+		</tr>
+	</thead>
+	</table>
+	
+	<!-- <div class="row">
 		<div class="col-lg-3 col-sm-4">
 			<div class="form-group">
-				<input type="text" name="projectName" class="form-control" required>
+				<input type="text" name="projectName" class="form-control" maxlength="40" required>
 				<label class="form-control-placeholder" for="projectName">프로젝트명</label>			
 			</div>
 		</div>
@@ -161,7 +238,7 @@ $(document).ready(function() {
 				<label class="form-control-placeholder" for="note">비고</label>			
 			</div>
 		</div>
-	</div><br>
+	</div> --><br>
 	<button class="btn btn-primary">확인</button>
 	<button type="reset" class="btn btn-primary" style="float: right;" >다시 작성</button>
 </div>
