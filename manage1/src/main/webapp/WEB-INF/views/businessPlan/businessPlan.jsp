@@ -239,8 +239,8 @@ tr {
 			</div>
 		</div>
 	</div> --><br>
-	<button class="btn btn-primary">확인</button>
-	<button type="reset" class="btn btn-primary" style="float: right;" >다시 작성</button>
+	<button class="btn btn-outline-primary">확인</button>
+	<button type="reset" class="btn btn-outline-primary" style="float: right;" >다시 작성</button>
 </div>
 </section>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

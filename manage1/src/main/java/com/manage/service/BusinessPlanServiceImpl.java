@@ -72,17 +72,17 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 
 	@Override
 	public boolean businessPlanUpdate(BusinessPlanVO b) {
-		 boolean isSuccess = false;
+		boolean isSuccess = false;
 	        
-		 BusinessPlanVO bp = businessPlanMapper.businessPlanDtl(b.getOppId());
+		BusinessPlanVO bp = businessPlanMapper.businessPlanDtl(b.getOppId());
 	        
-	        if (b.getUserNum().equals(bp.getUserNum())) {
+			if (b.getUserNum().equals(bp.getUserNum())) {
 	        	businessPlanMapper.businessPlanUpdate(b);
 	            isSuccess = true;
 	        } else {
 	            isSuccess = false;
 	        }
-	        return isSuccess;
+		return isSuccess;
 	}
 
 	@Override

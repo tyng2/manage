@@ -146,7 +146,8 @@
 	
 	<update id="businessPlanUpdate">
 		UPDATE manage.BusinessPlanning SET projectName=#{projectName}, endUser=#{endUser}, customer=#{customer}, expectedSales=#{expectedSales}, expectedPurchase=#{expectedPurchase}, expectedProfit=#{expectedProfit}, expectedSalesMonth=#{expectedSalesMonth},
-			state=#{state}, note=#{note}, customerName=#{customerName}, customerPhone=#{customerPhone}, customerEmail=#{customerEmail}
+			state=#{state}, note=#{note}, customerName=#{customerName}, customerPhone=#{customerPhone}, customerEmail=#{customerEmail}, 
+			sort1=#{sort1}, sort2=#{sort2}
 		WHERE oppId = #{oppId};
 	</update>
 
