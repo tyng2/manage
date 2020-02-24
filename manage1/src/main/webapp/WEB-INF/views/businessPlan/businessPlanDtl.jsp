@@ -26,176 +26,176 @@ tr {
 <jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 
 <section class="ftco-section">
-	<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<h2 class="heading-section">${data.oppId}</h2>
-		</div>
+<div class="container">
+<div class="row">
+	<div class="col-md-12">
+		<h2 class="heading-section">${data.oppId}</h2>
 	</div>
-	<form action="/businessPlanDtl" id="dataForm" method="POST">
-	
-	
-		<table class="table table-light table-hover table-borderless">
+</div>
+<form action="/businessPlanDtl" id="dataForm" method="POST">
+
+
+	<table class="table table-light table-hover table-borderless">
+	<thead class="thead-dark">
+		<tr>
+			<th style="vertical-align: middle;">프로젝트명</th>
+			<td colspan="3">${data.projectName}</td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">담당자</th>
+			<td>${data.userNum}</td>
+			<th style="vertical-align: middle;">작성일</th>
+			<td><fmt:formatDate value="${data.regDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">구분1</th>
+			<td><c:choose>
+			<c:when test="${data.sort1 == '1'}">
+				상품
+			</c:when>
+			<c:when test="${data.sort1 == '2'}">
+				유지보수
+			</c:when>
+			<c:when test="${data.sort1 == '3'}">
+				개발
+			</c:when>
+			<c:otherwise>없음</c:otherwise>
+			</c:choose></td>
+			<th style="vertical-align: middle;">구분2</th>
+			<td><c:choose>
+			<c:when test="${data.sort2 == '1'}">
+				Nonstop
+			</c:when>
+			<c:when test="${data.sort2 == '2'}">
+				ACI
+			</c:when>
+			<c:when test="${data.sort2 == '3'}">
+				HSM
+			</c:when>
+			<c:when test="${data.sort2 == '4'}">
+				Oracle
+			</c:when>
+			<c:when test="${data.sort2 == '5'}">
+				OGG
+			</c:when>
+			<c:when test="${data.sort2 == '6'}">
+				Solution
+			</c:when>
+			<c:when test="${data.sort2 == '7'}">
+				이벤트
+			</c:when>
+			<c:otherwise>없음</c:otherwise>
+			</c:choose></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">예상매출액</th>
+			<td>${data.expectedSales}</td>
+			<th style="vertical-align: middle;">예상매입금</th>
+			<td>${data.expectedPurchase}</td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">예상매출월</th>
+			<td><fmt:formatDate value="${data.expectedSalesMonth}" pattern="yyyy년 MM월"/></td>
+			<th style="vertical-align: middle;">예상이익</th>
+			<td>${data.expectedProfit}</td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">상태</th>
+			<td><c:choose>
+			<c:when test="${data.state == '1'}">
+				Lead
+			</c:when>
+			<c:when test="${data.state == '2'}">
+				Opportunity
+			</c:when>
+			<c:when test="${data.state == '3'}">
+				Negotiation
+			</c:when>
+			<c:when test="${data.state == '4'}">
+				Win
+			</c:when>
+			<c:when test="${data.state == '5'}">
+				Lose
+			</c:when>
+			<c:otherwise>없음</c:otherwise>
+			</c:choose></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">최종사용자</th>
+			<td>${data.endUser}</td>
+			<th style="vertical-align: middle;">납품처</th>
+			<td>${data.customer}</td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">고객명</th>
+			<td>${data.customerName}</td>
+			<th style="vertical-align: middle;">고객연락처</th>
+			<td>${data.customerPhone}</td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">고객이메일</th>
+			<td colspan="3">${data.customerEmail}</td>
+		</tr>
+		<tr>
+			<th style="vertical-align: middle;">비고</th>
+			<td colspan="3">${data.note}</td>
+		</tr>
+	</thead>
+	</table>
+
+
+
+	<%-- <table class="table table-light table-hover table-borderless">
 		<thead class="thead-dark">
-			<tr>
-				<th style="vertical-align: middle;">프로젝트명</th>
-				<td colspan="3">${data.projectName}</td>
-			</tr>
-			<tr>
-				<th style="vertical-align: middle;">담당자</th>
-				<td>${data.userNum}</td>
-				<th style="vertical-align: middle;">작성일</th>
-				<td><fmt:formatDate value="${data.regDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-			</tr>
-			<tr>
-				<th style="vertical-align: middle;">구분1</th>
-				<td><c:choose>
-				<c:when test="${data.sort1 == '1'}">
-					상품
-				</c:when>
-				<c:when test="${data.sort1 == '2'}">
-					유지보수
-				</c:when>
-				<c:when test="${data.sort1 == '3'}">
-					개발
-				</c:when>
-				<c:otherwise>없음</c:otherwise>
-				</c:choose></td>
-				<th style="vertical-align: middle;">구분2</th>
-				<td><c:choose>
-				<c:when test="${data.sort2 == '1'}">
-					Nonstop
-				</c:when>
-				<c:when test="${data.sort2 == '2'}">
-					ACI
-				</c:when>
-				<c:when test="${data.sort2 == '3'}">
-					HSM
-				</c:when>
-				<c:when test="${data.sort2 == '4'}">
-					Oracle
-				</c:when>
-				<c:when test="${data.sort2 == '5'}">
-					OGG
-				</c:when>
-				<c:when test="${data.sort2 == '6'}">
-					Solution
-				</c:when>
-				<c:when test="${data.sort2 == '7'}">
-					이벤트
-				</c:when>
-				<c:otherwise>없음</c:otherwise>
-				</c:choose></td>
-			</tr>
-			<tr>
-				<th style="vertical-align: middle;">예상매출액</th>
-				<td>${data.expectedSales}</td>
-				<th style="vertical-align: middle;">예상매입금</th>
-				<td>${data.expectedPurchase}</td>
-			</tr>
-			<tr>
-				<th style="vertical-align: middle;">예상매출월</th>
-				<td><fmt:formatDate value="${data.expectedSalesMonth}" pattern="yyyy년 MM월"/></td>
-				<th style="vertical-align: middle;">예상이익</th>
-				<td>${data.expectedProfit}</td>
-			</tr>
-			<tr>
-				<th style="vertical-align: middle;">상태</th>
-				<td><c:choose>
-				<c:when test="${data.state == '1'}">
-					Lead
-				</c:when>
-				<c:when test="${data.state == '2'}">
-					Opportunity
-				</c:when>
-				<c:when test="${data.state == '3'}">
-					Negotiation
-				</c:when>
-				<c:when test="${data.state == '4'}">
-					Win
-				</c:when>
-				<c:when test="${data.state == '5'}">
-					Lose
-				</c:when>
-				<c:otherwise>없음</c:otherwise>
-				</c:choose></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<th style="vertical-align: middle;">최종사용자</th>
-				<td>${data.endUser}</td>
-				<th style="vertical-align: middle;">납품처</th>
-				<td>${data.customer}</td>
-			</tr>
-			<tr>
-				<th style="vertical-align: middle;">고객명</th>
-				<td>${data.customerName}</td>
-				<th style="vertical-align: middle;">고객연락처</th>
-				<td>${data.customerPhone}</td>
-			</tr>
-			<tr>
-				<th style="vertical-align: middle;">고객이메일</th>
-				<td colspan="3">${data.customerEmail}</td>
-			</tr>
-			<tr>
-				<th style="vertical-align: middle;">비고</th>
-				<td colspan="3">${data.note}</td>
-			</tr>
+		<tr>
+			<th>OPPID</th>
+			<th>프로젝트명</th>
+			<th>담당자</th>
+			<th>최종사용자</th>
+			<th>납품처</th>
+			<th>예상매출액</th>
+			<th>예상매입금</th>
+			<th>예상이익</th>
+			<th>예상매출월</th>
+			<th>상태</th>
+			<th>비고</th>
+			<th>작성일</th>
+			<th>고객명</th>
+			<th>고객연락처</th>
+			<th>고객이메일</th>
+		</tr>
 		</thead>
-		</table>
+		<tbody>
+		<tr>
+			<td>${data.oppId}</td>
+			<td>${data.projectName}</td>
+			<td>${data.userNum}</td>
+			<td>${data.endUser}</td>
+			<td>${data.customer}</td>
+			<td>${data.expectedSales}</td>
+			<td>${data.expectedPurchase}</td>
+			<td>${data.expectedProfit}</td>
+			<td>${data.expectedSalesMonth}</td>
+			<td>${data.state}</td>
+			<td>${data.note}</td>
+			<td>${CURRENT_TIMESTAMP}</td>
+			<td>${data.customerName}</td>
+			<td>${data.customerPhone}</td>
+			<td>${data.customerEmail}</td>
+		</tr>
+		</tbody>
+	</table> --%>
 	
+	<br><input type="button" class="btn btn-outline-primary" value="수정" onclick="location.href='/businessPlanUpdate?oppId=${data.oppId}'" />
+	<input type="button" class="btn btn-outline-primary" value="삭제" onclick="location.href='/businessPlanDel?oppId=${data.oppId }'"/>
+	<input type="button" class="btn btn-outline-primary" value="목록으로" onclick="location.href='/businessPlanList'" style="float: right;" />
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	
-	
-		<%-- <table class="table table-light table-hover table-borderless">
-			<thead class="thead-dark">
-			<tr>
-				<th>OPPID</th>
-				<th>프로젝트명</th>
-				<th>담당자</th>
-				<th>최종사용자</th>
-				<th>납품처</th>
-				<th>예상매출액</th>
-				<th>예상매입금</th>
-				<th>예상이익</th>
-				<th>예상매출월</th>
-				<th>상태</th>
-				<th>비고</th>
-				<th>작성일</th>
-				<th>고객명</th>
-				<th>고객연락처</th>
-				<th>고객이메일</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-				<td>${data.oppId}</td>
-				<td>${data.projectName}</td>
-				<td>${data.userNum}</td>
-				<td>${data.endUser}</td>
-				<td>${data.customer}</td>
-				<td>${data.expectedSales}</td>
-				<td>${data.expectedPurchase}</td>
-				<td>${data.expectedProfit}</td>
-				<td>${data.expectedSalesMonth}</td>
-				<td>${data.state}</td>
-				<td>${data.note}</td>
-				<td>${CURRENT_TIMESTAMP}</td>
-				<td>${data.customerName}</td>
-				<td>${data.customerPhone}</td>
-				<td>${data.customerEmail}</td>
-			</tr>
-			</tbody>
-		</table> --%>
-		
-		<br><input type="button" class="btn btn-outline-primary" value="수정" onclick="location.href='/businessPlanUpdate?oppId=${data.oppId}'" />
-		<input type="button" class="btn btn-outline-primary" value="삭제" onclick="location.href='/businessPlanDel?oppId=${data.oppId }'"/>
-		<input type="button" class="btn btn-outline-primary" value="목록으로" onclick="location.href='/businessPlanList'" style="float: right;" />
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		
-	</form>
+</form>
 <!-- 	</div> -->
-	</div>
+</div>
 </section>
 </div>
 <jsp:include page="/WEB-INF/views/inc/bottom.jsp"></jsp:include>

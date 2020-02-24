@@ -203,17 +203,28 @@ public class BusinessPlanController {
 		return new ResponseEntity<List>(list2, headers, HttpStatus.OK);
 	}
 	 
-	@GetMapping("/businessPlanDtl")
-	public String businessPlanDtl(String oppId, Model model) {
+//	@GetMapping("/businessPlanDtl")
+//	public String businessPlanDtl(String oppId, Model model) {
+//		System.out.println("<<businessPlanDtl>>");
+//		
+//		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
+//		 
+//		model.addAttribute("data", list);
+//		
+//		return "businessPlan/businessPlanDtl";
+//	}
+	 
+	@PostMapping("/businessPlanDtl")
+	public String businessPlanDtl(@RequestParam String oppId, Model model) {
 		System.out.println("<<businessPlanDtl>>");
 		
 		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
-		 
+		System.out.println(list);
 		model.addAttribute("data", list);
 		
 		return "businessPlan/businessPlanDtl";
-	 }
-	 
+	}
+	
 	@GetMapping("/bpReport")
 	public String businessPlanGetReport(Principal principal, Model model) {
 		
@@ -346,9 +357,10 @@ public class BusinessPlanController {
 		System.out.println("<< businessPlan Update, POST >>\n");
 		System.out.println(b);
 		
+		String userNum = userService.getUserById(principal.getName()).getUserNum();
 		HttpHeaders headers = new HttpHeaders();
 		
-		boolean isSuccess = businessPlanService.businessPlanUpdate(b);
+		boolean isSuccess = businessPlanService.businessPlanUpdate(b, userNum);
 		
 		if(!isSuccess) { // 수정 실패
 			headers.add("Content-Type", "text/html; charset=UTF-8");
@@ -362,8 +374,10 @@ public class BusinessPlanController {
 		}
     
 		// 글 수정 성공 이후 글목록으로 리다이렉트
-		headers.add("Location", "/businessPlanDtl?oppId=" + oppId);
-		return new ResponseEntity<String>(headers, HttpStatus.FOUND);
+		businessPlanDtl(oppId, model);
+//		headers.add("Location", "/businessPlanDtl?oppId=" + oppId);
+//		return new ResponseEntity<String>(headers, HttpStatus.FOUND);
+		return null;
 	
 	}
 	 
