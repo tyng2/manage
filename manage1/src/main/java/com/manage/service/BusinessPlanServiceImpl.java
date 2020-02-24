@@ -29,13 +29,20 @@ public class BusinessPlanServiceImpl implements BusinessPlanSevice {
 		System.out.println("lastOppId : " + lastOppid);
 		
 		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		
 		
 		StringBuffer newOppId = new StringBuffer();
-		newOppId.append("O").append(cal.get(Calendar.YEAR));
+		newOppId.append("O").append(year);
 		
 		int num = 1;
 		if (lastOppid != null) {
-			num = Integer.parseInt(lastOppid.substring(7)) + 1;
+			
+			if ((year + "").equals(lastOppid.substring(1, 5))) {
+				System.out.println("if ((year + \"\").equals(lastOppid.substring(1, 5)))");
+				num = Integer.parseInt(lastOppid.substring(7)) + 1;
+			}
+			
 		}
 		
 		if (num < 10) {
