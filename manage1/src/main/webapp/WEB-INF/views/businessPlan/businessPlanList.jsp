@@ -12,9 +12,10 @@
 <script>
 function dtlPage(inp) {
 	
-	var dataFrom = document.createElement("form");
-	dataForm.setAttribute("method", "POST");
-	dataForm.setAttribute("action", "/businessPlanDtl");
+// 	var dataFrom = document.createElement("form");
+// 	dataForm.setAttribute("method", "GET");
+// 	dataForm.setAttribute("action", "/businessPlanDtl");
+	var dataForm = document.querySelector('#dataForm');
 
 	var input1 = document.createElement("input");
 	input1.setAttribute("type", "hidden");
@@ -23,6 +24,7 @@ function dtlPage(inp) {
 	dataForm.appendChild(input1);
 
 	dataForm.submit();
+
 }
 </script>
 </head>

@@ -9,7 +9,7 @@ import com.manage.vo.CostBenefitAnalysisVO;
 
 public interface CostBenefitAnalysisMapper {
 
-	public List<BusinessPlanVO> getCBAnalysis(@Param("search") String search, @Param("amount") int amount, @Param("startRow") int startRow);
+	public List<CostBenefitAnalysisVO> getCBAnalysis(@Param("search") String search, @Param("amount") int amount, @Param("startRow") int startRow);
 
 	public CostBenefitAnalysisVO CBAnalysisDtl(String oppId);
 
