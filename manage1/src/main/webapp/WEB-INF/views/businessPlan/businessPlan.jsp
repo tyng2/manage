@@ -75,9 +75,9 @@ tr {
 		</tr>
 		<tr>
 			<th style="vertical-align: middle;">예상매출액</th>
-			<td><input type="number" name="expectedSales" class="form-control" maxlength="12" required></td>
+			<td><input type="text" name="expectedSales" class="form-control" maxlength="12" required></td>
 			<th style="vertical-align: middle;">예상매입금</th>
-			<td><input type="number" name="expectedPurchase" class="form-control" maxlength="12" required></td>
+			<td><input type="text" name="expectedPurchase" class="form-control" maxlength="12" required></td>
 		</tr>
 		<tr>
 			<th style="vertical-align: middle;">예상매출월</th>
