@@ -101,23 +101,38 @@ public class BusinessPlanController {
 	
 //	GET 방식으로 businessPlan 주소 접근 시 businessPlan.jsp 페이지로 이동
 	@GetMapping("/businessPlan")
-	public String businessplan(Model model) {
+	public String businessplan(Model model, Principal principal) {
 		System.out.println("<< businessPlan >>\n");
+		
+		if (principal == null) {
+			return "/";
+		}
 		
 		return "businessPlan/businessPlan";
 	}
 	
 //	POST 방식으로 businessPlan 주소 접근 시 예산 작성 처리
 	@PostMapping("/businessPlan")
-	public ResponseEntity<String> addBusinessPlan(BusinessPlanVO businessPlanVO, Model model) {
+	public ResponseEntity<String> addBusinessPlan(BusinessPlanVO businessPlanVO, Model model, Principal principal) {
 		System.out.println("<< businessPlan, POST >>\n");
-
-		businessPlanService.insertBusinessPlan(businessPlanVO);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");
-		
 		StringBuilder sb = new StringBuilder();
+
+		if (principal == null) {
+			sb.append("<script>");
+			sb.append("alert('세션이 만료되었습니다.');");
+			sb.append("location.href = '/';");
+			sb.append("</script>");
+
+			ResponseEntity<String> responseEntity = new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
+			return responseEntity;
+		}
+
+		businessPlanService.insertBusinessPlan(businessPlanVO);
+		
+		
 		sb.append("<script>");
 		sb.append("alert('입력이 완료되었습니다.');");
 		sb.append("location.href = '/';");
@@ -132,6 +147,11 @@ public class BusinessPlanController {
 	@GetMapping("/businessPlanList")
 	public String getBusinessPlanByUserNum(Principal principal, Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(required = false) String search) { 
 		System.out.println("<< businessPlanList >>\n");
+		
+		if (principal == null) {
+			return "/";
+		}
+		
 		System.out.println("param : " + pageNum + " " + search);
 		
 		String userNum = userService.getUserById(principal.getName()).getUserNum(); // 현재 로그인된 사용자의 userNum 가져오기
@@ -185,8 +205,6 @@ public class BusinessPlanController {
 		model.addAttribute("list", list);
 		model.addAttribute("page", page);
 		
-		
-
 		return "businessPlan/businessPlanList";
 	}
 	
@@ -205,8 +223,12 @@ public class BusinessPlanController {
 	 
 	 
 	@PostMapping("/businessPlanDtl")
-	public String businessPlanDtl(@RequestParam String oppId, Model model) {
+	public String businessPlanDtl(@RequestParam String oppId, Model model, Principal principal) {
 		System.out.println("<<businessPlanDtl>>");
+		
+		if (principal == null) {
+			return "/";
+		}
 		
 		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
 		System.out.println(list);
@@ -219,7 +241,7 @@ public class BusinessPlanController {
 	public String businessPlanGetReport(Principal principal, Model model) {
 		
 		if (principal == null) {
-			return "";
+			return "/";
 		}
 		
 //		로그인 한 아이디의 권한 가져오기
@@ -240,16 +262,16 @@ public class BusinessPlanController {
 	@RequestMapping(value = "/bpReport", method = RequestMethod.POST, produces = "application/text; charset=utf8") // 한글 깨짐으로 인해 이 코드 사용
 	@ResponseBody
 	public String businessPlanReport(@RequestBody BpReportDTO bpr, Principal principal) {
+		if (principal == null) {
+			return "";
+		}
+		
 		String year = bpr.getYear();
 		String team = bpr.getTeam();
 		
 		System.out.println("<< businessPlan Report, POST, " + year + ", " + team + " >>\n");
 
 		JSONArray jArr = new JSONArray(); 
-		
-		if (principal == null) {
-			return "";
-		}
 		
 		if (year == null ) {
 			System.out.println("year is null");
@@ -343,12 +365,37 @@ public class BusinessPlanController {
 //	}
 	
 	@PostMapping("/bPUpdate")
-	public String businessPlanUpdate(String oppId, Model model, HttpSession session) {
-		System.out.println("<< bPUpdate, GET >>\n");
+	public String businessPlanUpdate(String oppId, Model model, Principal principal, HttpSession session, HttpServletResponse response) throws IOException {
+		System.out.println("<< bPUpdate, POST >>\n");
 		
-		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if (principal == null) {
+			out.println("<script>");
+			out.println("alert('세션이 만료되었습니다.');");
+			out.println("location.href='/';");
+			out.println("</script>");
+			out.close();
+			
+			return null;
+		}
 		
-		model.addAttribute("data", list);
+		String userNum = userService.getUserById(principal.getName()).getUserNum();
+		
+		BusinessPlanVO bp = businessPlanService.businessPlanDtl(oppId);
+		System.out.println("bp.getUserNum() : " + bp.getUserNum() + " / principal-userNum : " + userNum);
+			
+		if (!bp.getUserNum().equals(userNum)) {
+			out.println("<script>");
+			out.println("alert('잘못된 접근입니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			
+			return "forward:businessPlanDtl";
+		}
+		
+		model.addAttribute("data", bp);
 		
 		return "businessPlan/businessPlanUpdate";
 	}
@@ -356,6 +403,11 @@ public class BusinessPlanController {
 	@PostMapping("/businessPlanUpdate") 
 	public String businessPlanUpdate(String oppId, BusinessPlanVO b, Model model, Principal principal, HttpServletResponse response) throws IOException {
 		System.out.println("<< businessPlan Update, POST >>\n");
+		
+		if (principal == null) {
+			return "/";
+		}
+		
 		System.out.println(b);
 		
 		String userNum = userService.getUserById(principal.getName()).getUserNum();
@@ -380,7 +432,6 @@ public class BusinessPlanController {
 		System.out.println("수정 성공#####################");
 		// 글 수정 성공 이후 글목록으로 리다이렉트
 		
-//		model.addAttribute("oppId", oppId);
 		return "forward:businessPlanDtl";
 	
 	}
@@ -389,12 +440,23 @@ public class BusinessPlanController {
 	public void businessPlanDel(String oppId, Principal principal, HttpServletResponse response) throws IOException {
         System.out.println("<< businessPlanDel >>");
         
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        if (principal == null) {
+        	out.println("<script>");
+            out.println("alert('세션이 만료되었습니다.');");
+            out.println("location.href='/';");
+            out.println("</script>");
+            out.close();
+        	
+        	return;
+		}
+        
         String userNum = userService.getUserById(principal.getName()).getUserNum();
         
         boolean isSuccess = businessPlanService.businessPlanDel(oppId, userNum);
         
-        response.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = response.getWriter();
         String msg = null;
         if (isSuccess) {
         	msg = "삭제되었습니다.";

@@ -193,8 +193,8 @@ if (request.getProtocol().equals("HTTP/1.1"))
 		</tr>
 		</tbody>
 	</table> --%>
-<form id="dataForm" method="POST">
-	<br><input type="button" class="btn btn-outline-primary" value="수정" onclick="javascript:upDate('${data.oppId}')" />
+<form id="dataForm" method="POST"><br>
+	<input type="button" class="btn btn-outline-primary" value="수정" onclick="javascript:upDate('${data.oppId}')" />
 	<input type="button" class="btn btn-outline-primary" value="삭제" onclick="javascript:del('${data.oppId}')"/>
 	<input type="button" class="btn btn-outline-primary" value="목록" onclick="location.href='/businessPlanList'" style="float: right;" />
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
