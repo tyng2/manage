@@ -81,6 +81,8 @@ tr {
 							<option value="1">내자</option>
 							<option value="2">외자</option>
 						</select></td>
+				</tr>
+				<tr style="display:none;">
 					<td><input type="hidden" name="oppId" value="${data.oppId}" readonly="readonly"></td>
 					<td><input type="hidden" name="userNum" value="${data.userNum}" readonly="readonly"></td>
 					<td><input type="hidden" name="projectName" value="${data.projectName}" readonly="readonly"></td>						
