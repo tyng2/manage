@@ -12,7 +12,7 @@
 <script>
 function dtlPage(inp) {
 	
-// 	var dataFrom = document.createElement("form");
+// 	var dataForm = document.createElement("form");
 // 	dataForm.setAttribute("method", "GET");
 // 	dataForm.setAttribute("action", "/businessPlanDtl");
 	var dataForm = document.querySelector('#dataForm');

@@ -19,6 +19,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         
     	String ajaxHeader = request.getHeader("X-Ajax-call");
+    	String header = (String) request.getParameter("allow");
     	
     	if ("true".equals(ajaxHeader)) {
     		System.out.println("ajax 접근 : " + ajaxHeader);
@@ -28,6 +29,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 //    		RequestDispatcher dispatcher = request.getRequestDispatcher(request.getRequestURI());
 //    		dispatcher.forward(request, response);
 
+    	} else if ("true".equals(header)) {
+    		System.out.println("allow : " + header);
     	} else {
     		log.error("Access Denied Handler");
     		log.error("Redirect....");
