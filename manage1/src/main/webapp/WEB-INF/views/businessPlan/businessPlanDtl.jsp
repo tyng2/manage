@@ -21,7 +21,13 @@ tr {
 </style>
 </head>
 <body>
-
+<%  
+response.setHeader("Cache-Control","no-store");  
+response.setHeader("Pragma","no-cache");  
+response.setDateHeader("Expires",0);  
+if (request.getProtocol().equals("HTTP/1.1"))
+        response.setHeader("Cache-Control", "no-cache");
+%>  
 <div class="main-section">
 <jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 
@@ -32,7 +38,7 @@ tr {
 		<h2 class="heading-section">${data.oppId}</h2>
 	</div>
 </div>
-<form action="/businessPlanDtl" id="dataForm" method="POST">
+<!-- <form action="/businessPlanDtl" id="dataForm" method="POST"> -->
 
 
 	<table class="table table-light table-hover table-borderless">
@@ -187,17 +193,49 @@ tr {
 		</tr>
 		</tbody>
 	</table> --%>
-	
-	<br><input type="button" class="btn btn-outline-primary" value="수정" onclick="location.href='/businessPlanUpdate?oppId=${data.oppId}'" />
-	<input type="button" class="btn btn-outline-primary" value="삭제" onclick="location.href='/businessPlanDel?oppId=${data.oppId }'"/>
-	<input type="button" class="btn btn-outline-primary" value="목록으로" onclick="location.href='/businessPlanList'" style="float: right;" />
+<form id="dataForm" method="POST">
+	<br><input type="button" class="btn btn-outline-primary" value="수정" onclick="javascript:upDate('${data.oppId}')" />
+	<input type="button" class="btn btn-outline-primary" value="삭제" onclick="javascript:del('${data.oppId}')"/>
+	<input type="button" class="btn btn-outline-primary" value="목록" onclick="location.href='/businessPlanList'" style="float: right;" />
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-	
 </form>
+<!-- </form> -->
 <!-- 	</div> -->
 </div>
 </section>
 </div>
+<script>
+
+function del(oppId) {
+	
+	if (confirm("삭제하시겠습니까?") == true) {
+	var dataForm = document.querySelector('#dataForm');
+	dataForm.setAttribute("action", "/bpDel");
+
+	var input1 = document.createElement("input");
+	input1.setAttribute("type", "hidden");
+	input1.setAttribute("name", "oppId");
+	input1.setAttribute("value", oppId);
+	dataForm.appendChild(input1);
+
+	dataForm.submit();
+		
+	}
+}
+
+function upDate(oppId) {
+	var dataForm = document.querySelector('#dataForm');
+	dataForm.setAttribute("action", "/bPUpdate");
+
+	var input1 = document.createElement("input");
+	input1.setAttribute("type", "hidden");
+	input1.setAttribute("name", "oppId");
+	input1.setAttribute("value", oppId);
+	dataForm.appendChild(input1);
+
+	dataForm.submit();
+}
+</script>
 <jsp:include page="/WEB-INF/views/inc/bottom.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/inc/js.jsp"></jsp:include>	
 	
