@@ -190,29 +190,19 @@ public class BusinessPlanController {
 		return "businessPlan/businessPlanList";
 	}
 	
-	// 사용하지 않음
-	@PostMapping("/businessPlanList")
-	public ResponseEntity<List> getBusinessPlanByUserNum(@RequestParam HashMap<String, String> params, Model model) {
-		System.out.println("listPage : " + params);
-		
-		HttpHeaders headers = new HttpHeaders();
-		
-//		List<BusinessPlanVO> list2 = businessPlanService.getBusinessPlanList(params);
-		List<BusinessPlanVO> list2 = null;
-		
-		return new ResponseEntity<List>(list2, headers, HttpStatus.OK);
-	}
-	 
-//	@GetMapping("/businessPlanDtl")
-//	public String businessPlanDtl(String oppId, Model model) {
-//		System.out.println("<<businessPlanDtl>>");
+//	// 사용하지 않음
+//	@PostMapping("/businessPlanList")
+//	public ResponseEntity<List> getBusinessPlanByUserNum(@RequestParam HashMap<String, String> params, Model model) {
+//		System.out.println("listPage : " + params);
 //		
-//		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
-//		 
-//		model.addAttribute("data", list);
+//		HttpHeaders headers = new HttpHeaders();
 //		
-//		return "businessPlan/businessPlanDtl";
+////		List<BusinessPlanVO> list2 = businessPlanService.getBusinessPlanList(params);
+//		List<BusinessPlanVO> list2 = null;
+//		
+//		return new ResponseEntity<List>(list2, headers, HttpStatus.OK);
 //	}
+	 
 	 
 	@PostMapping("/businessPlanDtl")
 	public String businessPlanDtl(@RequestParam String oppId, Model model) {
@@ -341,9 +331,20 @@ public class BusinessPlanController {
 		return expectedSales;
 	}
 	 
-	@GetMapping("/businessPlanUpdate")
+//	@GetMapping("/bPUpdate")
+//	public String businessPlanUpdate(String oppId, Model model, HttpSession session) {
+//		System.out.println("<< bPUpdate, GET >>\n");
+//		
+//		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
+//		
+//		model.addAttribute("data", list);
+//		
+//		return "businessPlan/businessPlanUpdate";
+//	}
+	
+	@PostMapping("/bPUpdate")
 	public String businessPlanUpdate(String oppId, Model model, HttpSession session) {
-		System.out.println("<<businessPlanUpdate>>");
+		System.out.println("<< bPUpdate, GET >>\n");
 		
 		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
 		
@@ -371,17 +372,36 @@ public class BusinessPlanController {
 			sb.append("</script>");
 			
 			return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
+		} else {
+			headers.add("Content-Type", "text/html; charset=UTF-8");
+			StringBuilder sb = new StringBuilder();
+			sb.append("<script>");
+			sb.append("document.write('<form action=\"/businessPlanUpdate\" id=\"dataForm\" method=\"POST\"></form>');");
+//			sb.append("$(document).ready(function() {");
+			sb.append("var dataFrom = document.createElement('form');");
+			sb.append("dataForm.setAttribute('method', 'POST');");
+			sb.append("dataForm.setAttribute('action', '/businessPlanDtl');");
+			sb.append("var input1 = document.createElement('input');");
+			sb.append("input1.setAttribute('type', 'hidden');");
+			sb.append("input1.setAttribute('name', 'oppId');");
+			sb.append("input1.setAttribute('value', '" + oppId + "');");
+			sb.append("dataForm.appendChild(input1);");
+			sb.append("dataForm.submit();");
+//			sb.append("});");
+			sb.append("</script>");
+			System.out.println("else문 탔음");
+			
+			return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
+			
 		}
     
 		// 글 수정 성공 이후 글목록으로 리다이렉트
-		businessPlanDtl(oppId, model);
-//		headers.add("Location", "/businessPlanDtl?oppId=" + oppId);
+//		headers.add("forward", "/businessPlanDtl");
 //		return new ResponseEntity<String>(headers, HttpStatus.FOUND);
-		return null;
 	
 	}
 	 
-	@GetMapping("/businessPlanDel")
+	@PostMapping("/bpDel")
 	public void businessPlanDel(String oppId, Principal principal, HttpServletResponse response) throws IOException {
         System.out.println("<< businessPlanDel >>");
         
