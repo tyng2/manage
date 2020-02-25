@@ -234,6 +234,9 @@ public class BusinessPlanController {
 		System.out.println(list);
 		model.addAttribute("data", list);
 		
+		String userNum = userService.getUserById(principal.getName()).getUserNum();
+		model.addAttribute("userNum", userNum);
+		
 		return "businessPlan/businessPlanDtl";
 	}
 	
