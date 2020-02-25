@@ -60,6 +60,21 @@ $(document).ready(function() {
 	}
 	
 });
+
+function dtlPage(inp) {
+	
+	var dataForm = document.querySelector('#dataForm');
+	dataForm.setAttribute("action", "/businessPlanDtl");
+
+	var input1 = document.createElement("input");
+	input1.setAttribute("type", "hidden");
+	input1.setAttribute("name", "oppId");
+	input1.setAttribute("value", inp);
+	dataForm.appendChild(input1);
+
+	dataForm.submit();
+
+}
 </script>
 <style>
 tr {
