@@ -75,15 +75,15 @@ tr {
 		</tr>
 		<tr>
 			<th style="vertical-align: middle;">예상매출액</th>
-			<td><input type="text" name="expectedSales" class="form-control" maxlength="12" required></td>
+			<td><input type="text" name="expectedSales" class="form-control" maxlength="9" required></td>
 			<th style="vertical-align: middle;">예상매입금</th>
-			<td><input type="text" name="expectedPurchase" class="form-control" maxlength="12" required></td>
+			<td><input type="text" name="expectedPurchase" class="form-control" maxlength="9" required></td>
 		</tr>
 		<tr>
 			<th style="vertical-align: middle;">예상매출월</th>
 			<td><input type="month" name="expectedSalesMonth" class="form-control" value="" required></td>
 			<th style="vertical-align: middle;">예상이익</th>
-			<td><input type="text" name="expectedProfit" class="form-control" maxlength="12" required></td>
+			<td><input type="text" name="expectedProfit" class="form-control" maxlength="9" required></td>
 		</tr>
 		<tr>
 			<th style="vertical-align: middle;">상태</th>

@@ -62,6 +62,11 @@ public class HomeController {
 //	}
 	
 
+	@GetMapping("/accessError")
+	public String accessDenied(Model model) {
+		
+		return "accessError";
+	}
 	
 	
 }

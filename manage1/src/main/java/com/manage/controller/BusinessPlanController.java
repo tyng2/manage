@@ -354,50 +354,34 @@ public class BusinessPlanController {
 	}
 	
 	@PostMapping("/businessPlanUpdate") 
-	public ResponseEntity<String> businessPlanUpdate(String oppId, BusinessPlanVO b, Model model, Principal principal) {
+	public String businessPlanUpdate(String oppId, BusinessPlanVO b, Model model, Principal principal, HttpServletResponse response) throws IOException {
 		System.out.println("<< businessPlan Update, POST >>\n");
 		System.out.println(b);
 		
 		String userNum = userService.getUserById(principal.getName()).getUserNum();
-		HttpHeaders headers = new HttpHeaders();
 		
 		boolean isSuccess = businessPlanService.businessPlanUpdate(b, userNum);
 		
+		
 		if(!isSuccess) { // 수정 실패
-			headers.add("Content-Type", "text/html; charset=UTF-8");
-			StringBuilder sb = new StringBuilder();
-			sb.append("<script>");
-			sb.append("alert('글 작성자가 다릅니다!');");
-			sb.append("history.back();");
-			sb.append("</script>");
+			System.out.println("수정 실패!");
 			
-			return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
-		} else {
-			headers.add("Content-Type", "text/html; charset=UTF-8");
-			StringBuilder sb = new StringBuilder();
-			sb.append("<script>");
-			sb.append("document.write('<form action=\"/businessPlanUpdate\" id=\"dataForm\" method=\"POST\"></form>');");
-//			sb.append("$(document).ready(function() {");
-			sb.append("var dataFrom = document.createElement('form');");
-			sb.append("dataForm.setAttribute('method', 'POST');");
-			sb.append("dataForm.setAttribute('action', '/businessPlanDtl');");
-			sb.append("var input1 = document.createElement('input');");
-			sb.append("input1.setAttribute('type', 'hidden');");
-			sb.append("input1.setAttribute('name', 'oppId');");
-			sb.append("input1.setAttribute('value', '" + oppId + "');");
-			sb.append("dataForm.appendChild(input1);");
-			sb.append("dataForm.submit();");
-//			sb.append("});");
-			sb.append("</script>");
-			System.out.println("else문 탔음");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('글 작성자가 다릅니다!');");
+			out.println("location.href='/businessPlanList';");
+			out.println("</script>");
+			out.close();
 			
-			return new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
-			
+			return null;
 		}
     
+		System.out.println("수정 성공#####################");
 		// 글 수정 성공 이후 글목록으로 리다이렉트
-//		headers.add("forward", "/businessPlanDtl");
-//		return new ResponseEntity<String>(headers, HttpStatus.FOUND);
+		
+//		model.addAttribute("oppId", oppId);
+		return "forward:businessPlanDtl";
 	
 	}
 	 
