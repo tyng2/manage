@@ -119,7 +119,7 @@ function report(result) {
 			</div>
 			</c:if>
 			<div class="col-lg-3 col-sm-3">
-				<button type="button" id="getReport" class="btn btn-primary">확인</button>
+				<button type="button" id="getReport" class="btn btn-outline-primary">확인</button>
 			</div>
 			<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</div>
