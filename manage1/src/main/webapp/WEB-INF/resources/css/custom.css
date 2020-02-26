@@ -42,7 +42,18 @@ body {
 	text-decoration: none;
 	color: #FFF;
 }
-        
+
+
+.pagination.pagination-1 .more-page {
+	text-align: center;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	color: rgba(0, 0, 0, 0.4);
+	background: #fff;
+	
+}
         
 
 

@@ -73,7 +73,7 @@ function dtlPage(inp) {
 			<c:if test="${page.allRowCount gt 0 }">
 			
 			<c:if test="${page.startPage gt page.pageBlockSize }">
-			<a href="/businessPlanList?pageNum=1">1</a><span class="more-page">...</span>
+			<a href="/businessPlanList?pageNum=1">1</a><p class="more-page">...</p>
 			<a href="/businessPlanList?pageNum=${page.startPage - 1 }">&laquo;</a>
 			</c:if>
 			
@@ -90,7 +90,7 @@ function dtlPage(inp) {
            	
            	<c:if test="${page.endPage lt page.maxPage }">
 			<a href="/businessPlanList?pageNum=${page.endPage + 1 }&#board">&raquo;</a>
-			<span class="more-page">...</span>
+			<p class="more-page">...</p>
 			<a href="/businessPlanList?pageNum=${page.maxPage }&#board">${page.maxPage }</a>
 			</c:if>
            	
