@@ -169,7 +169,7 @@ public class BusinessPlanController {
         }
         
         
-        int amount = 5; // 한 페이지 당 보여줄 글 갯수
+        int amount = 2; // 한 페이지 당 보여줄 글 갯수
         int startRow = (pageNum - 1) * amount; // 시작 행 번호
         
         List<BusinessPlanVO> list = businessPlanService.getBusinessPlanPageList(search, department, userNum, amount, startRow);;
@@ -196,7 +196,7 @@ public class BusinessPlanController {
         page.put("allRowCount", allRowCount);
         page.put("pageNum", pageNum);
         
-        
+        System.out.println("Page : " + page);
 //		List<BusinessPlanVO> list = businessPlanService.getBusinessPlanByUserNum(userNum);
 //		System.out.println("listYear : " + listYear);
 //		List<Integer> listYear = businessPlanMapper.getYearBusinessPlan();
