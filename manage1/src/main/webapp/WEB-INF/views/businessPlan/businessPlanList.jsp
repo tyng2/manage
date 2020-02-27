@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,10 +46,11 @@ function dtlPage(inp) {
 			<table class="table table-light table-hover table-borderless">
 			<thead class="thead-dark">
 				<tr>
-					<th>OPPID</th>
-					<th>Product 구분</th>
+					<th style="width: 50px;">OPPID</th>
+					<th style="width: 80px;">구분</th>
 					<th>프로젝트명</th>
-					<th>담당자</th>
+					<th style="width: 80px;">작성일</th>
+					<th style="width: 80px;">상태</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,9 +62,31 @@ function dtlPage(inp) {
 				<c:forEach var="data" items="${list}">
 				<tr onclick="javascript:dtlPage('${data.oppId}')" >
 					<td>${data.oppId}</td>
-					<td>${data.sort1}</td>
-					<td>${data.projectName}</td>
-					<td>${data.userNum}</td>
+					<td><c:if test="${data.sort1 == 1}">상품</c:if>
+					<c:if test="${data.sort1 == 2}">유지보수</c:if>
+					<c:if test="${data.sort1 == 3}">개발</c:if></td>
+					<c:set var="pName">${data.projectName}</c:set>
+					<c:if test="${pName.length() > 30 }">
+						<c:set var="pName" value="${fn:substring(pName,0,30) }... "/>
+					</c:if>
+					<td>${pName}</td>
+					<td><jsp:useBean id="today" class="java.util.Date"></jsp:useBean>
+					<fmt:parseNumber value="${today.time / (1000 * 60 * 60 * 24)}" var="nowDays" integerOnly="true" />
+					<fmt:parseNumber value="${data.regDate.time / (1000 * 60 * 60 * 24)}" var="regDays" integerOnly="true" />
+					<c:set value="${nowDays - regDays }" var="dayDiff" />
+					<c:choose>
+					<c:when test="${dayDiff == 0 }">
+						<fmt:formatDate value="${data.regDate}" pattern="HH:mm:ss"/>
+					</c:when>
+					<c:otherwise>
+						<fmt:formatDate value="${data.regDate}" pattern="yyyy.MM.dd"/>
+					</c:otherwise>
+					</c:choose></td>
+					<td><c:if test="${data.state == 1}">Lead</c:if>
+					<c:if test="${data.state == 2}">Opportunity</c:if>
+					<c:if test="${data.state == 3}">Negotiation</c:if>
+					<c:if test="${data.state == 4}">Win</c:if>
+					<c:if test="${data.state == 5}">Lose</c:if></td>
 				</tr>
 				</c:forEach>
 			</c:otherwise>
