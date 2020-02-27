@@ -231,7 +231,7 @@ public class BusinessPlanController {
 	 
 	 
 	@PostMapping("/businessPlanDtl")
-	public String businessPlanDtl(@RequestParam String oppId, Model model, Principal principal, HttpServletResponse response) throws IOException {
+	public String businessPlanDtl(@RequestParam String oppId, @RequestParam String pageNum, Model model, Principal principal, HttpServletResponse response) throws IOException {
 		System.out.println("<<businessPlanDtl>>");
 		
 		if (principal == null) {
@@ -252,6 +252,7 @@ public class BusinessPlanController {
 		
 		String userNum = userService.getUserById(principal.getName()).getUserNum();
 		model.addAttribute("userNum", userNum);
+		model.addAttribute("pageNum", pageNum);
 		
 		return "businessPlan/businessPlanDtl";
 	}
@@ -392,7 +393,7 @@ public class BusinessPlanController {
 //	}
 	
 	@PostMapping("/bPUpdate")
-	public String businessPlanUpdate(String oppId, Model model, Principal principal, HttpSession session, HttpServletResponse response) throws IOException {
+	public String businessPlanUpdate(String oppId, String pageNum, Model model, Principal principal, HttpSession session, HttpServletResponse response) throws IOException {
 		System.out.println("<< bPUpdate, POST >>\n");
 		
 		if (principal == null) {
@@ -430,7 +431,7 @@ public class BusinessPlanController {
 	}
 	
 	@PostMapping("/businessPlanUpdate") 
-	public String businessPlanUpdate(String oppId, BusinessPlanVO b, Model model, Principal principal, HttpServletResponse response) throws IOException {
+	public String businessPlanUpdate(String oppId, String pageNum, BusinessPlanVO b, Model model, Principal principal, HttpServletResponse response) throws IOException {
 		System.out.println("<< businessPlan Update, POST >>\n");
 		
 		if (principal == null) {
@@ -459,7 +460,7 @@ public class BusinessPlanController {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('글 작성자가 다릅니다!');");
-			out.println("location.href='/businessPlanList';");
+			out.println("location.href='/businessPlanList?pageNum=" + pageNum + "';");
 			out.println("</script>");
 			out.close();
 			

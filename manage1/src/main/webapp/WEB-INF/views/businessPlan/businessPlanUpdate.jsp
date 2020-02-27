@@ -95,6 +95,7 @@ tr {
 	<input type="hidden" name="oppId" value="${data.oppId}">
 	<input type="hidden" name="userNum" value="${data.userNum}">
 	<input type="hidden" name="regDate" value="${data.regDate}">
+	<input type="hidden" name="pageNum" value="${param.pageNum }" />
 	<div class="row">
 		<h2 class="heading-section">${data.oppId} 예산 수정</h2>
 	</div>
