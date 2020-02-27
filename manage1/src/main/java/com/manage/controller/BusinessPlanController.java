@@ -101,11 +101,11 @@ public class BusinessPlanController {
 	
 //	GET 방식으로 businessPlan 주소 접근 시 businessPlan.jsp 페이지로 이동
 	@GetMapping("/businessPlan")
-	public String businessplan(Model model, Principal principal) {
+	public String businessplan(Model model, Principal principal) throws IOException {
 		System.out.println("<< businessPlan >>\n");
 		
 		if (principal == null) {
-			return "/";
+			return "redirect:/";
 		}
 		
 		return "businessPlan/businessPlan";
@@ -145,11 +145,19 @@ public class BusinessPlanController {
 	
 //GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
 	@GetMapping("/businessPlanList")
-	public String getBusinessPlanByUserNum(Principal principal, Model model, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(required = false) String search) { 
+	public String getBusinessPlanByUserNum(Principal principal, Model model, HttpServletResponse response, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(required = false) String search) throws IOException { 
 		System.out.println("<< businessPlanList >>\n");
 		
 		if (principal == null) {
-			return "/";
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('세션이 만료되었습니다.');");
+			out.println("location.href='/';");
+			out.println("</script>");
+			out.close();
+			
+			return null;
 		}
 		
 		System.out.println("param : " + pageNum + " " + search);
@@ -223,11 +231,19 @@ public class BusinessPlanController {
 	 
 	 
 	@PostMapping("/businessPlanDtl")
-	public String businessPlanDtl(@RequestParam String oppId, Model model, Principal principal) {
+	public String businessPlanDtl(@RequestParam String oppId, Model model, Principal principal, HttpServletResponse response) throws IOException {
 		System.out.println("<<businessPlanDtl>>");
 		
 		if (principal == null) {
-			return "/";
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('세션이 만료되었습니다.');");
+			out.println("location.href='/';");
+			out.println("</script>");
+			out.close();
+			
+			return null;
 		}
 		
 		BusinessPlanVO list = businessPlanService.businessPlanDtl(oppId);
@@ -241,10 +257,18 @@ public class BusinessPlanController {
 	}
 	
 	@GetMapping("/bpReport")
-	public String businessPlanGetReport(Principal principal, Model model) {
+	public String businessPlanGetReport(Principal principal, Model model, HttpServletResponse response) throws IOException {
 		
 		if (principal == null) {
-			return "/";
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('세션이 만료되었습니다.');");
+			out.println("location.href='/';");
+			out.println("</script>");
+			out.close();
+			
+			return null;
 		}
 		
 //		로그인 한 아이디의 권한 가져오기
@@ -371,9 +395,9 @@ public class BusinessPlanController {
 	public String businessPlanUpdate(String oppId, Model model, Principal principal, HttpSession session, HttpServletResponse response) throws IOException {
 		System.out.println("<< bPUpdate, POST >>\n");
 		
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
 		if (principal == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('세션이 만료되었습니다.');");
 			out.println("location.href='/';");
@@ -389,6 +413,8 @@ public class BusinessPlanController {
 		System.out.println("bp.getUserNum() : " + bp.getUserNum() + " / principal-userNum : " + userNum);
 			
 		if (!bp.getUserNum().equals(userNum)) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('잘못된 접근입니다.');");
 			out.println("history.back();");
@@ -408,7 +434,15 @@ public class BusinessPlanController {
 		System.out.println("<< businessPlan Update, POST >>\n");
 		
 		if (principal == null) {
-			return "/";
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('세션이 만료되었습니다.');");
+			out.println("location.href='/';");
+			out.println("</script>");
+			out.close();
+			
+			return null;
 		}
 		
 		System.out.println(b);
