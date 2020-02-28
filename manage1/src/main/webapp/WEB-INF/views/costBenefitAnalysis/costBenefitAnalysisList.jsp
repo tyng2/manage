@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -57,14 +58,16 @@
 									<td>${data.userNum}</td>
 									<td>${data.endUser}</td>
 									<td>${data.customer}</td>
-									<td>${data.contractDate}</td>
-									<td>${data.expiredDate}</td>
+									<td><fmt:formatDate value="${data.contractDate}" pattern="yyyy-MM-dd" /></td>
+									<td><fmt:formatDate value="${data.expiredDate}" pattern="yyyy-MM-dd" /></td>
 									<td>${data.autoExtension}</td>
-									<td>${data.profitSort}</td>
+									<td><c:if test="${data.profitSort == 1}">당월</c:if>
+										<c:if test="${data.profitSort == 2}">익월</c:if></td>
 									<td>${data.expectedSales}</td>
 									<td>${data.expectedPurchase}</td>
 									<td>${data.expectedProfit}</td>
-									<td>${data.exchangeRate}</td>
+									<td><c:if test="${data.exchangeRate == 1}">내자</c:if>
+										<c:if test="${data.exchangeRate == 2}">외자</c:if></td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
