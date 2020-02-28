@@ -26,7 +26,42 @@ $(document).ready(function() {
 	var setting = year + "-" + month;
 	console.log(setting);
 	$('input[name=expectedSalesMonth]').attr("value", setting);
+	
+	
+	
+	
+// 	숫자 입력 텍스트 박스
+	$("input:text[numberOnly]").on("focus", function() {
+	    var x = $(this).val();
+	    x = removeCommas(x);
+	    $(this).val(x);
+	}).on("focusout", function() {
+	    var x = $(this).val();
+	    if(x && x.length > 0) {
+	        if(!$.isNumeric(x)) {
+	            x = x.replace(/[^0-9]/g,"");
+	        }
+	        x = addCommas(x);
+	        $(this).val(x);
+	    }
+	}).on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
+
+	//3자리 단위마다 콤마 생성
+	function addCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	 
+	//모든 콤마 제거
+	function removeCommas(x) {
+	    if(!x || x.length == 0) return "";
+	    else return x.split(",").join("");
+	}
+// 	숫자 입력 텍스트 박스
+
 })
+
 </script>
 <style>
 tr {
@@ -75,15 +110,15 @@ tr {
 		</tr>
 		<tr>
 			<th style="vertical-align: middle;">예상매출액</th>
-			<td><input type="text" name="expectedSales" class="form-control" maxlength="9" required></td>
+			<td><input type="text" name="expectedSales" class="form-control" maxlength="9" numberOnly required></td>
 			<th style="vertical-align: middle;">예상매입금</th>
-			<td><input type="text" name="expectedPurchase" class="form-control" maxlength="9" required></td>
+			<td><input type="text" name="expectedPurchase" class="form-control" maxlength="9" numberOnly required></td>
 		</tr>
 		<tr>
 			<th style="vertical-align: middle;">예상매출월</th>
 			<td><input type="month" name="expectedSalesMonth" class="form-control" value="" required></td>
 			<th style="vertical-align: middle;">예상이익</th>
-			<td><input type="text" name="expectedProfit" class="form-control" maxlength="9" required></td>
+			<td><input type="text" name="expectedProfit" class="form-control" maxlength="9" numberOnly required></td>
 		</tr>
 		<tr>
 			<th style="vertical-align: middle;">상태</th>
