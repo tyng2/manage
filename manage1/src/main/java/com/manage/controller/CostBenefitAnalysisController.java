@@ -64,6 +64,8 @@ public class CostBenefitAnalysisController {
         page.put("allRowCount", allRowCount);
         page.put("pageNum", pageNum);
         
+        System.out.println("Page : " + page);
+        
 		model.addAttribute("list", list);
 		model.addAttribute("page", page);
 		

@@ -4004,6 +4004,7 @@ input[type="button"].btn-block {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-left: 50%;
   padding-left: 0;
   list-style: none;
   border-radius: 0.25rem; }
@@ -8533,7 +8534,7 @@ h1, h2, h3, h4, h5,
     -moz-box-shadow: 0px 10px 27px -20px rgba(0, 0, 0, 0.33);
     box-shadow: 0px 10px 27px -20px rgba(0, 0, 0, 0.33); }
     .pagination.pagination-1 a:hover, .pagination.pagination-1 a.active, .pagination.pagination-1 span:hover, .pagination.pagination-1 span.active {
-      background: #3e64ff;
+      background: #454d55;
       color: #fff;
       border: 1px solid transparent; }
   .pagination.pagination-2 a, .pagination.pagination-2 span {
