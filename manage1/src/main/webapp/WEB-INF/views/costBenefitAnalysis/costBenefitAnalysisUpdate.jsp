@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -48,19 +50,21 @@ tr {
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">최종사용자</th>
-					<td><input type="text" name="endUser" value="${data.endUser}" class="form-control"></td>
+					<td><input type="text" name="endUser" value="${data.endUser}" class="form-control" required></td>
 					<th style="vertical-align: middle;">납품처</th>
-					<td><input type="text" name="customer" value="${data.customer}" class="form-control"></td>
+					<td><input type="text" name="customer" value="${data.customer}" class="form-control" required></td>
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">계약시작</th>
-					<td><input type="date" name="contractDate" value="${data.contractDate}" class="form-control"></td>
+					<td><c:set var="contDt"><fmt:formatDate value="${data.contractDate}" pattern="yyyy-MM-dd"/></c:set>
+					<input type="date" name="contractDate" value="${contDt}" class="form-control" required></td>
 					<th style="vertical-align: middle;">계약종료</th>
-					<td><input type="date" name="expiredDate" value="${data.expiredDate}" class="form-control"></td>
+					<td><c:set var="expDt"><fmt:formatDate value="${data.expiredDate}" pattern="yyyy-MM-dd"/></c:set>
+					<input type="date" name="expiredDate" value="${expDt}" class="form-control" required></td>
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">자동연장기한</th>
-					<td><input type="text" name="autoExtension" value="${data.autoExtension}" class="form-control"></td>
+					<td><input type="text" name="autoExtension" value="${data.autoExtension}" class="form-control" required></td>
 					<th style="vertical-align: middle;">수익인식</th>
 					<td><select name="profitSort" class="form-control">
 							<option value="1">당월</option>
@@ -69,13 +73,13 @@ tr {
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">예상매출액</th>
-					<td><input type="text" name="expectedSales" value="${data.expectedSales}" class="form-control"></td>
+					<td><input type="text" name="expectedSales" value="${data.expectedSales}" class="form-control" required></td>
 					<th style="vertical-align: middle;">예상매입금</th>
-					<td><input type="text" name="expectedPurchase" value="${data.expectedPurchase}" class="form-control"></td>
+					<td><input type="text" name="expectedPurchase" value="${data.expectedPurchase}" class="form-control" required></td>
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">예상이익</th>
-					<td><input type="text" name="expectedProfit" value="${data.expectedProfit}" class="form-control"></td>
+					<td><input type="text" name="expectedProfit" value="${data.expectedProfit}" class="form-control" required></td>
 					<th style="vertical-align: middle;">내외자</th>
 					<td><select name="exchangeRate" class="form-control">
 							<option value="1">내자</option>
