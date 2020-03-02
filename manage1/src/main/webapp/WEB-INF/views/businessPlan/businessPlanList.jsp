@@ -62,7 +62,7 @@ function dtlPage(inp) {
 			<c:otherwise>
 				<c:forEach var="data" items="${list}">
 				<tr onclick="javascript:dtlPage('${data.oppId}')" >
-					<td>${data.oppId}</td>
+					<td style="cursor:pointer">${data.oppId}</td>
 					<td><c:if test="${data.sort1 == 1}">상품</c:if>
 					<c:if test="${data.sort1 == 2}">유지보수</c:if>
 					<c:if test="${data.sort1 == 3}">개발</c:if></td>

@@ -111,7 +111,7 @@ public class CostBenefitAnalysisController {
 		List<CostBenefitAnalysisVO> list = costBenefitAnalysisService.getCBAnalysisList(search, amount, startRow);
 		
 		int allRowCount = 0; // 전체 행 갯수
-        allRowCount = costBenefitAnalysisMapper.getCBAnalysisPageCount(search);
+        allRowCount = costBenefitAnalysisMapper.getCBAnalysisListPageCount(search);
         
         int maxPage = allRowCount / amount + (allRowCount % amount == 0 ? 0 : 1);
         

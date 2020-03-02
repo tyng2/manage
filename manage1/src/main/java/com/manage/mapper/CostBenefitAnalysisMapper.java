@@ -23,4 +23,6 @@ public interface CostBenefitAnalysisMapper {
 
 	public int CBAnalysisUpdate(CostBenefitAnalysisVO c);
 
+	public int getCBAnalysisListPageCount(String search);
+
 }
