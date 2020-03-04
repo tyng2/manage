@@ -65,9 +65,9 @@ function report(result) {
 		output += "<td id='bp42'>" + result[0].bp42 + "</td>";
 		output += "<td id='bp52'>" + (Number(result[0].bp12) + Number(result[0].bp22) + Number(result[0].bp32) + Number(result[0].bp42)) + "</td></tr>";
 		output += "<tr><th>유지보수부문</th><td id='bp13'>" + result[0].bp13 + "</td>";
-		output += "<td id='bp23'>" + result[0].bp21 + "</td>";
-		output += "<td id='bp33'>" + result[0].bp31 + "</td>";
-		output += "<td id='bp43'>" + result[0].bp41 + "</td>";
+		output += "<td id='bp23'>" + result[0].bp23 + "</td>";
+		output += "<td id='bp33'>" + result[0].bp33 + "</td>";
+		output += "<td id='bp43'>" + result[0].bp43 + "</td>";
 		output += "<td id='bp53'>" + (Number(result[0].bp13) + Number(result[0].bp23) + Number(result[0].bp33) + Number(result[0].bp43)) + "</td></tr>";
 		output += "<tr><th>합계</th><td>" + (Number(result[0].bp11) + Number(result[0].bp12) + Number(result[0].bp13)) + "</td>";
 		output += "<td>" + (Number(result[0].bp21) + Number(result[0].bp22) + Number(result[0].bp23)) + "</td>";
