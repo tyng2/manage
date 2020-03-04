@@ -7,7 +7,7 @@ import com.manage.vo.CostBenefitAnalysisVO;
 
 public interface CostBenefitAnalysisService {
 
-	public List<BusinessPlanVO> getCBAnalysis(String search, int amount, int startRow);
+	public List<CostBenefitAnalysisVO> getCBAnalysis(String search, int amount, int startRow);
 
 	public CostBenefitAnalysisVO CBAnalysisDtl(String oppId);
 

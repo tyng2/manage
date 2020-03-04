@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manage.mapper.CostBenefitAnalysisMapper;
-import com.manage.vo.BusinessPlanVO;
 import com.manage.vo.CostBenefitAnalysisVO;
 
 import lombok.Setter;
@@ -18,8 +17,10 @@ public class CostBenefitAnalysisServiceImpl implements CostBenefitAnalysisServic
 	private CostBenefitAnalysisMapper costBenefitAnalysisMapper;
 
 	@Override
-	public List<BusinessPlanVO> getCBAnalysis(String search, int amount, int startRow) {
-		List<BusinessPlanVO> list = costBenefitAnalysisMapper.getCBAnalysis(search, amount, startRow);
+	public List<CostBenefitAnalysisVO> getCBAnalysis(String search, int amount, int startRow) {
+		List<CostBenefitAnalysisVO> list = costBenefitAnalysisMapper.getCBAnalysis(search, amount, startRow);
+
+		
 		
 		return list;
 	}

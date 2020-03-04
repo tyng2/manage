@@ -9,7 +9,7 @@ import com.manage.vo.CostBenefitAnalysisVO;
 
 public interface CostBenefitAnalysisMapper {
 
-	public List<BusinessPlanVO> getCBAnalysis(@Param("search") String search, @Param("amount") int amount, @Param("startRow") int startRow);
+	public List<CostBenefitAnalysisVO> getCBAnalysis(@Param("search") String search, @Param("amount") int amount, @Param("startRow") int startRow);
 
 	public CostBenefitAnalysisVO CBAnalysisDtl(String oppId);
 
@@ -22,5 +22,7 @@ public interface CostBenefitAnalysisMapper {
 	public CostBenefitAnalysisVO CBAnalysisListDtl(String oppId);
 
 	public int CBAnalysisUpdate(CostBenefitAnalysisVO c);
+
+	public int getCBAnalysisListPageCount(String search);
 
 }

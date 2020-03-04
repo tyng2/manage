@@ -8,6 +8,7 @@
 	<select id="getCBAnalysis" resultType="BusinessPlanVO">
 		SELECT * FROM manage.BusinessPlanning 
 		WHERE state = 4
+		LIMIT #{amount} OFFSET #{startRow};
 	</select>
 	
 <!-- 손익분석 작성시 띄우는 리스트 -->
@@ -27,7 +28,8 @@
 
 <!-- 손익분석 리스트 -->	
 	<select id="getCBAnalysisList" resultType="CostBenefitAnalysisVO">
-		SELECT * FROM manage.CostBenefitAnalysis;
+		SELECT * FROM manage.CostBenefitAnalysis
+		LIMIT #{amount} OFFSET #{startRow};
 	</select>
 
  	<select id="CBAnalysisListDtl" resultType="CostBenefitAnalysisVO">
@@ -45,6 +47,17 @@
 	
 <!-- 카운트 -->
 	<select id="getCBAnalysisPageCount" resultType="int" parameterType="string">
+	SELECT COUNT(*) FROM manage.BusinessPlanning
+	WHERE state = 4
+	<where>
+		<if test="value != null and value != ''">
+			projectName LIKE CONCAT('%', #{value }, '%') 
+		</if>
+	</where>
+</select>
+
+<!-- 카운트 -->
+	<select id="getCBAnalysisListPageCount" resultType="int" parameterType="string">
 	SELECT COUNT(*) FROM manage.CostBenefitAnalysis
 	<where>
 		<if test="value != null and value != ''">

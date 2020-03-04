@@ -40,7 +40,7 @@ public class CostBenefitAnalysisController {
 		int amount = 5; // 한 페이지 당 보여줄 글 갯수
         int startRow = (pageNum - 1) * amount; // 시작 행 번호
 		
-		List<BusinessPlanVO> list = costBenefitAnalysisService.getCBAnalysis(search, amount, startRow);
+		List<CostBenefitAnalysisVO> list = costBenefitAnalysisService.getCBAnalysis(search, amount, startRow);
 		
 		int allRowCount = 0; // 전체 행 갯수
         allRowCount = costBenefitAnalysisMapper.getCBAnalysisPageCount(search);
@@ -63,6 +63,8 @@ public class CostBenefitAnalysisController {
         page.put("maxPage", maxPage);
         page.put("allRowCount", allRowCount);
         page.put("pageNum", pageNum);
+        
+        System.out.println("Page : " + page);
         
 		model.addAttribute("list", list);
 		model.addAttribute("page", page);
@@ -109,7 +111,7 @@ public class CostBenefitAnalysisController {
 		List<CostBenefitAnalysisVO> list = costBenefitAnalysisService.getCBAnalysisList(search, amount, startRow);
 		
 		int allRowCount = 0; // 전체 행 갯수
-        allRowCount = costBenefitAnalysisMapper.getCBAnalysisPageCount(search);
+        allRowCount = costBenefitAnalysisMapper.getCBAnalysisListPageCount(search);
         
         int maxPage = allRowCount / amount + (allRowCount % amount == 0 ? 0 : 1);
         

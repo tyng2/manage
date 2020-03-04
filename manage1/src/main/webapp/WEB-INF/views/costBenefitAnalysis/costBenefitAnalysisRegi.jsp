@@ -12,7 +12,21 @@
 <script src="/resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {	
-	
+ 	$("#dataForm").submit(function() {
+        var startDate = $('[name="contractDate"]').val();
+        var endDate = $('[name="expiredDate"]').val();
+        //-을 구분자로 연,월,일로 잘라내어 배열로 반환
+        var startArray = startDate.split('-');
+        var endArray = endDate.split('-');   
+        //배열에 담겨있는 연,월,일을 사용해서 Date 객체 생성
+        var start_date = new Date(startArray[0], startArray[1], startArray[2]);
+        var end_date = new Date(endArray[0], endArray[1], endArray[2]);
+             //날짜를 숫자형태의 날짜 정보로 변환하여 비교한다.
+        if(start_date.getTime() > end_date.getTime()) {
+            alert("종료날짜보다 시작날짜가 작아야합니다.");
+            return false;
+        }
+	}); 
 });
 </script>
 <title>손익 분석 작성</title>
@@ -48,19 +62,19 @@ tr {
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">최종사용자</th>
-					<td><input type="text" name="endUser" value="${data.endUser}" class="form-control"></td>
+					<td><input type="text" name="endUser" value="${data.endUser}" class="form-control" required></td>
 					<th style="vertical-align: middle;">납품처</th>
-					<td><input type="text" name="customer" value="${data.customer}" class="form-control"></td>
+					<td><input type="text" name="customer" value="${data.customer}" class="form-control" required></td>
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">계약시작</th>
-					<td><input type="date" name="contractDate" value="${data.contractDate}" class="form-control"></td>
+					<td><input type="date" name="contractDate" value="${data.contractDate}" class="form-control" required></td>
 					<th style="vertical-align: middle;">계약종료</th>
-					<td><input type="date" name="expiredDate" value="${data.expiredDate}" class="form-control"></td>
+					<td><input type="date" name="expiredDate" value="${data.expiredDate}" class="form-control" required></td>
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">자동연장기한</th>
-					<td><input type="text" name="autoExtension" value="${data.autoExtension}" class="form-control"></td>
+					<td><input type="text" name="autoExtension" value="${data.autoExtension}" class="form-control" required></td>
 					<th style="vertical-align: middle;">수익인식</th>
 					<td><select name="profitSort" class="form-control">
 							<option value="1">당월</option>
@@ -69,13 +83,13 @@ tr {
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">예상매출액</th>
-					<td><input type="text" name="expectedSales" value="${data.expectedSales}" class="form-control"></td>
+					<td><input type="text" name="expectedSales" value="${data.expectedSales}" class="form-control" required></td>
 					<th style="vertical-align: middle;">예상매입금</th>
-					<td><input type="text" name="expectedPurchase" value="${data.expectedPurchase}" class="form-control"></td>
+					<td><input type="text" name="expectedPurchase" value="${data.expectedPurchase}" class="form-control" required></td>
 				</tr>
 				<tr>
 					<th style="vertical-align: middle;">예상이익</th>
-					<td><input type="text" name="expectedProfit" value="${data.expectedProfit}" class="form-control"></td>
+					<td><input type="text" name="expectedProfit" value="${data.expectedProfit}" class="form-control" required></td>
 					<th style="vertical-align: middle;">내외자</th>
 					<td><select name="exchangeRate" class="form-control">
 							<option value="1">내자</option>
