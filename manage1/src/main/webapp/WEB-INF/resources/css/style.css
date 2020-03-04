@@ -4001,10 +4001,9 @@ input[type="button"].btn-block {
   color: #6c757d; }
 
 .pagination {
-  display: -webkit-box;
+/*   display: -webkit-box; */
   display: -ms-flexbox;
-  display: flex;
-  margin-left: 50%;
+/*   display: flex; */
   padding-left: 0;
   list-style: none;
   border-radius: 0.25rem; }

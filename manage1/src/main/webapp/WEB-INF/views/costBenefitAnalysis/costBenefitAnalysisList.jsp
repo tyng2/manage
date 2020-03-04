@@ -76,7 +76,7 @@
 					</tbody>
 				</table>
 
-		<div class="container">
+		<div class="container pageCenter">
 		<div class="pagination pagination-1 mb-4">
 			<c:if test="${page.allRowCount gt 0 }">
 			
