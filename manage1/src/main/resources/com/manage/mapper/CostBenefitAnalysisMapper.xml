@@ -8,6 +8,7 @@
 	<select id="getCBAnalysis" resultType="BusinessPlanVO">
 		SELECT * FROM manage.BusinessPlanning 
 		WHERE state = 4
+		ORDER BY oppId DESC
 		LIMIT #{amount} OFFSET #{startRow};
 	</select>
 	
@@ -29,6 +30,7 @@
 <!-- 손익분석 리스트 -->	
 	<select id="getCBAnalysisList" resultType="CostBenefitAnalysisVO">
 		SELECT * FROM manage.CostBenefitAnalysis
+		ORDER BY oppId DESC
 		LIMIT #{amount} OFFSET #{startRow};
 	</select>
 
