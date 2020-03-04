@@ -25,6 +25,7 @@
 		<div class="col-md-12 heading-title">
 			<h2 class="heading-section" style="margin-bottom: 2rem;">손익 분석 목록 : ${page.allRowCount }건</h2>
 			<form action="/costBenefitAnalysisList" id="dataForm" method="POST">
+				<input type="hidden" name="pageNum" value="${param.pageNum }" />
 				<input type="hidden" id="page" name="listPage" value="${listPage}" />
 				<table class="table table-light table-hover table-borderless">
 					<thead class="thead-dark">
