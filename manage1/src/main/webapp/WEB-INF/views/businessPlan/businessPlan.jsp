@@ -60,6 +60,21 @@ $(document).ready(function() {
 	}
 // 	숫자 입력 텍스트 박스
 
+
+	$("#write").click(function() {
+		$write = $("#write").attr("disabled", "disabled");
+		var expSales = $("input[name=expectedSales]").val();
+		var expPurchase = $("input[name=expectedPurchase]").val();
+		var expProfit = $("input[name=expectedProfit]").val();
+		
+		$("input[name=expectedSales]").val(removeCommas(expSales));
+		$("input[name=expectedPurchase]").val(removeCommas(expPurchase));
+		$("input[name=expectedProfit]").val(removeCommas(expProfit));
+		
+		$("#form").submit();
+		$write = $("#write").removeAttr("disabled");
+	});
+
 })
 
 </script>
@@ -74,7 +89,7 @@ tr {
 <jsp:include page="/WEB-INF/views/inc/menu.jsp"></jsp:include>
 
 
-<form action="/businessPlan" method="POST">
+<form action="/businessPlan" method="POST" id="form">
 <section class="ftco-section bg-light" id="inputs">
 <div class="container">
 	<div class="row mb-5">
@@ -153,128 +168,9 @@ tr {
 			<td colspan="3"><input type="text" name="note" class="form-control" maxlength="100"></td>
 		</tr>
 	</thead>
-	</table>
+	</table><br>
 	
-	<!-- <div class="row">
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="text" name="projectName" class="form-control" maxlength="40" required>
-				<label class="form-control-placeholder" for="projectName">프로젝트명</label>			
-			</div>
-		</div>
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<select name="sort1" class="form-control">
-					<option value="1">상품</option>
-					<option value="2">유지보수</option>
-					<option value="3">개발</option>
-				</select>
-				<label class="form-control-placeholder" for="sort1">구분1</label>			
-			</div>
-		</div>
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<select name="sort2" class="form-control">
-					<option value="1">Nonstop</option>
-					<option value="2">ACI</option>
-					<option value="3">HSM</option>
-					<option value="4">Oracle</option>
-					<option value="5">OGG</option>
-					<option value="6">Solution</option>
-					<option value="7">이벤트</option>
-				</select>
-				<label class="form-control-placeholder" for="sort2">구분2</label>			
-			</div>
-		</div>
-	</div><br><br>
-	
-	<div class="row">
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="text" name="expectedSales" class="form-control" required>
-				<label class="form-control-placeholder" for="expectedSales">예상매출액</label>			
-			</div>
-		</div>
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="text" name="expectedPurchase" class="form-control" required>
-				<label class="form-control-placeholder" for="expectedPurchase">예상매입금</label>			
-			</div>
-		</div>
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="text" name="expectedProfit" class="form-control" required>
-				<label class="form-control-placeholder" for="expectedProfit">예상이익</label>			
-			</div>
-		</div>
-	</div><br>
-	
-	<div class="row">
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="month" name="expectedSalesMonth" class="form-control" value="" required>
-				<label class="form-control-placeholder" for="expectedSalesMonth">예상매출월</label>		
-			</div>
-		</div>
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<select name="state" class="form-control">
-					<option value="1">Lead</option>
-					<option value="2">Opportunity</option>
-					<option value="3">Negotiation</option>
-					<option value="4">Win</option>
-					<option value="5">Lose</option>
-				</select>
-				<label class="form-control-placeholder" for="state">상태</label>			
-			</div>
-		</div>
-	</div><br><br>
-	
-	<div class="row">
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="text" name="endUser" class="form-control" required>
-				<label class="form-control-placeholder" for="endUser">최종사용자</label>		
-			</div>
-		</div>
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="text" name="customer" class="form-control" required>
-				<label class="form-control-placeholder" for="customer">납품처</label>			
-			</div>
-		</div>
-	</div><br>
-	
-	<div class="row">
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="text" name="customerName" class="form-control" required>
-				<label class="form-control-placeholder" for="customerName">고객명</label>			
-			</div>
-		</div>
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="text" name="customerPhone" class="form-control" required>
-				<label class="form-control-placeholder" for="customerPhone">고객연락처</label>			
-			</div>
-		</div>
-		<div class="col-lg-3 col-sm-4">
-			<div class="form-group">
-				<input type="email" name="customerEmail" class="form-control" required>
-				<label class="form-control-placeholder" for="customerEmail">고객이메일</label>			
-			</div>
-		</div>
-	</div><br><br>
-	
-	<div class="row">
-		<div class="col-lg-9 col-sm-4">
-			<div class="form-group">
-				<input type="text" name="note" id="note" class="form-control" required>
-				<label class="form-control-placeholder" for="note">비고</label>			
-			</div>
-		</div>
-	</div> --><br>
-	<button class="btn btn-outline-primary">확인</button>
+	<button type="button" id="write" class="btn btn-outline-primary">확인</button>
 	<button type="reset" class="btn btn-outline-primary" style="float: right;" >다시 작성</button>
 </div>
 </section>
