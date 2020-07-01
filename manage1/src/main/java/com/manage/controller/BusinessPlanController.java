@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.manage.comm.Common;
 import com.manage.mapper.AuthMapper;
 import com.manage.mapper.BusinessPlanMapper;
 import com.manage.service.BusinessPlanSevice;
@@ -64,6 +65,19 @@ public class BusinessPlanController {
 	private UserService userService;
 	
 	
+//	GET 방식으로 test 접근 시 test
+	@GetMapping("/test")
+	public String ttest(Model model, Principal principal, HttpServletResponse response) throws IOException {
+		System.out.println("<< businessPlan >>\n");
+		
+		if (principal == null) {
+			return "redirect:/";
+		}
+		
+		Common.script(response, "alert('테스트중!!');location.href='.';");
+		
+		return "businessPlan/businessPlan";
+	}
 	
 	
 // 로그인 한 아이디의 권한 리스트 가져오기
@@ -116,8 +130,6 @@ public class BusinessPlanController {
 	public ResponseEntity<String> addBusinessPlan(BusinessPlanVO businessPlanVO, Model model, Principal principal) {
 		System.out.println("<< businessPlan, POST >>\n");
 		
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "text/html; charset=UTF-8");
 		StringBuilder sb = new StringBuilder();
 
 		if (principal == null) {
@@ -126,24 +138,20 @@ public class BusinessPlanController {
 			sb.append("location.href = '/';");
 			sb.append("</script>");
 
-			ResponseEntity<String> responseEntity = new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
-			return responseEntity;
+			return Common.alertMsg(sb.toString());
 		}
 
 		businessPlanService.insertBusinessPlan(businessPlanVO);
-		
 		
 		sb.append("<script>");
 		sb.append("alert('입력이 완료되었습니다.');");
 		sb.append("location.href = '/';");
 		sb.append("</script>");
 
-		ResponseEntity<String> responseEntity = new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
-
-		return responseEntity;
+		return Common.alertMsg(sb.toString());
 	}
 	
-//GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
+// GET 방식으로 businessPlanList 주소 접근 시 예산 작성 목록 표시
 	@GetMapping("/businessPlanList")
 	public String getBusinessPlanByUserNum(Principal principal, Model model, HttpServletResponse response, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(required = false) String search) throws IOException { 
 		System.out.println("<< businessPlanList >>\n");
